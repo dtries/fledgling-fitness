@@ -1,26 +1,41 @@
-const express = require('express');
-const PORT = process.env.PORT || 3001;
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const passport = require("passport");
+
+const users = require("./routes/api/users");
+
 const app = express();
-const routes = require('./routes');
-const mongoose = require('mongoose');
-mongoose.set('useCreateIndex', true);
 
-// Define Middleware Here -------------------------------------
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
+// BodyParser middleware
+app.use(
+    bodyParser.urlencoded({
+        extended: false
+    })
+);
 
-// Serve Up Static Assets (usually on Heroku) -----------------
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
-}
+app.use(bodyParser.json());
 
-// Define API Routes Here -------------------------------------
-app.use(routes);
+// DB Condig
+const db = require("./config/keys").mongoURI;
 
-// Connect to the MongoDB Database ----------------------------
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/googlebooks';
-mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
+// Connect to MongoDB
+mongoose
+    .connect(db,
+        { useNewUrlParser: true }
+    )
+    .then(() => console.log("MongoDB connected successfully"))
+    .catch(err => console.log(err));
 
-app.listen(PORT, () => {
-  console.log(`API Server now on port: ${PORT}`)
-});
+// Passort middleware
+app.use(passport.initialize());
+
+// Passport config
+require("./config/passport")(passport);
+
+// Routes
+app.use("/api/users", users);
+
+const port = process.env.PORT || 5000; // process.env.port is Heroku's port
+
+app.listen(port, () => console.log(`🌎  running on port ${port} !`));
