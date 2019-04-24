@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "../../App.css";
 
 class Navbar extends Component {
     render(){
@@ -14,27 +15,26 @@ class Navbar extends Component {
                         Fledgling Fitness   
                     </Link>
                     <Link 
-                            to="/register"
+                            to="/progress"
                             style={{
                                 width: "140px",
                                 borderRadius: "3px",
                                 letterSpacing: "1.5px"
                             }}
-                            className="btn btn-large waves-effect waves-light hoverable blue accent-3 right"
+                            className="progress-nav waves-effect waves-light hoverable right"
                             >
-                            Register                
+                            Progress                
                         </Link>
                         <Link
-                            to="/login" 
+                            to="/dashboard" 
                             style={{
-                            marginLeft: "2rem",
                             width: "140px",
                             borderRadius: "3px",
                             letterSpacing: "1.5px"
                         }}
-                        className="btn btn-large waves-effect white hoverable black-text right"
+                        className="workouts-nav waves-effect hoverable right"
                         >
-                            Log In
+                            Workouts
                         </Link>
                 </nav>
             </div>

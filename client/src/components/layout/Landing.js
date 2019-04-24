@@ -11,7 +11,7 @@ class Landing extends Component {
                             <b>Welcome to Fledgling Fitness</b>
                         </h4>
                         <p className="flow-text grey-text text-darken-1">
-                            Stepwise Exercise Progression for Normal People
+                            Stepwise Cardio and Strength Progressions for Normal People
                         </p>
                         <br />
                         {/* <div className="col s6">
@@ -26,43 +26,41 @@ class Landing extends Component {
                             >
                             Register                
                         </Link>
-                        </div>
-                        <div className="col s6">
+                        </div> */}
+                        <div className="col s12">
                         <Link
                             to="/login" 
                             style={{
                             marginLeft: "2rem",
-                            width: "140px",
+                            width: "200px",
                             borderRadius: "3px",
                             letterSpacing: "1.5px"
                         }}
-                        className="btn btn-large waves-effect white hoverable black-text"
+                        className="btn btn-large waves-effect green hoverable black-text"
                         >
-                            Log In
+                            Get Started
                         </Link>
-                        </div> */}
+                        </div>
 
                     </div>
                 </div>
                 <div className="row">
                         <div className="col s12">
                             <h5>
-                                Mission:
+                               Frugal Fitness Planning and Tracking for Everyone
                             </h5>
                         </div>
                 </div>
                 <div className="row">
                         <div className="col s12">
-                            <h5>
-                                Vison:
+                            <h5 className="center">
+                                Improve Your Individual Health and Wellbeing
                             </h5>
                         </div>
                 </div>
                 <div className="row">
                         <div className="col s12">
-                            <h5>
-                                Principles:
-                            </h5>
+                            <h5 className="right">The Focus is on Fitness not Weight</h5>
                         </div>
                 </div>
             </div>
