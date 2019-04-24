@@ -15,6 +15,11 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import Pushup from "./components/pushup/Pushup";
+import Situp from "./components/situp/Situp";
+import Squat from "./components/squat/Squat";  
+import Walking from "./components/walking/Walking";
+import Progress from "./components/progress/Progress";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -47,8 +52,15 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            {/* <Route path="/pushup" component={Pushup} /> */}
+
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/pushup" component={Pushup} />
+              <PrivateRoute exact path="/situp" component={Situp} />
+              <PrivateRoute exact path="/squat" component={Squat} />
+              <PrivateRoute exact path="/walking" component={Walking} />
+              <PrivateRoute exact path="/progress" component={Progress} />
             </Switch>
           </div>
         </Router>
