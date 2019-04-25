@@ -60,16 +60,16 @@ class Register extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col s8 offset-s2">
-                        <Link to="/" className="btn-flat waves-effect">
+                        <Link to="/" className="back-btn btn-flat waves-effect">
                             <i className="material-icons left">keyboard_backspace</i>
                             Back to Home
                         </Link>
                         <div className="col s12" style={{ paddingLeft: "11.25px"}}>
-                            <h4>
+                            <h4 className="register-below">
                                 <b>Register</b> below
                             </h4>
-                            <p className="grey-text text-darken-1">
-                                Already have an account? <Link to="/login">Log In</Link>
+                            <p className="account-already">
+                                Already have an account? <Link to="/login" className="login-now">&nbsp;Log In</Link>
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
@@ -138,7 +138,7 @@ class Register extends Component {
                                         marginTop: "1rem"
                                     }}
                                     type="submit"
-                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                                    className="sign-up-btn btn btn-large waves-effect waves-light hoverable"
                                 >
                                     Sign Up
                                 </button>

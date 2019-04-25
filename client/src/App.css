@@ -54,10 +54,42 @@ nav {
 }
 
 .bird-bullet {
-    color: #FF652F;
+    color: #FF652F;  
 }
 
 .tag-line {
     color: #FFE400;
+} 
+
+/* End of Landing Page Styling */
+
+/* Login & Register Page Styling */
+.back-btn {
+    color: #13A76C;
+}
+
+.login-below,
+.register-below {
+    color: #FF652F;
+}
+
+.have-account,
+.account-already {
+    color: #FFE400;
+}
+
+.register-now,
+.login-now {
+    color: #13A76C;
+    font-size: 125%;
+    font-weight: bolder;
+
+}
+
+.login-btn,
+.sign-up-btn {
+    background-color: #13A76C;
+    color: #FFE400;
+    font-weight: bolder;
 }
 

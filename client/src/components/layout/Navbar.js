@@ -32,7 +32,7 @@ class Navbar extends Component {
                             borderRadius: "3px",
                             letterSpacing: "1.5px"
                         }}
-                        className="workouts-nav waves-effect hoverable right"
+                        className="workouts-nav waves-effect waves-light hoverable right"
                         >
                             Workouts
                         </Link>
