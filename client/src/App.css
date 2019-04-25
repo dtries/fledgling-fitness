@@ -1,17 +1,63 @@
+/* Color Scheme
+#272727 - blackish
+#747474 - grayish
+#FF652F - orangish
+#FFE400 - yellowish
+#13A76C - greenish
+*/
+
+/* Navbar Styling */
+nav {
+    background-color: #272727;
+}
 .brand-logo {
     margin-left: 19%;
+    color: #FFE400;
+    
 }
 
 .fa-kiwi-bird { 
     margin-top: 4%;
+    color: #FFE400;
+}
+
+.brand {
+    color: #FFE400;
 }
 
 .workouts-nav,
 .progress-nav {
     text-align: center;
-    color: yellow;
+    color: #FFE400;
 }
 
 .progress-nav {
     margin-right: 19%;
 }
+
+/* End Navbar styling */
+
+/* Landing Page styling */
+.title {
+    color: #FF652F;
+}
+
+.sub-title {
+    color: #FF652F;
+    font-size: 175%;
+}
+
+.get-started-btn {
+    background-color: #13A76C; 
+    color: #FFE400;
+    font-weight: bolder;
+}
+
+.bird-bullet {
+    color: #FF652F;
+}
+
+.tag-line {
+    color: #FFE400;
+}
+

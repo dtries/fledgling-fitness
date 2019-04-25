@@ -7,10 +7,10 @@ class Landing extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col s12 center-align">
-                        <h4>
+                        <h4 className="title">
                             <b>Welcome to Fledgling Fitness</b>
                         </h4>
-                        <p className="flow-text grey-text text-darken-1">
+                        <p className="sub-title">
                             Stepwise Cardio and Strength Progressions for Normal People
                         </p>
                         <br />
@@ -27,16 +27,17 @@ class Landing extends Component {
                             Register                
                         </Link>
                         </div> */}
+                        <br />
+                        <br />
                         <div className="col s12">
                         <Link
                             to="/login" 
                             style={{
-                            marginLeft: "2rem",
                             width: "200px",
                             borderRadius: "3px",
                             letterSpacing: "1.5px"
                         }}
-                        className="btn btn-large waves-effect green hoverable black-text"
+                        className="get-started-btn btn btn-large waves-effect waves-dark hoverable"
                         >
                             Get Started
                         </Link>
@@ -44,23 +45,26 @@ class Landing extends Component {
 
                     </div>
                 </div>
+                <br />
                 <div className="row">
                         <div className="col s12">
-                            <h5>
-                               Frugal Fitness Planning and Tracking for Everyone
+                            <h5 className="tag-line">
+                            <i class="fas fa-kiwi-bird bird-bullet"></i> &nbsp;&nbsp;Exercise Planning and Tracking
                             </h5>
                         </div>
                 </div>
+                <br />
                 <div className="row">
                         <div className="col s12">
-                            <h5 className="center">
-                                Improve Your Individual Health and Wellbeing
+                            <h5 className="center tag-line">
+                            <i class="fas fa-kiwi-bird bird-bullet"></i> &nbsp;&nbsp;Improve Your Health and Wellbeing
                             </h5>
                         </div>
                 </div>
+                <br />
                 <div className="row">
                         <div className="col s12">
-                            <h5 className="right">The Focus is on Fitness not Weight</h5>
+                            <h5 className="right tag-line"><i class="fas fa-kiwi-bird bird-bullet"></i> &nbsp;&nbsp;Focus on Fitness, not Weight</h5>
                         </div>
                 </div>
             </div>

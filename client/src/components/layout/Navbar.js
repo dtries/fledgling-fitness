@@ -9,10 +9,10 @@ class Navbar extends Component {
                 <nav>
                     <Link 
                         to="/"
-                        className="col s4 brand-logo left yellow-text"
+                        className="col s4 brand-logo left"
                     >
                         <i className="fas fa-kiwi-bird"></i> 
-                        Fledgling Fitness   
+                        <span className="brand">Fledgling Fitness</span>  
                     </Link>
                     <Link 
                             to="/progress"
