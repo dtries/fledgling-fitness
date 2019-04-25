@@ -14,19 +14,6 @@ class Landing extends Component {
                             Stepwise Cardio and Strength Progressions for Normal People
                         </p>
                         <br />
-                        {/* <div className="col s6">
-                        <Link 
-                            to="/register"
-                            style={{
-                                width: "140px",
-                                borderRadius: "3px",
-                                letterSpacing: "1.5px"
-                            }}
-                            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                            >
-                            Register                
-                        </Link>
-                        </div> */}
                         <br />
                         <br />
                         <div className="col s12">

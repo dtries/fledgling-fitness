@@ -93,3 +93,33 @@ nav {
     font-weight: bolder;
 }
 
+/* End Login and Register Styling */
+
+/* Dashboard Styling */
+
+.create-plan-btn {
+    background-color: #13A76C;
+    color: #FFE400;
+    font-weight: bolder;
+    margin-bottom: 9%;
+
+}
+
+.logout-btn {
+    background-color: #747474;
+    color: #FF652F;
+    font-weight: bolder;
+}
+
+.base-assessment-question {
+    color: #FFE400;
+    font-size: 125%;
+}
+
+.baseline-input-line {
+    color: #FF652F;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* End Dashboard Styling */
