@@ -24,18 +24,18 @@ class Workouts extends Component {
                 </div>
                 <div className="row">
                     <div className="workout-list col s4 center-align push-s4">
-                        <ul className="colletion with-header">
+                        <ul className="workout-list">
                             <li className="collection-header"><h4>YOUR WORKOUTS</h4></li>
-                            <Link to="/walking" id="walking" className="active"><li className="collection-item">Walking</li></Link>
-                            <Link to="/pushup" id="pushups" className="disabled"><li className="collection-item">Pushups</li></Link>
-                            <Link to="/situp" id="situps" className="disabled"><li className="collection-item">Situps</li></Link>
-                            <Link to="/squat" id="squats" className="disabled"><li className="collection-item">Squats</li></Link>
+                            <Link to="/walking" id="walking-workout-page" className="active btn btn-large waves-effect waves-dark hoverable"><li className="">Walking</li></Link>
+                            <Link to="/pushup" id="pushups-workout-page" className="disabled btn btn-large waves-effect waves-dark hoverable"><li className="">Pushups</li></Link>
+                            <Link to="/situp" id="situps-workout-page" className="disabled btn btn-large waves-effect waves-dark hoverable"><li className="">Situps</li></Link>
+                            <Link to="/squat" id="squats-workout-page" className="disabled btn btn-large waves-effect waves-dark hoverable"><li className="">Squats</li></Link>
                         </ul>
                     </div>
                 </div>
                 <br />
                 <div className="row">
-                    <div className="col s12 center-align workout-logout">
+                    <div className="col s12 workout-logout">
                         <button 
                             style={{ 
                                 width: "200px",

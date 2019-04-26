@@ -13,15 +13,64 @@ class Walking extends Component {
         const { user } = this.props.auth;
 
         return (
-            <div style={{ height: "75vh" }} className="container valign-wrapper">
+            <div className="container">
                 <div className="row">
                     <div className="col s12 center-align">
-                        <h4>
+                        <h4 className="user-workout">
                             {user.name.split(" ")[0]}
-                            <p className="flow-tect grey-text text-darken-1">
-                                Walking Now!
-                            </p>
                         </h4>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="walking-list col s12 center-align">
+                        <ul className=" work-out-list">
+                            <li className="workout-header"><h4>WEEKLY WALKING WORKOUTS</h4>
+                            </li>
+                            <li className="workout-item">
+                                <div className="card workout-card">
+                                    <div className="card-content">
+                                        <p className="card-title" id="workout-card-title">Day 1</p>
+                                        <p>Walk for 30 minutes at a brisk pace.</p>
+                                    </div>
+
+                                    <div className="card-action">
+                                        <button className="attempted-btn btn btn-small waves-effect waves-light hoverable">Attempted</button>
+                                        <button className="completed-btn btn btn-small waves-effect waves-light hoverable">Completed</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li className="workout-item">
+                                <div className="card workout-card">
+                                    <div className="card-content">
+                                        <p className="card-title" id="workout-card-title">Day 2</p>
+                                        <p>Walk for 32 minutes at a brisk pace.</p>
+                                    </div>
+
+                                    <div className="card-action">
+                                        <button className="attempted-btn btn btn-small waves-effect waves-light hoverable">Attempted</button>
+                                        <button className="completed-btn btn btn-small waves-effect waves-light hoverable">Completed</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li className="workout-item">
+                                <div className="card workout-card">
+                                    <div className="card-content">
+                                        <p className="card-title" id="workout-card-title">Day 3</p>
+                                        <p>Walk for 35 minutes at a brisk pace.</p>
+                                    </div>
+
+                                    <div className="card-action">
+                                        <button className="attempted-btn btn btn-small waves-effect waves-light hoverable">Attempted</button>
+                                        <button className="completed-btn btn btn-small waves-effect waves-light hoverable">Completed</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <br />
+                <div className="row">
+                    <div className="col s12 workout-card-logout">
                         <button 
                             style={{ 
                                 width: "200px",
@@ -30,13 +79,14 @@ class Walking extends Component {
                                 marginTop: "1rem"
                             }}
                             onClick={this.onLogoutClick}
-                            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                            className="workout-logout-btn btn btn-large waves-effect waves-light hoverable"
                         >
-                            Hey Walking!
+                            Logout
                         </button>
                     </div>
                 </div>
             </div>
+
         );
     }
 }

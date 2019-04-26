@@ -151,7 +151,7 @@ class Dashboard extends Component {
                 </form>
 
                 <div className="row">
-                    <div className="col s12 center-align">
+                    <div className="col s12">
                         <button 
                             style={{ 
                                 width: "140px",
