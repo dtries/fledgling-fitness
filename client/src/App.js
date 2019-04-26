@@ -15,6 +15,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import Workouts from "./components/workouts/Workouts";
 import Pushup from "./components/pushup/Pushup";
 import Situp from "./components/situp/Situp";
 import Squat from "./components/squat/Squat";  
@@ -55,6 +56,7 @@ class App extends Component {
 
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/workouts" component={Workouts} />
               <PrivateRoute exact path="/pushup" component={Pushup} />
               <PrivateRoute exact path="/situp" component={Situp} />
               <PrivateRoute exact path="/squat" component={Squat} />

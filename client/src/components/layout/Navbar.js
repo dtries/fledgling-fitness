@@ -26,7 +26,7 @@ class Navbar extends Component {
                             Progress                
                         </Link>
                         <Link
-                            to="/dashboard" 
+                            to="/workouts" 
                             style={{
                             width: "140px",
                             borderRadius: "3px",

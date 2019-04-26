@@ -42,11 +42,14 @@ class Dashboard extends Component {
                         <p className="sub-title">
                             Enter Your Values For the Assessment Activities, Click Create My Plan When Done.
                         </p>
-                        <br />
-                        <br />
-                        <div className="col s12">
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div className="row">
+                    <div className="col s12 center-align">
                         <Link
-                            to="/login" 
+                            to="/workouts" 
                             style={{
                             width: "250px",
                             borderRadius: "3px",
@@ -56,98 +59,99 @@ class Dashboard extends Component {
                         >
                             Create My Plan
                         </Link>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <form onSubmit={this.onSubmit}>
+                    <div className="row form-begin">
+                        <div className="col s12 base-assessment-question center">
+                        <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
+                        Minutes you can walk comfortably at a brisk pace &nbsp;&nbsp;
+                            <div className="input-field inline">
+                                <input
+                                    onChange={this.onChange}
+                                    value={this.state.walking}
+                                    id="walking"
+                                    type="number"
+                                    min="0"
+                                    max="1000000"
+                                    className="validate baseline-input-line"
+                                />
+                                <label htmlFor="name">Enter Number</label>
+                                <span   className="helper-text" data-error="Enter a Valid Number" 
+                                        data-success="Great!">
+                                </span>
+                            </div>
                         </div>
                     </div>
-                    <br />
-                    <br />
-
-                    <form onSubmit={this.onSubmit}>
-                        <div className="row form-begin">
-                            <div className="col s12 base-assessment-question center">
-                            <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
-                            Minutes you can walk comfortably at a brisk pace &nbsp;&nbsp;
-                                <div className="input-field inline">
-                                    <input
-                                        onChange={this.onChange}
-                                        value={this.state.walking}
-                                        id="walking"
-                                        type="number"
-                                        min="0"
-                                        max="1000000"
-                                        className="validate baseline-input-line"
-                                    />
-                                    <label htmlFor="name">Enter Number</label>
-                                    <span   className="helper-text" data-error="Enter a Valid Number" 
-                                            data-success="Great!">
-                                    </span>
-                                </div>
+                    <div className="row">
+                        <div className="col s12 base-assessment-question center">
+                        <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
+                        Number of good-form pushups you can complete &nbsp;
+                            <div className="input-field inline">
+                                <input
+                                    onChange={this.onChange}
+                                    value={this.state.pushups}
+                                    id="pushups"
+                                    type="number"
+                                    min="0"
+                                    max="1000000"                                        
+                                    className="validate baseline-input-line"
+                                />
+                                <label htmlFor="name">Enter Number</label>
+                                <span   className="helper-text" data-error="Please Enter a Number" 
+                                        data-success="Great!">
+                                </span>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col s12 base-assessment-question center">
-                            <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
-                            Number of good-form pushups you can complete &nbsp;
-                                <div className="input-field inline">
-                                    <input
-                                        onChange={this.onChange}
-                                        value={this.state.pushups}
-                                        id="pushups"
-                                        type="number"
-                                        min="0"
-                                        max="1000000"                                        
-                                        className="validate baseline-input-line"
-                                    />
-                                    <label htmlFor="name">Enter Number</label>
-                                    <span   className="helper-text" data-error="Please Enter a Number" 
-                                            data-success="Great!">
-                                    </span>
-                                </div>
+                    </div>
+                    <div className="row">
+                        <div className="col s12 base-assessment-question center">
+                        <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
+                        Number of good form situps you can complete &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div className="input-field inline">
+                                <input
+                                    onChange={this.onChange}
+                                    value={this.state.situps}
+                                    id="situps"
+                                    type="number"
+                                    min="0"
+                                    max="1000000"                                        
+                                    className="validate baseline-input-line"
+                                />
+                                <label htmlFor="name">Enter Number</label>
+                                <span   className="helper-text" data-error="Please Enter a Number" 
+                                        data-success="Great!">
+                                </span>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col s12 base-assessment-question center">
-                            <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
-                            Number of good form situps you can complete &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <div className="input-field inline">
-                                    <input
-                                        onChange={this.onChange}
-                                        value={this.state.situps}
-                                        id="situps"
-                                        type="number"
-                                        min="0"
-                                        max="1000000"                                        
-                                        className="validate baseline-input-line"
-                                    />
-                                    <label htmlFor="name">Enter Number</label>
-                                    <span   className="helper-text" data-error="Please Enter a Number" 
-                                            data-success="Great!">
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col s12 base-assessment-question center">
+                    </div>
+                    <div className="row">
+                        <div className="col s12 base-assessment-question center">
                             <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
                             Number of good form squats you can complete &nbsp;&nbsp;&nbsp;&nbsp;
-                                <div className="input-field inline">
-                                    <input
-                                        onChange={this.onChange}
-                                        value={this.state.squats}
-                                        id="squats"
-                                        type="number"
-                                        min="0"
-                                        max="1000000"                                        
-                                        className="validate baseline-input-line"
-                                    />
-                                    <label htmlFor="name">Enter Number</label>
-                                    <span   className="helper-text" data-error="Please Enter a Number" 
-                                            data-success="Great!">
-                                    </span>
-                                </div>
+                            <div className="input-field inline">
+                                <input
+                                    onChange={this.onChange}
+                                    value={this.state.squats}
+                                    id="squats"
+                                    type="number"
+                                    min="0"
+                                    max="1000000"                                        
+                                    className="validate baseline-input-line"
+                                />
+                                <label htmlFor="name">Enter Number</label>
+                                <span   className="helper-text" data-error="Please Enter a Number" 
+                                        data-success="Great!">
+                                </span>
                             </div>
                         </div>
-                        </form>
-                
+                    </div>
+                </form>
+
+                <div className="row">
+                    <div className="col s12 center-align">
                         <button 
                             style={{ 
                                 width: "140px",
@@ -162,6 +166,7 @@ class Dashboard extends Component {
                         </button>
                     </div>
                 </div>
+            </div>              
         );
     }
 }

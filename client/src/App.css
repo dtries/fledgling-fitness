@@ -123,3 +123,39 @@ nav {
 }
 
 /* End Dashboard Styling */
+
+/* Workouts Styling */
+.user-workout {
+    color: #FF652F;
+}
+li {
+    color: #FF652F;
+    margin-bottom: 1%;
+    padding: 2%;
+}
+
+.collection-item {
+    background-color: #13A76C;
+    color: #FFE400;
+    margin-bottom: 4%;
+
+}
+
+#walking,
+#pushups,
+#situps,
+#squats {
+    font-size: 175%;
+}
+
+.workout-logout {
+    margin-top: 10%;
+}
+
+.workout-logout-btn {
+    background-color: #747474;
+    color: #FF652F;
+    font-weight: bolder;
+}
+
+/* End of Workouts Styling */
