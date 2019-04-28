@@ -9,9 +9,9 @@ var week = 0;
 class Walking extends Component {
     state = {
         walkBase: "",
-        Day1: "Hi",
-        Day2: "Hi2",
-        Day3: "Hi3"};
+        Day1: "",
+        Day2: "",
+        Day3: ""};
 
     onLogoutClick = e => {
         e.preventDefault();
@@ -27,13 +27,13 @@ class Walking extends Component {
             .catch(err => console.log(err)); 
     };
 
-    calculateWalking = walkBase => {
+    calculateWalking = (walkBase) => {
         week=week+1;
         console.log(`walkBase is ${this.state.walkBase}`);
         this.setState({Day1: walkBase});
         if (walkBase < 10) {
             this.setState({Day2: Math.ceil(walkBase*1.1)});
-            this.setState({Day3:Math.ceil(this.state.Day2*1.1)});
+            this.setState({Day3: Math.ceil(this.state.Day2*1.1)});
         } else {
             this.setState({Day2: Math.trunc(walkBase*1.1)});        
             this.setState({Day3: Math.trunc(this.state.Day2*1.1)});
@@ -47,12 +47,6 @@ class Walking extends Component {
     componentWillMount(){
         this.loadBaseline()
     };
-
-    // componentWillUpdate() {
-    //     this.calculateWalking()
-    // };
-
-
 
     render () {
         const { user } = this.props.auth;
