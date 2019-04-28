@@ -3,7 +3,7 @@ const baselineController = require("../../controllers/baselineController");
 
 // Matches with "/api/baseline"
 router.route("/")
-  .get(baselineController.findAll)
+  .get(baselineController.getBaseline)
   .post(baselineController.create);
 
 // Matches with "/api/baseline/:id"

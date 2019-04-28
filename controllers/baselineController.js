@@ -2,10 +2,10 @@ const db = require("../models");
 
 // Defining methods for the exercisesController
 module.exports = {
-  findAll: function(req, res) {
+  getBaseline: function(req, res) {
     db.Baseline
       .find({})
-      .sort({ date: -1 })
+    //   .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

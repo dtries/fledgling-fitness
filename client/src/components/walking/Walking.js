@@ -1,35 +1,56 @@
 import React, { Component } from "react";
+import API from "../../utils/API";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
-var Day1, Day2, Day3, week = 0;
+var week = 0;
 
 class Walking extends Component {
+    state = {
+        walkBase: "",
+        Day1: "Hi",
+        Day2: "Hi2",
+        Day3: "Hi3"};
+
     onLogoutClick = e => {
         e.preventDefault();
         this.props.logoutUser();
     };
 
+    loadBaseline = () => {
+        API.getBaseline()
+            .then( res => {
+                this.setState({walkBase: res.data[0].walking})
+                this.calculateWalking(this.state.walkBase)
+            }) 
+            .catch(err => console.log(err)); 
+    };
+
     calculateWalking = walkBase => {
         week=week+1;
-        walkBase = 12;
-        Day1 = walkBase;
+        console.log(`walkBase is ${this.state.walkBase}`);
+        this.setState({Day1: walkBase});
         if (walkBase < 10) {
-            Day2 = Math.ceil(walkBase*1.1);
-            Day3 = Math.ceil(Day2*1.1);
+            this.setState({Day2: Math.ceil(walkBase*1.1)});
+            this.setState({Day3:Math.ceil(this.state.Day2*1.1)});
         } else {
-        Day2 = Math.trunc(walkBase*1.1);
-        Day3 = Math.trunc(Day2*1.1);
+            this.setState({Day2: Math.trunc(walkBase*1.1)});        
+            this.setState({Day3: Math.trunc(this.state.Day2*1.1)});
+
         };
 
 
-        console.log(`Week = ${week}, Day 1 = ${Day1}, Day 2 = ${Day2}, Day 3 = ${Day3}`);
+        console.log(`Week = ${week}, Day 1 = ${this.state.Day1}, Day 2 = ${this.state.Day2}, Day 3 = ${this.state.Day3}`);
     };
 
     componentWillMount(){
-        this.calculateWalking();
+        this.loadBaseline()
     };
+
+    // componentWillUpdate() {
+    //     this.calculateWalking()
+    // };
 
 
 
@@ -56,7 +77,7 @@ class Walking extends Component {
                                         <p className="card-title" id="workout-card-title">Day 1</p>
                                             <ul className="collection set-card">
                                                 <li className="collection-item"><span className="set-marker">Warm Up:</span> &nbsp;  Easy pace for 5 minutes</li>
-                                                <li className="collection-item"><span className="set-marker">Workout: </span> &nbsp;  Brisk pace for {Day1} minutes.</li>
+                                                <li className="collection-item"><span className="set-marker">Workout: </span> &nbsp;  Brisk pace for {this.state.Day1} minutes.</li>
                                                 <li className="collection-item"><span className="set-marker">Cool Down:</span> &nbsp;  Easy pace for 5 minutes</li>
                                             </ul>
                                     </div>
@@ -73,7 +94,7 @@ class Walking extends Component {
                                         <p className="card-title" id="workout-card-title">Day 2</p>
                                             <ul className="collection set-card">
                                                 <li className="collection-item"><span className="set-marker">Warm Up:</span> &nbsp;  Easy pace for 5 minutes</li>
-                                                <li className="collection-item"><span className="set-marker">Workout: </span> &nbsp;  Brisk pace for {Day2} minutes.</li>
+                                                <li className="collection-item"><span className="set-marker">Workout: </span> &nbsp;  Brisk pace for {this.state.Day2} minutes.</li>
                                                 <li className="collection-item"><span className="set-marker">Cool Down:</span> &nbsp;  Easy pace for 5 minutes</li>
                                             </ul>                                    </div>
 
@@ -89,7 +110,7 @@ class Walking extends Component {
                                         <p className="card-title" id="workout-card-title">Day 3</p>
                                         <ul className="collection set-card">
                                                 <li className="collection-item"><span className="set-marker">Warm Up:</span> &nbsp;  Easy pace for 5 minutes</li>
-                                                <li className="collection-item"><span className="set-marker">Workout: </span> &nbsp;  Brisk pace for {Day3} minutes.</li>
+                                                <li className="collection-item"><span className="set-marker">Workout: </span> &nbsp;  Brisk pace for {this.state.Day3} minutes.</li>
                                                 <li className="collection-item"><span className="set-marker">Cool Down:</span> &nbsp;  Easy pace for 5 minutes</li>
                                             </ul>                                    
                                     </div>

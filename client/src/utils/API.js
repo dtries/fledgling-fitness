@@ -6,10 +6,10 @@ export default {
 //         console.log(`The query is ${query}`);
 //         return axios.get("https://www.googleapis.com/books/v1/volumes", { params: {q: query} });
 //     },
-//       // Gets all books
-//   getBooks: function() {
-//     return axios.get("/api/books");
-//   },
+//  Gets all baseline infor from database
+  getBaseline: function() {
+    return axios.get("/api/baseline");
+  },
 //   // Deletes the book with the given id
 //   deleteBook: function(id) {
 //     return axios.delete(`/api/books/${id}`);
