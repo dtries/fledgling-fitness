@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import API from "../../utils/API";
 import { logoutUser } from "../../actions/authActions";
-import { Link } from "react-router-dom";
+// import { baseLineSubmit } from "../../actions/dataUpdates";
+// import { Link } from "react-router-dom";
 // import classnames from "classnames";
 
 
@@ -10,6 +12,7 @@ class Dashboard extends Component {
     constructor () {
         super();
         this.state = {
+            
             walking: "",
             pushups: "",
             situps: "",
@@ -17,9 +20,41 @@ class Dashboard extends Component {
         };
     }
 
+
+
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
-    }
+    };
+
+    onSubmit = e => {
+        e.preventDefault();
+        const { user } = this.props.auth;
+        // console.log("MADE IT HERE DURING ONSUBMIT")
+        const baselineData = {
+            userID: user.id,
+            walking: this.state.walking,
+            pushups: this.state.pushups,
+            situps: this.state.situps,
+            squats: this.state.squats,
+            baselineComplete: true
+        };
+        console.log(`This is the baseline data ${JSON.stringify(baselineData)}`);
+        if (this.props.auth.isAuthenticated) {
+            this.props.history.push("/workouts");
+        }
+
+        const id = user.id;
+
+        console.log(id);
+
+        API.saveBaseline(baselineData)
+            .then(res => {
+                console.log(res.status, res.statusText);
+            })
+            .catch( err => {
+                console.log(err);
+            });
+    };
 
 
     onLogoutClick = e => {
@@ -28,7 +63,9 @@ class Dashboard extends Component {
     };
 
     render () {
+        console.log(`State is ${JSON.stringify(this.state)}`);
         const { user } = this.props.auth;
+        console.log(`The user is ${JSON.stringify(user.id)}`);
         // const { errors } = this.state;
 
 
@@ -48,17 +85,19 @@ class Dashboard extends Component {
                 <br />
                 <div className="row">
                     <div className="col s12 center-align">
-                        <Link
-                            to="/workouts" 
+                        <button
                             style={{
                             width: "250px",
                             borderRadius: "3px",
                             letterSpacing: "1.5px"
                         }}
                         className="create-plan-btn btn btn-large waves-effect waves-dark hoverable"
+                        type="submit"
+                        name="action"
+                        onClick={this.onSubmit}
                         >
                             Create My Plan
-                        </Link>
+                        </button>
                     </div>
                 </div>
                 <br />
@@ -184,3 +223,4 @@ export default connect (
     mapStateToProps,
     { logoutUser }
 )(Dashboard);
+

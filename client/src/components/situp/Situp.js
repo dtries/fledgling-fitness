@@ -3,10 +3,58 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
+var week = 0;
+var baselineSitup = 20;
+var day1Sets, day2Sets, day3Sets = {};
+
 class Situp extends Component {
     onLogoutClick = e => {
         e.preventDefault();
         this.props.logoutUser();
+    };
+
+    calculateSitups = situpBase => {
+        if (week === 0) {
+            situpBase = Math.trunc((baselineSitup-2)/3);
+        } else {
+            situpBase = 99;
+        }
+        week=week+1;
+
+        day1Sets = {
+            set1: situpBase,
+            set2: situpBase+1,
+            set3: situpBase
+        }
+
+        day2Sets = {
+            set1: situpBase,
+            set2: situpBase+1,
+            set3: situpBase+1
+        }
+
+        day3Sets = {
+            set1: situpBase+1,
+            set2: situpBase+1,
+            set3: situpBase+1
+        }
+
+        let newBaseLine = day3Sets.set3;
+        console.log(newBaseLine);
+
+
+
+
+
+        console.log(
+            `Week = ${week}, 
+            Day 1 = ${JSON.stringify(day1Sets)}, 
+            Day 2 = ${JSON.stringify(day2Sets)}, 
+            Day 3 = ${JSON.stringify(day3Sets)}`);
+    };
+
+    componentWillMount() {
+        this.calculateSitups();
     };
 
     render () {
@@ -33,9 +81,9 @@ class Situp extends Component {
                                         <p>Complete 3 Sets of Situps:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
-                                                <li className="collection-item">Set 1: 8 situps</li>
-                                                <li className="collection-item">Set 2: 9 situps</li>
-                                                <li className="collection-item">Set 3: 8 situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {day1Sets.set1} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 2:</span> &nbsp;  {day1Sets.set2} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 3:</span> &nbsp;  {day1Sets.set3} situps</li>
                                             </ul>
                                     </div>
 
@@ -52,9 +100,9 @@ class Situp extends Component {
                                         <p>Complete 3 Sets of Pushups:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
-                                                <li className="collection-item">Set 1: 8 situps</li>
-                                                <li className="collection-item">Set 2: 9 situps</li>
-                                                <li className="collection-item">Set 3: 9 situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {day2Sets.set1} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 2:</span> &nbsp;  {day2Sets.set2} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 3:</span> &nbsp;  {day2Sets.set3} situps</li>
                                             </ul>                                    
                                     </div>
 
@@ -71,9 +119,9 @@ class Situp extends Component {
                                         <p>Complete 3 Sets of Pushups:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
-                                                <li className="collection-item">Set 1: 9 situps</li>
-                                                <li className="collection-item">Set 2: 9 situps</li>
-                                                <li className="collection-item">Set 3: 9 situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {day3Sets.set1} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 2:</span> &nbsp;  {day3Sets.set2} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 3:</span> &nbsp;  {day3Sets.set3} situps</li>
                                             </ul>                                    
                                     </div>
 

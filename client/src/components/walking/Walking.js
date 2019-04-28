@@ -3,11 +3,35 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
+var Day1, Day2, Day3, week = 0;
+
 class Walking extends Component {
     onLogoutClick = e => {
         e.preventDefault();
         this.props.logoutUser();
     };
+
+    calculateWalking = walkBase => {
+        week=week+1;
+        walkBase = 12;
+        Day1 = walkBase;
+        if (walkBase < 10) {
+            Day2 = Math.ceil(walkBase*1.1);
+            Day3 = Math.ceil(Day2*1.1);
+        } else {
+        Day2 = Math.trunc(walkBase*1.1);
+        Day3 = Math.trunc(Day2*1.1);
+        };
+
+
+        console.log(`Week = ${week}, Day 1 = ${Day1}, Day 2 = ${Day2}, Day 3 = ${Day3}`);
+    };
+
+    componentWillMount(){
+        this.calculateWalking();
+    };
+
+
 
     render () {
         const { user } = this.props.auth;
@@ -30,7 +54,11 @@ class Walking extends Component {
                                 <div className="card workout-card">
                                     <div className="card-content">
                                         <p className="card-title" id="workout-card-title">Day 1</p>
-                                        <p>Walk for 30 minutes at a brisk pace.</p>
+                                            <ul className="collection set-card">
+                                                <li className="collection-item"><span className="set-marker">Warm Up:</span> &nbsp;  Easy pace for 5 minutes</li>
+                                                <li className="collection-item"><span className="set-marker">Workout: </span> &nbsp;  Brisk pace for {Day1} minutes.</li>
+                                                <li className="collection-item"><span className="set-marker">Cool Down:</span> &nbsp;  Easy pace for 5 minutes</li>
+                                            </ul>
                                     </div>
 
                                     <div className="card-action">
@@ -43,8 +71,11 @@ class Walking extends Component {
                                 <div className="card workout-card">
                                     <div className="card-content">
                                         <p className="card-title" id="workout-card-title">Day 2</p>
-                                        <p>Walk for 32 minutes at a brisk pace.</p>
-                                    </div>
+                                            <ul className="collection set-card">
+                                                <li className="collection-item"><span className="set-marker">Warm Up:</span> &nbsp;  Easy pace for 5 minutes</li>
+                                                <li className="collection-item"><span className="set-marker">Workout: </span> &nbsp;  Brisk pace for {Day2} minutes.</li>
+                                                <li className="collection-item"><span className="set-marker">Cool Down:</span> &nbsp;  Easy pace for 5 minutes</li>
+                                            </ul>                                    </div>
 
                                     <div className="card-action">
                                         <button className="attempted-btn btn btn-small waves-effect waves-light hoverable">Attempted</button>
@@ -56,7 +87,11 @@ class Walking extends Component {
                                 <div className="card workout-card">
                                     <div className="card-content">
                                         <p className="card-title" id="workout-card-title">Day 3</p>
-                                        <p>Walk for 35 minutes at a brisk pace.</p>
+                                        <ul className="collection set-card">
+                                                <li className="collection-item"><span className="set-marker">Warm Up:</span> &nbsp;  Easy pace for 5 minutes</li>
+                                                <li className="collection-item"><span className="set-marker">Workout: </span> &nbsp;  Brisk pace for {Day3} minutes.</li>
+                                                <li className="collection-item"><span className="set-marker">Cool Down:</span> &nbsp;  Easy pace for 5 minutes</li>
+                                            </ul>                                    
                                     </div>
 
                                     <div className="card-action">
@@ -100,7 +135,10 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
+
 export default connect (
     mapStateToProps,
     { logoutUser }
 )(Walking);
+
+

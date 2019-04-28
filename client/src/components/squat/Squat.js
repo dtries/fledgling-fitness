@@ -3,10 +3,58 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
+var week = 0;
+var baselineSquat = 20;
+var day1Sets, day2Sets, day3Sets = {};
+
 class Squat extends Component {
     onLogoutClick = e => {
         e.preventDefault();
         this.props.logoutUser();
+    };
+
+    calculateSquats = squatBase => {
+        if (week === 0) {
+            squatBase = Math.trunc((baselineSquat-2)/3);
+        } else {
+            squatBase = 99;
+        }
+        week=week+1;
+
+        day1Sets = {
+            set1: squatBase,
+            set2: squatBase+1,
+            set3: squatBase
+        }
+
+        day2Sets = {
+            set1: squatBase,
+            set2: squatBase+1,
+            set3: squatBase+1
+        }
+
+        day3Sets = {
+            set1: squatBase+1,
+            set2: squatBase+1,
+            set3: squatBase+1
+        }
+
+        let newBaseLine = day3Sets.set3;
+        console.log(newBaseLine);
+
+
+
+
+
+        console.log(
+            `Week = ${week}, 
+            Day 1 = ${JSON.stringify(day1Sets)}, 
+            Day 2 = ${JSON.stringify(day2Sets)}, 
+            Day 3 = ${JSON.stringify(day3Sets)}`);
+    };
+
+    componentWillMount() {
+        this.calculateSquats();
     };
 
     render () {
@@ -33,9 +81,9 @@ class Squat extends Component {
                                         <p>Complete 3 Sets of SQUATS:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
-                                                <li className="collection-item">Set 1: 11 squats</li>
-                                                <li className="collection-item">Set 2: 12 squats</li>
-                                                <li className="collection-item">Set 3: 11 squats</li>
+                                                <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {day1Sets.set1} squats</li>
+                                                <li className="collection-item"><span className="set-marker">Set 2:</span> &nbsp;  {day1Sets.set2} squats</li>
+                                                <li className="collection-item"><span className="set-marker">Set 3:</span> &nbsp;  {day1Sets.set3} squats</li>
                                             </ul>
                                     </div>
 
@@ -52,9 +100,9 @@ class Squat extends Component {
                                         <p>Complete 3 Sets of Pushups:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
-                                                <li className="collection-item">Set 1: 11 squats</li>
-                                                <li className="collection-item">Set 2: 12 squats</li>
-                                                <li className="collection-item">Set 3: 12 squats</li>
+                                                <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {day2Sets.set1} squats</li>
+                                                <li className="collection-item"><span className="set-marker">Set 2:</span> &nbsp;  {day2Sets.set2} squats</li>
+                                                <li className="collection-item"><span className="set-marker">Set 3:</span> &nbsp;  {day2Sets.set3} squats</li>
                                             </ul>                                    
                                     </div>
 
@@ -71,9 +119,9 @@ class Squat extends Component {
                                         <p>Complete 3 Sets of Pushups:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
-                                                <li className="collection-item">Set 1: 12 squats</li>
-                                                <li className="collection-item">Set 2: 12 squats</li>
-                                                <li className="collection-item">Set 3: 12 squats</li>
+                                                <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {day2Sets.set1} squats</li>
+                                                <li className="collection-item"><span className="set-marker">Set 2:</span> &nbsp;  {day3Sets.set3} squats</li>
+                                                <li className="collection-item"><span className="set-marker">Set 3:</span> &nbsp;  {day3Sets.set3} squats</li>
                                             </ul>                                    
                                     </div>
 

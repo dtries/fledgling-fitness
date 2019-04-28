@@ -36,7 +36,7 @@ class Landing extends Component {
                 <div className="row">
                         <div className="col s12">
                             <h5 className="tag-line">
-                            <i class="fas fa-kiwi-bird bird-bullet"></i> &nbsp;&nbsp;Exercise Planning and Tracking
+                            <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;&nbsp;Exercise Planning and Tracking
                             </h5>
                         </div>
                 </div>
@@ -44,14 +44,14 @@ class Landing extends Component {
                 <div className="row">
                         <div className="col s12">
                             <h5 className="center tag-line">
-                            <i class="fas fa-kiwi-bird bird-bullet"></i> &nbsp;&nbsp;Improve Your Health and Wellbeing
+                            <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;&nbsp;Improve Your Health and Wellbeing
                             </h5>
                         </div>
                 </div>
                 <br />
                 <div className="row">
                         <div className="col s12">
-                            <h5 className="right tag-line"><i class="fas fa-kiwi-bird bird-bullet"></i> &nbsp;&nbsp;Focus on Fitness, not Weight</h5>
+                            <h5 className="right tag-line"><i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;&nbsp;Focus on Fitness, not Weight</h5>
                         </div>
                 </div>
             </div>

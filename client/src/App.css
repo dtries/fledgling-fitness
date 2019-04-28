@@ -73,6 +73,10 @@ nav {
     color: #FF652F;
 }
 
+input {
+    color: #FF652F;
+}
+
 .have-account,
 .account-already {
     color: #FFE400;
@@ -176,8 +180,17 @@ li {
 
 .workout-card {
     background-color: #747474;
-    font-size: 175%;
+    font-size: 130%;
     color: #FFE400;
+}
+
+.set-marker {
+    color: #FF652F;
+    font-weight: bolder;
+}
+li.collection-item {
+    color: #13A76C;
+    text-align: left;
 }
 .attempted-btn {
     margin-right: 15%;
