@@ -63,10 +63,6 @@ class Pushup extends Component {
         let newBaseLine = this.state.day3Set3;
         console.log(newBaseLine);
 
-
-
-
-
         console.log(
             `Week = ${week}, 
             Day 1 Set 1 = ${JSON.stringify(this.state.day1Set1)}, 

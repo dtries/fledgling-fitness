@@ -1,60 +1,77 @@
 import React, { Component } from "react";
+import API from "../../utils/API";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
 var week = 0;
-var baselineSitup = 20;
-var day1Sets, day2Sets, day3Sets = {};
 
 class Situp extends Component {
+
+    state = {
+        situpBase: "",
+        day1Set1: "",
+        day1Set2: "",
+        day1Set3: "",
+        day2Set1: "",
+        day2Set2: "",
+        day2Set3: "",      
+        day3Set1: "",
+        day3Set2: "",
+        day3Set3: ""
+    }
     onLogoutClick = e => {
         e.preventDefault();
         this.props.logoutUser();
     };
 
+    loadBaseline = () => {
+        API.getBaseline()
+            .then( res => {
+                console.log(`SITUP BASE is ${JSON.stringify(res.data[0])}`)
+                this.setState({situpBase: res.data[0].situps})
+                this.calculateSitups(this.state.situpBase)
+            }) 
+            .catch(err => console.log(err)); 
+    };
+
     calculateSitups = situpBase => {
-        if (week === 0) {
-            situpBase = Math.trunc((baselineSitup-2)/3);
-        } else {
-            situpBase = 99;
-        }
+        // if (week === 0) {
+            situpBase = Math.trunc((this.state.situpBase-2)/3);
+        // } else {
+        //     situpBase = 99;
+        // }
+        console.log(`Situp Base is ${situpBase}`);
+
         week=week+1;
 
-        day1Sets = {
-            set1: situpBase,
-            set2: situpBase+1,
-            set3: situpBase
-        }
+        // Day 1 Sets
+        this.setState({day1Set1: situpBase});
+        this.setState({day1Set2: situpBase+1});
+        this.setState({day1Set3: situpBase});
 
-        day2Sets = {
-            set1: situpBase,
-            set2: situpBase+1,
-            set3: situpBase+1
-        }
+        // Day 2 Sets
+        this.setState({day2Set1: situpBase});
+        this.setState({day2Set2: situpBase+1});
+        this.setState({day2Set3: situpBase+1});
+      
+        // Day 3 Sets
+        this.setState({day3Set1: situpBase+1});
+        this.setState({day3Set2: situpBase+1});
+        this.setState({day3Set3: situpBase+1});
 
-        day3Sets = {
-            set1: situpBase+1,
-            set2: situpBase+1,
-            set3: situpBase+1
-        }
-
-        let newBaseLine = day3Sets.set3;
+        let newBaseLine = this.state.day3Set3;
         console.log(newBaseLine);
-
-
-
-
-
+        
         console.log(
             `Week = ${week}, 
-            Day 1 = ${JSON.stringify(day1Sets)}, 
-            Day 2 = ${JSON.stringify(day2Sets)}, 
-            Day 3 = ${JSON.stringify(day3Sets)}`);
+            Day 1 Set 1 = ${JSON.stringify(this.state.day1Set1)}, 
+            Day 2 Set 2 = ${JSON.stringify(this.state.day1Set2)}, 
+            Day 3 Set 3 = ${JSON.stringify(this.state.day1Set3)}`);
     };
 
     componentWillMount() {
-        this.calculateSitups();
+        this.loadBaseline();
     };
 
     render () {
@@ -81,9 +98,9 @@ class Situp extends Component {
                                         <p>Complete 3 Sets of Situps:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
-                                                <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {day1Sets.set1} situps</li>
-                                                <li className="collection-item"><span className="set-marker">Set 2:</span> &nbsp;  {day1Sets.set2} situps</li>
-                                                <li className="collection-item"><span className="set-marker">Set 3:</span> &nbsp;  {day1Sets.set3} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {this.state.day1Set1} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 2:</span> &nbsp;  {this.state.day1Set2} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 3:</span> &nbsp;  {this.state.day1Set3} situps</li>
                                             </ul>
                                     </div>
 
@@ -100,9 +117,9 @@ class Situp extends Component {
                                         <p>Complete 3 Sets of Pushups:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
-                                                <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {day2Sets.set1} situps</li>
-                                                <li className="collection-item"><span className="set-marker">Set 2:</span> &nbsp;  {day2Sets.set2} situps</li>
-                                                <li className="collection-item"><span className="set-marker">Set 3:</span> &nbsp;  {day2Sets.set3} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {this.state.day2Set1} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 2:</span> &nbsp;  {this.state.day2Set2} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 3:</span> &nbsp;  {this.state.day2Set3} situps</li>
                                             </ul>                                    
                                     </div>
 
@@ -119,9 +136,9 @@ class Situp extends Component {
                                         <p>Complete 3 Sets of Pushups:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
-                                                <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {day3Sets.set1} situps</li>
-                                                <li className="collection-item"><span className="set-marker">Set 2:</span> &nbsp;  {day3Sets.set2} situps</li>
-                                                <li className="collection-item"><span className="set-marker">Set 3:</span> &nbsp;  {day3Sets.set3} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {this.state.day3Set1} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 2:</span> &nbsp;  {this.state.day3Set2} situps</li>
+                                                <li className="collection-item"><span className="set-marker">Set 3:</span> &nbsp;  {this.state.day3Set3} situps</li>
                                             </ul>                                    
                                     </div>
 
