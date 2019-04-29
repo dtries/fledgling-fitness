@@ -20,6 +20,21 @@ class Dashboard extends Component {
         };
     }
 
+    componentWillMount() {
+        this.baselineCompleted();
+    };
+
+    baselineCompleted = () => {
+        API.getBaseline()
+            .then( res => {
+                console.log(`SITUP BASE is ${JSON.stringify(res.data[5])}`)
+                if (res.data[0].baselineComplete === true) {
+                    this.props.history.push("/workouts");
+                }
+            }) 
+            .catch(err => console.log(err)); 
+    };
+
 
 
     onChange = e => {
@@ -32,6 +47,7 @@ class Dashboard extends Component {
         // console.log("MADE IT HERE DURING ONSUBMIT")
         const baselineData = {
             userID: user.id,
+            week: 0,
             walking: this.state.walking,
             pushups: this.state.pushups,
             situps: this.state.situps,

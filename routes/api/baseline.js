@@ -4,7 +4,8 @@ const baselineController = require("../../controllers/baselineController");
 // Matches with "/api/baseline"
 router.route("/")
   .get(baselineController.getBaseline)
-  .post(baselineController.create);
+  .post(baselineController.create)
+  .put(baselineController.updateBaselineWeek);
 
 // Matches with "/api/baseline/:id"
 // router

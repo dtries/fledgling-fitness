@@ -10,6 +10,11 @@ export default {
   getBaseline: function() {
     return axios.get("/api/baseline");
   },
+
+//   Updates week in baseline from 0 to 1
+  updateBaselineWeek: function() {
+      return axios.put("/api/baseline");
+  },
 //   // Deletes the book with the given id
 //   deleteBook: function(id) {
 //     return axios.delete(`/api/books/${id}`);

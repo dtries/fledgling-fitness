@@ -4,32 +4,38 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
-var week = 0;
+// var week = 0;
 
 class Walking extends Component {
     state = {
-        walkBase: "",
-        Day1: "",
-        Day2: "",
-        Day3: ""};
+        week: null,
+        walkBase: null,
+        Day1: null,
+        Day2: null,
+        Day3: null
+    }
 
-    onLogoutClick = e => {
-        e.preventDefault();
-        this.props.logoutUser();
+    componentWillMount(){
+        this.loadBaseline()
     };
 
     loadBaseline = () => {
-        API.getBaseline()
+        console.log(`User ID is ${JSON.stringify(this.props.auth.user.id)}`);
+        API.getBaseline(this.props.auth.user.id)
             .then( res => {
-                this.setState({walkBase: res.data[0].walking})
-                this.calculateWalking(this.state.walkBase)
+                console.log(`The baseline response object is ${JSON.stringify(res.data)}`);
+                this.setState({walkBase: res.data.walking})
+                this.setState({week: res.data.week})
+                this.calculateWalking(this.state.walkBase, this.state.week)
+                console.log(`Week here is ${JSON.stringify(res.data.week)}`)
+
             }) 
             .catch(err => console.log(err)); 
     };
 
-    calculateWalking = (walkBase) => {
-        week=week+1;
-        console.log(`walkBase is ${this.state.walkBase}`);
+    calculateWalking = (walkBase, week) => {
+        console.log(`walkBase is ${walkBase}`);
+        console.log(`week at begin of calcWalk is ${week}`);
         this.setState({Day1: walkBase});
         if (walkBase < 10) {
             this.setState({Day2: Math.ceil(walkBase*1.1)});
@@ -44,8 +50,43 @@ class Walking extends Component {
         console.log(`Week = ${week}, Day 1 = ${this.state.Day1}, Day 2 = ${this.state.Day2}, Day 3 = ${this.state.Day3}`);
     };
 
-    componentWillMount(){
-        this.loadBaseline()
+    attemptedDay1Click = e => {
+        e.preventDefault();
+        console.log(`Attempted button clicked`);
+        this.setState({week: this.state.week + 1});
+        console.log(`Week is now ${this.state.week+1}`);
+
+
+    }
+
+    completedDay1Click = e => {
+        e.preventDefault();
+        console.log(`Completed button clicked`);
+    }
+
+    attemptedDay2Click = e => {
+        e.preventDefault();
+        console.log(`Attempted button clicked`);
+    }
+
+    completedDay2Click = e => {
+        e.preventDefault();
+        console.log(`Completed button clicked`);
+    }
+
+    attemptedDay3Click = e => {
+        e.preventDefault();
+        console.log(`Attempted button clicked`);
+    }
+
+    completedDay3Click = e => {
+        e.preventDefault();
+        console.log(`Completed button clicked`);
+    }
+
+    onLogoutClick = e => {
+        e.preventDefault();
+        this.props.logoutUser();
     };
 
     render () {
@@ -77,8 +118,20 @@ class Walking extends Component {
                                     </div>
 
                                     <div className="card-action">
-                                        <button className="attempted-btn btn btn-small waves-effect waves-light hoverable">Attempted</button>
-                                        <button className="completed-btn btn btn-small waves-effect waves-light hoverable">Completed</button>
+                                        <button className="attempted-btn 
+                                            btn btn-small waves-effect 
+                                            waves-light hoverable"
+                                            onClick={this.attemptedDay1Click}
+                                            >
+                                            Attempted
+                                        </button>
+                                        <button className="completed-btn
+                                            btn btn-small waves-effect
+                                            waves-light hoverable"
+                                            onClick={this.completedDay1Click}
+                                            >
+                                            Completed
+                                        </button>                                    
                                     </div>
                                 </div>
                             </li>
@@ -93,8 +146,20 @@ class Walking extends Component {
                                             </ul>                                    </div>
 
                                     <div className="card-action">
-                                        <button className="attempted-btn btn btn-small waves-effect waves-light hoverable">Attempted</button>
-                                        <button className="completed-btn btn btn-small waves-effect waves-light hoverable">Completed</button>
+                                        <button className="attempted-btn 
+                                            btn btn-small waves-effect 
+                                            waves-light hoverable"
+                                            onClick={this.attemptedDay2Click}
+                                            >
+                                            Attempted
+                                        </button>
+                                        <button className="completed-btn
+                                            btn btn-small waves-effect
+                                            waves-light hoverable"
+                                            onClick={this.completedDay2Click}
+                                            >
+                                            Completed
+                                        </button>                                    
                                     </div>
                                 </div>
                             </li>
@@ -110,8 +175,20 @@ class Walking extends Component {
                                     </div>
 
                                     <div className="card-action">
-                                        <button className="attempted-btn btn btn-small waves-effect waves-light hoverable">Attempted</button>
-                                        <button className="completed-btn btn btn-small waves-effect waves-light hoverable">Completed</button>
+                                        <button className="attempted-btn 
+                                            btn btn-small waves-effect 
+                                            waves-light hoverable"
+                                            onClick={this.attemptedDay3Click}
+                                            >
+                                            Attempted
+                                        </button>
+                                        <button className="completed-btn
+                                            btn btn-small waves-effect
+                                            waves-light hoverable"
+                                            onClick={this.completedDay3Click}
+                                            >
+                                            Completed
+                                        </button>
                                     </div>
                                 </div>
                             </li>

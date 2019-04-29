@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const baselineSchema = new Schema({
   userID: { type: String, required: true },
+  week: { type: Number, required: true},
   walking: { type: Number , required: true },
   pushups: { type: Number, required: true },
   situps: { type: Number, required: true },
@@ -11,6 +12,10 @@ const baselineSchema = new Schema({
     type: Boolean,
     required: true,
     default: false
+  },
+  user: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
   },
   date: {
     type: Date,

@@ -4,7 +4,9 @@ const db = require("../models");
 module.exports = {
   getBaseline: function(req, res) {
     db.Baseline
-      .find({})
+      .findOne({
+          "userID": "5cc67ff9989e6c571836158b"
+      })
     //   .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
@@ -16,6 +18,14 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  updateBaselineWeek: function (req, res) {
+    console.log(`The req body week is ${JSON.stringify(req.body.week)}`);
+
+    db.Baseline
+      .update(req.body.week)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   remove: function(req, res) {
     db.Baseline
       .findById({ _id: req.params.id })
@@ -24,3 +34,4 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   }
 };
+
