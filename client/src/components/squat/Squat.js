@@ -28,8 +28,8 @@ class Squat extends Component {
     loadBaseline = () => {
         API.getBaseline()
             .then( res => {
-                console.log(`SQUAT BASE is ${JSON.stringify(res.data[0])}`)
-                this.setState({squatBase: res.data[0].squats})
+                console.log(`SQUAT BASE is ${JSON.stringify(res.data)}`)
+                this.setState({squatBase: res.data.squats})
                 this.calculateSquats(this.state.squatBase)
             }) 
             .catch(err => console.log(err)); 

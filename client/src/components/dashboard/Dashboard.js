@@ -28,7 +28,7 @@ class Dashboard extends Component {
         API.getBaseline()
             .then( res => {
                 console.log(`SITUP BASE is ${JSON.stringify(res.data[5])}`)
-                if (res.data[0].baselineComplete === true) {
+                if (res.data.baselineComplete === true) {
                     this.props.history.push("/workouts");
                 }
             }) 

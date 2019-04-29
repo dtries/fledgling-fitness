@@ -28,8 +28,8 @@ class Situp extends Component {
     loadBaseline = () => {
         API.getBaseline()
             .then( res => {
-                console.log(`SITUP BASE is ${JSON.stringify(res.data[0])}`)
-                this.setState({situpBase: res.data[0].situps})
+                console.log(`SITUP BASE is ${JSON.stringify(res.data)}`)
+                this.setState({situpBase: res.data.situps})
                 this.calculateSitups(this.state.situpBase)
             }) 
             .catch(err => console.log(err)); 
@@ -62,7 +62,7 @@ class Situp extends Component {
 
         let newBaseLine = this.state.day3Set3;
         console.log(newBaseLine);
-        
+
         console.log(
             `Week = ${week}, 
             Day 1 Set 1 = ${JSON.stringify(this.state.day1Set1)}, 

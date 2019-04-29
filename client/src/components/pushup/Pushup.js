@@ -28,8 +28,8 @@ class Pushup extends Component {
     loadBaseline = () => {
         API.getBaseline()
             .then( res => {
-                console.log(`PUSH BASE is ${JSON.stringify(res.data[0])}`)
-                this.setState({pushupBase: res.data[0].pushups})
+                console.log(`Baseline response object is ${JSON.stringify(res.data)}`)
+                this.setState({pushupBase: res.data.pushups})
                 this.calculatePushups(this.state.pushupBase)
             }) 
             .catch(err => console.log(err)); 
