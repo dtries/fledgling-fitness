@@ -5,9 +5,8 @@ module.exports = {
   getBaseline: function(req, res) {
     db.Baseline
       .findOne({
-          "userID": "5cc67ff9989e6c571836158b"
+          "userID": req.query.userID
       })
-    //   .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -25,13 +24,13 @@ module.exports = {
       .update(req.body.week)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  },
-  remove: function(req, res) {
-    db.Baseline
-      .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
   }
+//   remove: function(req, res) {
+//     db.Baseline
+//       .findById({ _id: req.params.id })
+//       .then(dbModel => dbModel.remove())
+//       .then(dbModel => res.json(dbModel))
+//       .catch(err => res.status(422).json(err));
+//   }
 };
 

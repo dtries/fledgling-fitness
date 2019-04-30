@@ -14,8 +14,8 @@ const app = express();
 // Use morger logger to track logging requests
 app.use(logger("dev"));
 
-// BodyParser middleware
-app.use(express.urlencoded({ extended: true }));
+// parsing middleware
+app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
 
@@ -37,7 +37,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes
-app.use(routes); //("/api/users", users);
+app.use(routes); 
 
 //Serve static assests if in production
 if (process.env.NODE_ENV === "production") {

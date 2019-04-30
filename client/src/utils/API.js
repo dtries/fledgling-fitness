@@ -7,8 +7,16 @@ export default {
 //         return axios.get("https://www.googleapis.com/books/v1/volumes", { params: {q: query} });
 //     },
 //  Gets all baseline infor from database
-  getBaseline: function() {
-    return axios.get("/api/baseline");
+  getBaseline: function(userID) {
+      console.log(`API baselineID is ${JSON.stringify(userID.userID)}`);
+    return axios.get("/api/baseline/",
+    {
+        params: {
+            userID: userID.userID
+        }
+
+    }
+    )
   },
 
 //   Updates week in baseline from 0 to 1

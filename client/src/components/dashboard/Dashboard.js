@@ -25,9 +25,15 @@ class Dashboard extends Component {
     };
 
     baselineCompleted = () => {
-        API.getBaseline()
+        const { user } = this.props.auth;
+        const baselineID = {
+            userID: user.id
+        };
+        console.log(`This userID is ${JSON.stringify(baselineID)}`);
+
+        API.getBaseline(baselineID)
             .then( res => {
-                console.log(`SITUP BASE is ${JSON.stringify(res.data[5])}`)
+                console.log(`Baseline data are ${JSON.stringify(res.data)}`)
                 if (res.data.baselineComplete === true) {
                     this.props.history.push("/workouts");
                 }
@@ -59,10 +65,6 @@ class Dashboard extends Component {
             this.props.history.push("/workouts");
         }
 
-        const id = user.id;
-
-        console.log(id);
-
         API.saveBaseline(baselineData)
             .then(res => {
                 console.log(res.status, res.statusText);
@@ -81,9 +83,6 @@ class Dashboard extends Component {
     render () {
         console.log(`State is ${JSON.stringify(this.state)}`);
         const { user } = this.props.auth;
-        console.log(`The user is ${JSON.stringify(user.id)}`);
-        // const { errors } = this.state;
-
 
         return (
             <div className="container">

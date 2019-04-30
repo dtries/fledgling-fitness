@@ -20,8 +20,12 @@ class Walking extends Component {
     };
 
     loadBaseline = () => {
-        console.log(`User ID is ${JSON.stringify(this.props.auth.user.id)}`);
-        API.getBaseline(this.props.auth.user.id)
+        const { user } = this.props.auth;
+        const baselineID = {
+            userID: user.id
+        };
+        console.log(`This userID is ${JSON.stringify(baselineID)}`);
+        API.getBaseline(baselineID)
             .then( res => {
                 console.log(`The baseline response object is ${JSON.stringify(res.data)}`);
                 this.setState({walkBase: res.data.walking})
