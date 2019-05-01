@@ -14,7 +14,6 @@ export default {
         params: {
             userID: userID.userID
         }
-
     }
     )
   },

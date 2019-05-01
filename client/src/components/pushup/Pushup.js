@@ -9,27 +9,33 @@ var week = 0;
 class Pushup extends Component {
 
     state = {
-        pushupBase: "",
-        day1Set1: "",
-        day1Set2: "",
-        day1Set3: "",
-        day2Set1: "",
-        day2Set2: "",
-        day2Set3: "",      
-        day3Set1: "",
-        day3Set2: "",
-        day3Set3: ""
+        week: null,
+        pushupBase: null,
+        day1Set1: null,
+        day1Set2: null,
+        day1Set3: null,
+        day2Set1: null,
+        day2Set2: null,
+        day2Set3: null,      
+        day3Set1: null,
+        day3Set2: null,
+        day3Set3: null
     }
-    onLogoutClick = e => {
-        e.preventDefault();
-        this.props.logoutUser();
+
+    componentWillMount() {
+        this.loadBaseline();
     };
 
     loadBaseline = () => {
-        API.getBaseline()
+        const { user } = this.props.auth;
+        const baselineID = {
+            userID: user.id
+        };
+        API.getBaseline(baselineID)
             .then( res => {
                 console.log(`Baseline response object is ${JSON.stringify(res.data)}`)
                 this.setState({pushupBase: res.data.pushups})
+                this.setState({week: res.data.week})
                 this.calculatePushups(this.state.pushupBase)
             }) 
             .catch(err => console.log(err)); 
@@ -70,8 +76,9 @@ class Pushup extends Component {
             Day 3 Set 3 = ${JSON.stringify(this.state.day1Set3)}`);
     };
 
-    componentWillMount() {
-        this.loadBaseline();
+    onLogoutClick = e => {
+        e.preventDefault();
+        this.props.logoutUser();
     };
 
     render () {

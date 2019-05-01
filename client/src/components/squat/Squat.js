@@ -9,24 +9,30 @@ var week = 0;
 class Squat extends Component {
 
     state = {
-        squatBase: "",
-        day1Set1: "",
-        day1Set2: "",
-        day1Set3: "",
-        day2Set1: "",
-        day2Set2: "",
-        day2Set3: "",      
-        day3Set1: "",
-        day3Set2: "",
-        day3Set3: ""
+        week: null,
+        squatBase: null,
+        day1Set1: null,
+        day1Set2: null,
+        day1Set3: null,
+        day2Set1: null,
+        day2Set2: null,
+        day2Set3: null,      
+        day3Set1: null,
+        day3Set2: null,
+        day3Set3: null
     }
-    onLogoutClick = e => {
-        e.preventDefault();
-        this.props.logoutUser();
+
+    
+    componentWillMount() {
+        this.loadBaseline();
     };
 
     loadBaseline = () => {
-        API.getBaseline()
+        const { user } = this.props.auth;
+        const baselineID = {
+            userID: user.id
+        };
+        API.getBaseline(baselineID)
             .then( res => {
                 console.log(`SQUAT BASE is ${JSON.stringify(res.data)}`)
                 this.setState({squatBase: res.data.squats})
@@ -68,8 +74,9 @@ class Squat extends Component {
             Day 3 Set 3 = ${JSON.stringify(this.state.day1Set3)}`);
     };
 
-    componentWillMount() {
-        this.loadBaseline();
+    onLogoutClick = e => {
+        e.preventDefault();
+        this.props.logoutUser();
     };
 
     render () {
