@@ -16,15 +16,15 @@ module.exports = {
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  },
-  updateBaselineWeek: function (req, res) {
-    console.log(`The req body week is ${JSON.stringify(req.body.week)}`);
-
-    db.Baseline
-      .update(req.body.week)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
   }
+//   updateBaselineWeek: function (req, res) {
+//     console.log(`The req body week is ${JSON.stringify(req.body.week)}`);
+
+//     db.Baseline
+//       .update(req.body.week)
+//       .then(dbModel => res.json(dbModel))
+//       .catch(err => res.status(422).json(err));
+//   }
 //   remove: function(req, res) {
 //     db.Baseline
 //       .findById({ _id: req.params.id })

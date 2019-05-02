@@ -15,7 +15,7 @@ const app = express();
 app.use(logger("dev"));
 
 // parsing middleware
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
 

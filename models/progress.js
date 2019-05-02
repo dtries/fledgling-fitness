@@ -1,18 +1,34 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+
+// const exerciseSchema = new Schema ({
+//     walking: []
+//     // pushups: [],
+//     // situps: [],
+//     // squats: []
+// });
+
+// const weekSchema = new Schema({
+//     week: Number,
+//     exercises: [exerciseSchema]
+//     // pushups: [],
+//     // situps: [],
+//     // squats: []
+//     // exercises: [exerciseSchema]    
+// });
+
 const progressSchema = new Schema({
-//   title: { type: String, required: true },
-//   authors: { type: [String], required: true },
-//   synopsis: { type: String, required: true },
-//   pic: String,
-//   publisher:{ type: String, required: true },
-//   titleId: { type: String, required: true },
-//   link: { type: String, required: true },
-//   date: {
-//     type: Date,
-//     default: Date.now
-//   }
+    userID: { type: String, required: true },
+    // user: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "User"
+    // },
+    // weeks: []
+    walking: [],
+    // pushups: [],
+    // situps: [],
+    // squats: []
 });
 
 const Progress = mongoose.model("Progress", progressSchema);

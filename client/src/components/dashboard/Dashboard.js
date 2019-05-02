@@ -50,7 +50,6 @@ class Dashboard extends Component {
     onSubmit = e => {
         e.preventDefault();
         const { user } = this.props.auth;
-        // console.log("MADE IT HERE DURING ONSUBMIT")
         const baselineData = {
             userID: user.id,
             week: 0,
