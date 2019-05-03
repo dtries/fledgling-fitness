@@ -26,8 +26,27 @@ class Pushup extends Component {
     }
 
     componentWillMount() {
-        this.loadBaseline();
+        this.checkDbCollections()
         this.getDate();
+    };
+
+    checkDbCollections = () => {
+        const { user } = this.props.auth;
+        const baselineID = {
+            userID: user.id
+        };
+        API.getProgress(baselineID)
+            .then( res => {
+                console.log(`Pushup progress data are: ${JSON.stringify(res.data)}`);
+                
+                if (res.data === null || res.data.pushups.length <2) {
+                    this.loadInitialBaseline()
+                }
+                else { 
+                    this.loadOngoingBaseline(res);
+                } 
+            })
+            .catch( err => console.log(err))
     };
 
     getDate = () => {
@@ -37,7 +56,7 @@ class Pushup extends Component {
         
     };
 
-    loadBaseline = () => {
+    loadInitialBaseline = () => {
         const { user } = this.props.auth;
         const baselineID = {
             userID: user.id
@@ -50,6 +69,53 @@ class Pushup extends Component {
                 this.calculatePushups(this.state.pushupBase)
             }) 
             .catch(err => console.log(err)); 
+    };
+
+    loadOngoingBaseline = res => {
+        let arrayStart = res.data.pushups.length-1;
+        for (let i=arrayStart; i > arrayStart-3; i--) { 
+        const lastDay3Item = res.data.pushups[i];
+        const lastDayValue = Object.keys(lastDay3Item)[0];
+        console.log(`Last day 3 item: ${JSON.stringify(lastDay3Item)}`);
+        console.log(`Last day 3 1st key value is ${lastDayValue}`)
+
+            if (lastDayValue === "Day3") {
+                console.log("Found last Day 3!!!!!!!");
+                
+                const lastDayCompleted = lastDay3Item.Day3.Completed;
+
+
+                if (lastDayCompleted) {
+                    console.log("get the value of day3 in last item");
+
+                    let newBaseline =
+                        parseInt([lastDay3Item.Day3.Day3Set3], 10) + 
+                        parseInt([lastDay3Item.Day3.Day3Set2], 10) +
+                        parseInt([lastDay3Item.Day3.Day3Set1], 10) +
+                        2;
+
+                    console.log(`Value for new baseline is 
+                        ${newBaseline}`);
+
+                    this.setState({pushupBase: newBaseline })
+                    this.calculatePushups(this.state.pushupBase, this.state.week);
+
+                } else {
+                    console.log("repeat last weeks progression");
+                    let newBaseline =
+                    parseInt([lastDay3Item.Day3.Day3Set3]-1, 10) + 
+                    parseInt([lastDay3Item.Day3.Day3Set2]-1, 10) +
+                    parseInt([lastDay3Item.Day3.Day3Set1]-1, 10) +
+                    2;
+
+                    console.log(`Value for new baseline is 
+                    ${newBaseline}`);
+
+                    this.setState({pushupBase: newBaseline })
+                    this.calculatePushups(this.state.pushupBase, this.state.week);
+                }
+            }
+         }
     };
 
     calculatePushups = pushupBase => {

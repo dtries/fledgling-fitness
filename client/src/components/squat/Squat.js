@@ -27,8 +27,27 @@ class Squat extends Component {
 
     
     componentWillMount() {
-        this.loadBaseline();
+        this.checkDbCollections()
         this.getDate();
+    };
+
+    checkDbCollections = () => {
+        const { user } = this.props.auth;
+        const baselineID = {
+            userID: user.id
+        };
+        API.getProgress(baselineID)
+            .then( res => {
+                console.log(`Squat progress data are: ${JSON.stringify(res.data)}`);
+                
+                if (res.data === null || res.data.squats.length <2) {
+                    this.loadInitialBaseline()
+                }
+                else { 
+                    this.loadOngoingBaseline(res);
+                } 
+            })
+            .catch( err => console.log(err))
     };
 
     getDate = () => {
@@ -38,7 +57,7 @@ class Squat extends Component {
         
     };
 
-    loadBaseline = () => {
+    loadInitialBaseline = () => {
         const { user } = this.props.auth;
         const baselineID = {
             userID: user.id
@@ -50,6 +69,53 @@ class Squat extends Component {
                 this.calculateSquats(this.state.squatBase)
             }) 
             .catch(err => console.log(err)); 
+    };
+
+    loadOngoingBaseline = res => {
+        let arrayStart = res.data.squats.length-1;
+        for (let i=arrayStart; i > arrayStart-3; i--) { 
+        const lastDay3Item = res.data.squats[i];
+        const lastDayValue = Object.keys(lastDay3Item)[0];
+        console.log(`Last day 3 item: ${JSON.stringify(lastDay3Item)}`);
+        console.log(`Last day 3 1st key value is ${lastDayValue}`)
+
+            if (lastDayValue === "Day3") {
+                console.log("Found last Day 3!!!!!!!");
+                
+                const lastDayCompleted = lastDay3Item.Day3.Completed;
+
+
+                if (lastDayCompleted) {
+                    console.log("get the value of day3 in last item");
+
+                    let newBaseline =
+                        parseInt([lastDay3Item.Day3.Day3Set3], 10) + 
+                        parseInt([lastDay3Item.Day3.Day3Set2], 10) +
+                        parseInt([lastDay3Item.Day3.Day3Set1], 10) +
+                        2;
+
+                    console.log(`Value for new baseline is 
+                        ${newBaseline}`);
+
+                    this.setState({squatBase: newBaseline })
+                    this.calculateSquats(this.state.squatBase, this.state.week);
+
+                } else {
+                    console.log("repeat last weeks progression");
+                    let newBaseline =
+                    parseInt([lastDay3Item.Day3.Day3Set3]-1, 10) + 
+                    parseInt([lastDay3Item.Day3.Day3Set2]-1, 10) +
+                    parseInt([lastDay3Item.Day3.Day3Set1]-1, 10) +
+                    2;
+
+                    console.log(`Value for new baseline is 
+                    ${newBaseline}`);
+
+                    this.setState({squatBase: newBaseline })
+                    this.calculateSquats(this.state.squatBase, this.state.week);
+                }
+            }
+         }
     };
 
     calculateSquats = squatBase => {
@@ -243,7 +309,7 @@ class Squat extends Component {
                                 <div className="card workout-card">
                                     <div className="card-content">
                                         <p className="card-title" id="workout-card-title">Day 1</p>
-                                        <p>Complete 3 Sets of SQUATS:</p>
+                                        <p>Complete 3 Sets of Squats:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
                                                 <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {this.state.day1Set1} squats</li>
@@ -274,7 +340,7 @@ class Squat extends Component {
                                 <div className="card workout-card">
                                     <div className="card-content">
                                         <p className="card-title" id="workout-card-title">Day 2</p>
-                                        <p>Complete 3 Sets of Pushups:</p>
+                                        <p>Complete 3 Sets of Squats:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
                                                 <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {this.state.day2Set1} squats</li>
@@ -305,7 +371,7 @@ class Squat extends Component {
                                 <div className="card workout-card">
                                     <div className="card-content">
                                         <p className="card-title" id="workout-card-title">Day 3</p>
-                                        <p>Complete 3 Sets of Pushups:</p>
+                                        <p>Complete 3 Sets of Squats:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
                                                 <li className="collection-item"><span className="set-marker">Set 1:</span> &nbsp;  {this.state.day3Set1} squats</li>

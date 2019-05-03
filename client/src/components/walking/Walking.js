@@ -6,7 +6,7 @@ import { logoutUser } from "../../actions/authActions";
 
 class Walking extends Component {
     state = {
-        walkingArrayExists: false,
+        week1ArrayComplete: false,
         walkBase: null,
         Day1: null,
         Day2: null,
@@ -28,21 +28,14 @@ class Walking extends Component {
         };
         API.getProgress(baselineID)
             .then( res => {
-                // const lastItem = res.data.walking[res.data.walking.length-1];
-                // const lastDayValue = Object.keys(lastItem)[0];
-                // console.log(JSON.stringify(res.data));
-                console.log(`Walking array length is ${res.data.walking.length}`);
-                console.log(`Pushups array lenth is ${res.data.pushups.length}`);
-                // console.log(`Latest Walking Day Object is ${JSON.stringify(lastItem)}`);
-                // console.log(`Value of Latests Walking Day is ${JSON.stringify(lastDayValue)}`);
-
-                if (res.data.walking.length > 1) {
-                    this.setState( {walkingArrayExists: true} )
+                console.log(`Walking progress data are: ${JSON.stringify(res.data)}`);
+                
+                if (res.data === null || res.data.walking.length <2) {
+                    this.loadInitialBaseline()
+                }
+                else { 
                     this.loadOngoingBaseline(res);
                 } 
-                else { 
-                this.loadInitialBaseline()
-                }
             })
             .catch( err => console.log(err))
     };
@@ -60,7 +53,7 @@ class Walking extends Component {
             userID: user.id
         };
         
-        console.log(`Walking array exists: ${this.state.walkingArrayExists}`);
+        console.log(`Week 1 walking array complete: ${this.state.week1ArrayComplete}`);
         console.log(`This userID is ${JSON.stringify(baselineID)}`);
         
         API.getBaseline(baselineID)
@@ -76,16 +69,31 @@ class Walking extends Component {
     };
 
     loadOngoingBaseline = res => {
-        const lastItem = res.data.walking[res.data.walking.length-1];
-        const lastDayValue = Object.keys(lastItem)[0];
-        console.log(`Latest Walking Day Object is ${JSON.stringify(lastItem)}`);
-        console.log(`Value of Latests Walking Day is ${JSON.stringify(lastDayValue)}`);
-        if (lastDayValue === "Day3") {
-            console.log("get the value of day3 walking in last item");
-        } else {
-            console.log("repeat last weeks progression");
-        }
+        let arrayStart = res.data.walking.length-1;
+        for (let i=arrayStart; i > arrayStart-3; i--) { 
+        const lastDay3Item = res.data.walking[i];
+        const lastDayValue = Object.keys(lastDay3Item)[0];
+        console.log(`Last day 3 item: ${JSON.stringify(lastDay3Item)}`);
+        console.log(`Last day 3 1st key value is ${lastDayValue}`)
 
+            if (lastDayValue === "Day3") {
+                console.log("Found last Day 3!!!!!!!");
+                
+                const lastDayCompleted = lastDay3Item.Day3.Completed;
+
+
+                if (lastDayCompleted) {
+                    console.log("get the value of day3 in last item");
+                    console.log(`Value for new baseline is ${lastDay3Item.Day3.Duration}`)
+                    let newBaseline = lastDay3Item.Day3.Duration;
+                    this.setState({walkBase: newBaseline })
+                    this.calculateWalking(this.state.walkBase, this.state.week);
+
+                } else {
+                    console.log("repeat last weeks progression");
+                }
+                    }
+         }
     };
 
     calculateWalking = (walkBase, week) => {
