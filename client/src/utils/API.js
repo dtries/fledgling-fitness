@@ -22,8 +22,32 @@ export default {
     return axios.post("/api/baseline/", baselineData);
   },
 
-  updateProgress: function(workoutData) {
-      return axios.post("/api/progress", workoutData);
+  updateWalking: function(workoutData) {
+      return axios.post("/api/progress/walking", workoutData);
+  },
+
+  updatePushups: function(workoutData) {
+    return axios.post("/api/progress/pushups", workoutData);
+  },
+
+  updateSitups: function(workoutData) {
+    return axios.post("/api/progress/situps", workoutData);
+  },
+
+  updateSquats: function(workoutData) {
+    return axios.post("/api/progress/squats", workoutData);
+  },
+
+  getProgress: function(userID) {
+    console.log(`API check collections baselineID is ${JSON.stringify(userID.userID)}`);
+  return axios.get("/api/progress/", 
+  {
+      params: {
+          userID: userID.userID
+      }
   }
+  )
+  }
+  
 
 };

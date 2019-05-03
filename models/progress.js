@@ -26,9 +26,9 @@ const progressSchema = new Schema({
     // },
     // weeks: []
     walking: [],
-    // pushups: [],
-    // situps: [],
-    // squats: []
+    pushups: [],
+    situps: [],
+    squats: []
 });
 
 const Progress = mongoose.model("Progress", progressSchema);

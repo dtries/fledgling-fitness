@@ -19,11 +19,22 @@ class Situp extends Component {
         day2Set3: null,      
         day3Set1: null,
         day3Set2: null,
-        day3Set3: null
+        day3Set3: null,
+        today: "",
+        attempted: false,
+        completed: false
     }
 
      componentWillMount() {
         this.loadBaseline();
+        this.getDate();
+    };
+
+    getDate = () => {
+        const now = new Date();
+        console.log(`${now}`);
+        this.setState({today: now});
+        
     };
 
     loadBaseline = () => {
@@ -75,6 +86,138 @@ class Situp extends Component {
             Day 3 Set 3 = ${JSON.stringify(this.state.day1Set3)}`);
     };
 
+    attemptedDay1Click = (e, completed) => {
+        e.preventDefault();
+        console.log(`The date is ${this.state.today}`);
+
+        console.log(`Completed value is  ${completed}`);
+        console.log(`Attempted button clicked`);
+        console.log(`Week is now ${this.state.week}`);
+        const attempted = true;
+        const { user } = this.props.auth;
+        const id = user.id;
+
+        if (completed === undefined) {
+            completed = false;
+        };
+        const workoutData = {
+            userID: user.id,
+            situps: {Day1: {
+                        Day: this.state.today,
+                        Day1Set1: this.state.day1Set1,
+                        Day1Set2: this.state.day1Set2,
+                        Day1Set3: this.state.day1Set3,
+                        Attempted: attempted,
+                        Completed: completed
+                        }
+                     }
+        };
+
+        console.log(`This userID is ${id}`);
+        console.log(`This workout data is ${JSON.stringify(workoutData)}`);
+        API.updateSitups(workoutData)
+            .then( res => {
+                console.log(res.status, res.statusText);
+
+            }) 
+            .catch(err => console.log(err));
+    };
+
+    completedDay1Click = e => {
+        e.preventDefault();
+        const completed = true;
+        this.attemptedDay1Click(e, completed);
+        console.log(`Completed button clicked`);
+    };
+
+    attemptedDay2Click = (e, completed) => {
+        e.preventDefault();
+        console.log(`The date is ${this.state.today}`);
+
+        console.log(`Completed value is  ${completed}`);
+        console.log(`Attempted button clicked`);
+        console.log(`Week is now ${this.state.week}`);
+        const attempted = true;
+        const { user } = this.props.auth;
+        const id = user.id;
+
+        if (completed === undefined) {
+            completed = false;
+        };
+        const workoutData = {
+            userID: user.id,
+            situps: {Day2: {
+                        Day: this.state.today,
+                        Day2Set1: this.state.day2Set1,
+                        Day2Set2: this.state.day2Set2,
+                        Day2Set3: this.state.day2Set3,
+                        Attempted: attempted,
+                        Completed: completed
+                        }
+                     }
+        };
+
+        console.log(`This userID is ${id}`);
+        console.log(`This workout data is ${JSON.stringify(workoutData)}`);
+        API.updateSitups(workoutData)
+            .then( res => {
+                console.log(res.status, res.statusText);
+
+            }) 
+            .catch(err => console.log(err));
+    };
+
+    completedDay2Click = e => {
+        e.preventDefault();
+        const completed = true;
+        this.attemptedDay2Click(e, completed);
+        console.log(`Completed button clicked`);
+    };
+
+    attemptedDay3Click = (e, completed) => {
+        e.preventDefault();
+        console.log(`The date is ${this.state.today}`);
+
+        console.log(`Completed value is  ${completed}`);
+        console.log(`Attempted button clicked`);
+        console.log(`Week is now ${this.state.week}`);
+        const attempted = true;
+        const { user } = this.props.auth;
+        const id = user.id;
+
+        if (completed === undefined) {
+            completed = false;
+        };
+        const workoutData = {
+            userID: user.id,
+            situps: {Day3: {
+                        Day: this.state.today,
+                        Day3Set1: this.state.day3Set1,
+                        Day3Set2: this.state.day3Set2,
+                        Day3Set3: this.state.day3Set3,
+                        Attempted: attempted,
+                        Completed: completed
+                        }
+                     }
+        };
+
+        console.log(`This userID is ${id}`);
+        console.log(`This workout data is ${JSON.stringify(workoutData)}`);
+        API.updateSitups(workoutData)
+            .then( res => {
+                console.log(res.status, res.statusText);
+
+            }) 
+            .catch(err => console.log(err));
+    };
+
+    completedDay3Click = e => {
+        e.preventDefault();
+        const completed = true;
+        this.attemptedDay3Click(e, completed);
+        console.log(`Completed button clicked`);
+    };
+
     onLogoutClick = e => {
         e.preventDefault();
         this.props.logoutUser();
@@ -111,8 +254,20 @@ class Situp extends Component {
                                     </div>
 
                                     <div className="card-action">
-                                        <button className="attempted-btn btn btn-small waves-effect waves-light hoverable">Attempted</button>
-                                        <button className="completed-btn btn btn-small waves-effect waves-light hoverable">Completed</button>
+                                        <button className="attempted-btn 
+                                                btn btn-small waves-effect 
+                                                waves-light hoverable"
+                                                onClick={this.attemptedDay1Click}
+                                                >
+                                                Attempted
+                                        </button>
+                                        <button className="completed-btn
+                                                btn btn-small waves-effect
+                                                waves-light hoverable"
+                                                onClick={this.completedDay1Click}
+                                                >
+                                                Completed
+                                        </button>                                    
                                     </div>
                                 </div>
                             </li>
@@ -130,8 +285,20 @@ class Situp extends Component {
                                     </div>
 
                                     <div className="card-action">
-                                        <button className="attempted-btn btn btn-small waves-effect waves-light hoverable">Attempted</button>
-                                        <button className="completed-btn btn btn-small waves-effect waves-light hoverable">Completed</button>
+                                        <button className="attempted-btn 
+                                                btn btn-small waves-effect 
+                                                waves-light hoverable"
+                                                onClick={this.attemptedDay2Click}
+                                                >
+                                                Attempted
+                                        </button>
+                                        <button className="completed-btn
+                                                btn btn-small waves-effect
+                                                waves-light hoverable"
+                                                onClick={this.completedDay2Click}
+                                                >
+                                                Completed
+                                        </button>                                    
                                     </div>
                                 </div>
                             </li>
@@ -149,8 +316,20 @@ class Situp extends Component {
                                     </div>
 
                                     <div className="card-action">
-                                        <button className="attempted-btn btn btn-small waves-effect waves-light hoverable">Attempted</button>
-                                        <button className="completed-btn btn btn-small waves-effect waves-light hoverable">Completed</button>
+                                        <button className="attempted-btn 
+                                                btn btn-small waves-effect 
+                                                waves-light hoverable"
+                                                onClick={this.attemptedDay3Click}
+                                                >
+                                                Attempted
+                                        </button>
+                                        <button className="completed-btn
+                                                btn btn-small waves-effect
+                                                waves-light hoverable"
+                                                onClick={this.completedDay3Click}
+                                                >
+                                                Completed
+                                        </button>                                    
                                     </div>
                                 </div>
                             </li>

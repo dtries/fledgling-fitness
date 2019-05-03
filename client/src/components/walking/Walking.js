@@ -6,6 +6,7 @@ import { logoutUser } from "../../actions/authActions";
 
 class Walking extends Component {
     state = {
+        walkingArrayExists: false,
         walkBase: null,
         Day1: null,
         Day2: null,
@@ -16,8 +17,34 @@ class Walking extends Component {
     }
 
     componentWillMount(){
-        this.loadBaseline()
+        this.checkDbCollections()
         this.getDate()
+    };
+
+    checkDbCollections = () => {
+        const { user } = this.props.auth;
+        const baselineID = {
+            userID: user.id
+        };
+        API.getProgress(baselineID)
+            .then( res => {
+                // const lastItem = res.data.walking[res.data.walking.length-1];
+                // const lastDayValue = Object.keys(lastItem)[0];
+                // console.log(JSON.stringify(res.data));
+                console.log(`Walking array length is ${res.data.walking.length}`);
+                console.log(`Pushups array lenth is ${res.data.pushups.length}`);
+                // console.log(`Latest Walking Day Object is ${JSON.stringify(lastItem)}`);
+                // console.log(`Value of Latests Walking Day is ${JSON.stringify(lastDayValue)}`);
+
+                if (res.data.walking.length > 1) {
+                    this.setState( {walkingArrayExists: true} )
+                    this.loadOngoingBaseline(res);
+                } 
+                else { 
+                this.loadInitialBaseline()
+                }
+            })
+            .catch( err => console.log(err))
     };
 
     getDate = () => {
@@ -25,13 +52,17 @@ class Walking extends Component {
         console.log(`${now}`);
         this.setState({today: now});
         
-    }
-    loadBaseline = () => {
+    };
+
+    loadInitialBaseline = () => {
         const { user } = this.props.auth;
         const baselineID = {
             userID: user.id
         };
+        
+        console.log(`Walking array exists: ${this.state.walkingArrayExists}`);
         console.log(`This userID is ${JSON.stringify(baselineID)}`);
+        
         API.getBaseline(baselineID)
             .then( res => {
                 console.log(`The baseline response object is ${JSON.stringify(res.data)}`);
@@ -42,6 +73,19 @@ class Walking extends Component {
 
             }) 
             .catch(err => console.log(err)); 
+    };
+
+    loadOngoingBaseline = res => {
+        const lastItem = res.data.walking[res.data.walking.length-1];
+        const lastDayValue = Object.keys(lastItem)[0];
+        console.log(`Latest Walking Day Object is ${JSON.stringify(lastItem)}`);
+        console.log(`Value of Latests Walking Day is ${JSON.stringify(lastDayValue)}`);
+        if (lastDayValue === "Day3") {
+            console.log("get the value of day3 walking in last item");
+        } else {
+            console.log("repeat last weeks progression");
+        }
+
     };
 
     calculateWalking = (walkBase, week) => {
@@ -88,7 +132,7 @@ class Walking extends Component {
 
         console.log(`This userID is ${id}`);
         console.log(`This workout data is ${JSON.stringify(workoutData)}`);
-        API.updateProgress(workoutData)
+        API.updateWalking(workoutData)
             .then( res => {
                 console.log(res.status, res.statusText);
 
@@ -127,7 +171,7 @@ class Walking extends Component {
 
         console.log(`This userID is ${id}`);
         console.log(`This workout data is ${JSON.stringify(workoutData)}`);
-        API.updateProgress(workoutData)
+        API.updateWalking(workoutData)
             .then( res => {
                 console.log(res.status, res.statusText);
 
@@ -146,6 +190,7 @@ class Walking extends Component {
         e.preventDefault();
         console.log(`Completed value is  ${completed}`);
         console.log(`Attempted button clicked`);
+        const week = this.state.week+1;
         console.log(`Week is now ${this.state.week}`);
         const attempted = true;
         const { user } = this.props.auth;
@@ -166,7 +211,7 @@ class Walking extends Component {
 
         console.log(`This userID is ${id}`);
         console.log(`This workout data is ${JSON.stringify(workoutData)}`);
-        API.updateProgress(workoutData)
+        API.updateWalking(workoutData)
             .then( res => {
                 console.log(res.status, res.statusText);
 
