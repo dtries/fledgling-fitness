@@ -91,8 +91,20 @@ class Walking extends Component {
 
                 } else {
                     console.log("repeat last weeks progression");
+                    let calcBaseline1 = Math.ceil(
+                    parseFloat(([lastDay3Item.Day3.Duration]/1.1), 10));
+
+                    let calcBaseline2 = Math.ceil(calcBaseline1/1.1);
+
+                    let newBaseline = Math.ceil(calcBaseline2);
+
+                    console.log(`Value for new baseline is 
+                    ${newBaseline}`);
+
+                    this.setState({walkBase: newBaseline })
+                    this.calculateWalking(this.state.walkBase, this.state.week);
                 }
-                    }
+            }
          }
     };
 
