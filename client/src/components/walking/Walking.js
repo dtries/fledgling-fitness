@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import PropTypes from "prop-types";
+// import ReactDom from "react-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
@@ -13,12 +14,17 @@ class Walking extends Component {
         Day3: null,
         today: "",
         attempted: false,
-        completed: false
+        completed: false,
+        attempt1: false,
+        complete1: false,
+        attempt2: true,
+        complete2: true
     }
 
     componentWillMount(){
         this.checkDbCollections()
         this.getDate()
+        // this.buttonActiveSetting()
     };
 
     checkDbCollections = () => {
@@ -46,6 +52,10 @@ class Walking extends Component {
         this.setState({today: now});
         
     };
+
+    // buttonActiveSetting = () => {
+
+    // };
 
     loadInitialBaseline = () => {
         const { user } = this.props.auth;
@@ -127,6 +137,10 @@ class Walking extends Component {
 
     attemptedDay1Click = (e, completed) => {
         e.preventDefault();
+        this.setState({attempt1: true});
+        this.setState({complete1: true});
+        this.setState({attempt2: false});
+        this.setState({complete2: false});
         console.log(`The date is ${this.state.today}`);
 
         console.log(`Completed value is  ${completed}`);
@@ -283,13 +297,16 @@ class Walking extends Component {
                                         <button className="attempted-btn 
                                             btn btn-small waves-effect 
                                             waves-light hoverable"
+                                            disabled={this.state.attempt1}
                                             onClick={this.attemptedDay1Click}
+                                            id="attempted-btn1"
                                             >
                                             Attempted
                                         </button>
                                         <button className="completed-btn
                                             btn btn-small waves-effect
                                             waves-light hoverable"
+                                            disabled={this.state.complete1}
                                             onClick={this.completedDay1Click}
                                             >
                                             Completed
@@ -311,6 +328,7 @@ class Walking extends Component {
                                         <button className="attempted-btn 
                                             btn btn-small waves-effect 
                                             waves-light hoverable"
+                                            disabled={this.state.attempt2}
                                             onClick={this.attemptedDay2Click}
                                             >
                                             Attempted
@@ -318,6 +336,7 @@ class Walking extends Component {
                                         <button className="completed-btn
                                             btn btn-small waves-effect
                                             waves-light hoverable"
+                                            disabled={this.state.complete2}
                                             onClick={this.completedDay2Click}
                                             >
                                             Completed
@@ -340,6 +359,7 @@ class Walking extends Component {
                                         <button className="attempted-btn 
                                             btn btn-small waves-effect 
                                             waves-light hoverable"
+                                            disabled={true}
                                             onClick={this.attemptedDay3Click}
                                             >
                                             Attempted
@@ -347,6 +367,7 @@ class Walking extends Component {
                                         <button className="completed-btn
                                             btn btn-small waves-effect
                                             waves-light hoverable"
+                                            disabled={true}
                                             onClick={this.completedDay3Click}
                                             >
                                             Completed
