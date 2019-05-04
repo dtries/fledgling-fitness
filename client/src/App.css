@@ -245,6 +245,10 @@ li.collection-item {
     color: #FFE400;
 }
 
+.tabs .tab a.active {
+    color: #FFE400;
+}
+
 .tabs .tab a:focus.active {
     color: #FFE400;
 }

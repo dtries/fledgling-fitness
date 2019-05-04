@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-// import * as $ from 'jquery';
-import {Tab,Tabs} from 'react-materialize'
+import {Tab,Tabs, Table} from 'react-materialize';
+import TableBody from "../TableBody/tablebody";
 import API from "../../utils/API";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-
-let $ = require("jquery");
 
 class Progress extends Component {
 
@@ -20,12 +18,10 @@ class Progress extends Component {
 
     componentWillMount() {
         this.checkDbCollections();
-        // $('.tabs').tabs();
     };
 
     componentWillUnmount() {
-        // $('.tabs').tabs();
-        // this.checkDbCollections();
+        this.checkDbCollections();
 
     }
 
@@ -53,8 +49,11 @@ class Progress extends Component {
                 const squatDisplay = JSON.stringify(res.data.squats)
                 this.setState({squatData: squatDisplay})
 
+                this.walkingTable(res);
             })
             .catch( err => console.log(err))
+
+
         
     };
 
@@ -65,6 +64,13 @@ class Progress extends Component {
 
     render () {
         const { user } = this.props.auth;
+        // this.walkTableRow = this.state.walkingData.map(day => 
+        //     <tr>
+        //         <td>
+        //             {day.Day1.Day}
+        //         </td>
+        //     </tr>
+        // );
 
         return (
             <div className="container">
@@ -81,7 +87,35 @@ class Progress extends Component {
 
                 <Tabs className="tab-progress z-depth-1 tabs-fixed-width">
                     <Tab title="Walking" className="tab-exercise">
-                        <div id="display-walking">{this.state.walkingData}</div>
+                        <div id="display-walking">
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th data-field="id">
+                                        Date
+                                    </th>
+                                    <th data-field="name">
+                                        Duration
+                                    </th>
+                                    <th data-field="price">
+                                        Attempted
+                                    </th>
+                                    <th data-field="price">
+                                        Completed
+                                    </th>
+                                </tr>
+                            </thead>
+                                {/* {this.state.walkingData.map(walkInfo => (
+                                <TableBody>
+                                    key={walkInfo.Day1.Day}
+                                    day={walkInfo.Day1.Day}
+                                    
+                                </TableBody>
+                                ))} */}
+
+                            </Table>
+                            {this.state.walkingData}
+                            </div>
                     </Tab>
                     <Tab title="Pushups">
                         <div id="display-pushups">{this.state.pushupData}</div>
