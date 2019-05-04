@@ -22,7 +22,13 @@ class Pushup extends Component {
         day3Set3: null,
         today: "",
         attempted: false,
-        completed: false
+        completed: false,
+        attemptDay1: false,
+        completeDay1: false,
+        attemptDay2: true,
+        completeDay2: true,
+        attemptDay3: true,
+        completeDay3: true
     }
 
     componentWillMount() {
@@ -155,6 +161,10 @@ class Pushup extends Component {
 
     attemptedDay1Click = (e, completed) => {
         e.preventDefault();
+        this.setState({attemptDay1: true});
+        this.setState({completeDay1: true});
+        this.setState({attemptDay2: false});
+        this.setState({completeDay2: false});
         console.log(`The date is ${this.state.today}`);
 
         console.log(`Completed value is  ${completed}`);
@@ -199,6 +209,10 @@ class Pushup extends Component {
 
     attemptedDay2Click = (e, completed) => {
         e.preventDefault();
+        this.setState({attemptDay2: true});
+        this.setState({completeDay2: true});
+        this.setState({attemptDay3: false});
+        this.setState({completeDay3: false});
         console.log(`The date is ${this.state.today}`);
 
         console.log(`Completed value is  ${completed}`);
@@ -276,6 +290,9 @@ class Pushup extends Component {
 
             }) 
             .catch(err => console.log(err));
+
+        this.props.history.push("/workouts");
+
     };
 
     completedDay3Click = e => {
@@ -324,6 +341,7 @@ class Pushup extends Component {
                                         <button className="attempted-btn 
                                                 btn btn-small waves-effect 
                                                 waves-light hoverable"
+                                                disabled={this.state.attemptDay1}
                                                 onClick={this.attemptedDay1Click}
                                                 >
                                                 Attempted
@@ -331,6 +349,7 @@ class Pushup extends Component {
                                         <button className="completed-btn
                                                 btn btn-small waves-effect
                                                 waves-light hoverable"
+                                                disabled={this.state.completeDay1}
                                                 onClick={this.completedDay1Click}
                                                 >
                                                 Completed
@@ -355,6 +374,7 @@ class Pushup extends Component {
                                         <button className="attempted-btn 
                                                 btn btn-small waves-effect 
                                                 waves-light hoverable"
+                                                disabled={this.state.attemptDay2}
                                                 onClick={this.attemptedDay2Click}
                                                 >
                                                 Attempted
@@ -362,6 +382,7 @@ class Pushup extends Component {
                                         <button className="completed-btn
                                                 btn btn-small waves-effect
                                                 waves-light hoverable"
+                                                disabled={this.state.completeDay2}
                                                 onClick={this.completedDay2Click}
                                                 >
                                                 Completed
@@ -386,6 +407,7 @@ class Pushup extends Component {
                                         <button className="attempted-btn 
                                                 btn btn-small waves-effect 
                                                 waves-light hoverable"
+                                                disabled={this.state.attemptDay3}
                                                 onClick={this.attemptedDay3Click}
                                                 >
                                                 Attempted
@@ -393,6 +415,7 @@ class Pushup extends Component {
                                         <button className="completed-btn
                                                 btn btn-small waves-effect
                                                 waves-light hoverable"
+                                                disabled={this.state.completeDay3}
                                                 onClick={this.completedDay3Click}
                                                 >
                                                 Completed
