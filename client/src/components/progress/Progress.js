@@ -87,12 +87,15 @@ class Progress extends Component {
                     <div id="walking" className="col s12">Walking
                         <div id="display-walking">{this.state.walkingData}</div>
                     </div>
-                    <div id="pushups" className="col s12">Pushups</div>
+                    <div id="pushups" className="col s12">Pushups
                         <div id="display-pushups">{this.state.pushupData}</div>
-                    <div id="situps" className="col s12">Situps</div>
+                    </div>
+                    <div id="situps" className="col s12">Situps
                         <div id="display-situps">{this.state.situpData}</div>
-                    <div id="squats" className="col s12">Squats</div>
+                    </div>
+                    <div id="squats" className="col s12">Squats
                         <div id="display-squats">{this.state.squatData}</div>
+                    </div>
                 </div>
 
 
