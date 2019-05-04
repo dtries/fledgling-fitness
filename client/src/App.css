@@ -208,3 +208,25 @@ li.collection-item {
 }
 
 /* End of Card Styling */
+
+/* Progress Page Styling */
+.user-progress,
+.progress-text {
+    color: #FF652F;
+}
+
+#walking,
+#pushups,
+#situps,
+#squats {
+    color: #FFE400;
+}
+
+#display-walking,
+#display-pushups,
+#display-situps,
+#display-squats {
+    color: #13A76C;
+}
+
+/* End of Progress Page Styling */
