@@ -1,10 +1,43 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import API from "../../utils/API";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 
 class Workouts extends Component {
+    state = {
+        doWalking: false,
+        doPushups: true,        
+        doSitups: true,
+        doSquats: true
+    }
+
+    componentWillMount() {
+        this.checkDisableButtons()
+    };
+
+    checkDisableButtons = () => {
+        const { user } = this.props.auth;
+        const baselineID = {
+            userID: user.id
+        };
+        API.getProgress(baselineID)
+            .then( res => {
+                console.log(`Progress data are: ${JSON.stringify(res.data)}`)
+                res.data.walking.length >5 ? 
+                    this.setState({doPushups: false}) : 
+                    this.setState({doPushups: true})
+                res.data.pushups.length >5 ? 
+                    this.setState({doSitups: false}) : 
+                    this.setState({doSitups: true})
+                res.data.situps.length >5 ? 
+                    this.setState({doSquats: false}) : 
+                    this.setState({doSquats: true})
+            })
+
+    };
+
     onLogoutClick = e => {
         e.preventDefault();
         this.props.logoutUser();
@@ -26,10 +59,34 @@ class Workouts extends Component {
                     <div className="workout-list col s4 center-align push-s4">
                         <ul className="workout-list">
                             <li className="collection-header"><h4>YOUR WORKOUTS</h4></li>
-                            <Link to="/walking" id="walking-workout-page" className="active btn btn-large waves-effect waves-dark hoverable"><li className="">Walking</li></Link>
-                            <Link to="/pushup" id="pushups-workout-page" className="disabled btn btn-large waves-effect waves-dark hoverable"><li className="">Pushups</li></Link>
-                            <Link to="/situp" id="situps-workout-page" className="disabled btn btn-large waves-effect waves-dark hoverable"><li className="">Situps</li></Link>
-                            <Link to="/squat" id="squats-workout-page" className="disabled btn btn-large waves-effect waves-dark hoverable"><li className="">Squats</li></Link>
+                            <Link to="/walking" id="walking-workout-page" 
+                                className="btn btn-large waves-effect 
+                                waves-dark hoverable"
+                                disabled={this.state.doWalking}
+                                >
+                                    <li className="">Walking</li>
+                            </Link>
+                            <Link to="/pushup" id="pushups-workout-page" 
+                                className="btn btn-large waves-effect 
+                                waves-dark hoverable"
+                                disabled={this.state.doPushups}
+                                >
+                                    <li className="">Pushups</li>
+                            </Link>
+                            <Link to="/situp" id="situps-workout-page" 
+                                className="btn btn-large waves-effect 
+                                waves-dark hoverable"
+                                disabled={this.state.doSitups}
+                                >
+                                    <li className="">Situps</li>
+                            </Link>
+                            <Link to="/squat" id="squats-workout-page" 
+                                className="btn btn-large waves-effect
+                                 waves-dark hoverable"
+                                 disabled={this.state.doSquats}
+                                 >
+                                    <li className="">Squats</li>
+                            </Link>
                         </ul>
                     </div>
                 </div>

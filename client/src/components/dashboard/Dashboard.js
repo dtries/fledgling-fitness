@@ -16,7 +16,7 @@ class Dashboard extends Component {
             walking: "",
             pushups: "",
             situps: "",
-            squats: "",
+            squats: ""
         };
     }
 
