@@ -226,7 +226,27 @@ li.collection-item {
 #display-pushups,
 #display-situps,
 #display-squats {
-    color: #13A76C;
+    color: #FFE400;
+}
+
+.tab-progress {
+    background-color:#13A76C;
+}
+
+.tabs .indicator {
+    color: purple;
+}
+
+.tabs .tab a {
+    color: #272727;
+}
+
+.tabs .tab a:hover {
+    color: #FFE400;
+}
+
+.tabs .tab a:focus.active {
+    color: #FFE400;
 }
 
 /* End of Progress Page Styling */

@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
+import {Tab,Tabs} from 'react-materialize'
 import API from "../../utils/API";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+
+let $ = require("jquery");
 
 class Progress extends Component {
 
@@ -22,6 +25,7 @@ class Progress extends Component {
 
     componentWillUnmount() {
         // $('.tabs').tabs();
+        // this.checkDbCollections();
 
     }
 
@@ -36,7 +40,7 @@ class Progress extends Component {
                 res.data.walking.length >0 ? 
                     this.setState({progressMessage: "You've Made Progress, Well Done!"}) 
                     : this.setState({progressMessage: "Let's Get Started!"})
-                console.log(`Walking data are: ${JSON.stringify(res.data.pushups)}`)
+                console.log(`Data are: ${JSON.stringify(res.data.pushups)}`)
                 const walkDisplay = JSON.stringify(res.data.walking)
                 this.setState({walkingData: walkDisplay})
 
@@ -75,30 +79,22 @@ class Progress extends Component {
                     </div>
                 </div>
 
-                <div className="row">
-                    <div className="col s12">
-                        <ul className="tabs">
-                            <li className="tab col s3"><a href="#walking">Walking</a></li>
-                            <li className="tab col s3"><a className="active" href="#pushups">Pushups</a></li>
-                            <li className="tab col s3"><a href="#situps">Situps</a></li>
-                            <li className="tab col s3"><a href="#squats">Squats</a></li>
-                        </ul>
-                    </div>
-                    <div id="walking" className="col s12">Walking
+                <Tabs className="tab-progress z-depth-1 tabs-fixed-width">
+                    <Tab title="Walking" className="tab-exercise">
                         <div id="display-walking">{this.state.walkingData}</div>
-                    </div>
-                    <div id="pushups" className="col s12">Pushups
+                    </Tab>
+                    <Tab title="Pushups">
                         <div id="display-pushups">{this.state.pushupData}</div>
-                    </div>
-                    <div id="situps" className="col s12">Situps
+                    </Tab>
+                    <Tab title="Situps">
                         <div id="display-situps">{this.state.situpData}</div>
-                    </div>
-                    <div id="squats" className="col s12">Squats
+                    </Tab>
+                    <Tab title="Squats">
                         <div id="display-squats">{this.state.squatData}</div>
-                    </div>
-                </div>
+                    </Tab>
+                </Tabs>
 
-
+                
                 <div className="row">
                     <div className="col s12 workout-card-logout">
                         <button 
