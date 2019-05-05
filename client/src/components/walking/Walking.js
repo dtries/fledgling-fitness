@@ -25,7 +25,6 @@ class Walking extends Component {
     componentWillMount(){
         this.checkDbCollections()
         this.getDate()
-        // this.buttonActiveSetting()
     };
 
     checkDbCollections = () => {
@@ -124,7 +123,7 @@ class Walking extends Component {
                     this.calculateWalking(this.state.walkBase, this.state.week);
                 }
             }
-         }
+        }
     };
 
     calculateWalking = (walkBase, week) => {

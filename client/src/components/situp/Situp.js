@@ -36,13 +36,6 @@ class Situp extends Component {
         this.getDate();
     };
 
-    getDate = () => {
-        const now = new Date();
-        console.log(`${now}`);
-        this.setState({today: now});
-        
-    };
-
     checkDbCollections = () => {
         const { user } = this.props.auth;
         const baselineID = {
@@ -60,6 +53,13 @@ class Situp extends Component {
                 } 
             })
             .catch( err => console.log(err))
+    };
+
+    getDate = () => {
+        const now = new Date();
+        console.log(`${now}`);
+        this.setState({today: now});
+        
     };
 
     loadInitialBaseline = () => {
@@ -80,23 +80,23 @@ class Situp extends Component {
         let arrayStart = res.data.situps.length-1;
         for (let i=arrayStart; i > arrayStart-3; i--) { 
         const lastDay3Item = res.data.situps[i];
-        const lastDayValue = Object.keys(lastDay3Item)[0];
+        const lastDayValue = lastDay3Item.Day;
         console.log(`Last day 3 item: ${JSON.stringify(lastDay3Item)}`);
         console.log(`Last day 3 1st key value is ${lastDayValue}`)
 
-            if (lastDayValue === "Day3") {
+            if (lastDayValue === 3) {
                 console.log("Found last Day 3!!!!!!!");
                 
-                const lastDayCompleted = lastDay3Item.Day3.Completed;
+                const lastDayCompleted = lastDay3Item.Completed;
 
 
                 if (lastDayCompleted) {
                     console.log("get the value of day3 in last item");
 
                     let newBaseline =
-                        parseInt([lastDay3Item.Day3.Day3Set3], 10) + 
-                        parseInt([lastDay3Item.Day3.Day3Set2], 10) +
-                        parseInt([lastDay3Item.Day3.Day3Set1], 10) +
+                        parseInt([lastDay3Item.Day3Set3], 10) + 
+                        parseInt([lastDay3Item.Day3Set2], 10) +
+                        parseInt([lastDay3Item.Day3Set1], 10) +
                         2;
 
                     console.log(`Value for new baseline is 
@@ -108,9 +108,9 @@ class Situp extends Component {
                 } else {
                     console.log("repeat last weeks progression");
                     let newBaseline =
-                    parseInt([lastDay3Item.Day3.Day3Set3]-1, 10) + 
-                    parseInt([lastDay3Item.Day3.Day3Set2]-1, 10) +
-                    parseInt([lastDay3Item.Day3.Day3Set1]-1, 10) +
+                    parseInt([lastDay3Item.Day3Set3]-1, 10) + 
+                    parseInt([lastDay3Item.Day3Set2]-1, 10) +
+                    parseInt([lastDay3Item.Day3Set1]-1, 10) +
                     2;
 
                     console.log(`Value for new baseline is 
@@ -124,11 +124,9 @@ class Situp extends Component {
     };
 
     calculateSitups = situpBase => {
-        // if (week === 0) {
-            situpBase = Math.trunc((this.state.situpBase-2)/3);
-        // } else {
-        //     situpBase = 99;
-        // }
+
+        situpBase = Math.trunc((this.state.situpBase-2)/3);
+
         console.log(`Situp Base is ${situpBase}`);
 
         week=week+1;
@@ -151,11 +149,6 @@ class Situp extends Component {
         let newBaseLine = this.state.day3Set3;
         console.log(newBaseLine);
 
-        console.log(
-            `Week = ${week}, 
-            Day 1 Set 1 = ${JSON.stringify(this.state.day1Set1)}, 
-            Day 2 Set 2 = ${JSON.stringify(this.state.day1Set2)}, 
-            Day 3 Set 3 = ${JSON.stringify(this.state.day1Set3)}`);
     };
 
     attemptedDay1Click = (e, completed) => {
@@ -180,15 +173,16 @@ class Situp extends Component {
         };
         const workoutData = {
             userID: user.id,
-            situps: {Day1: {
-                        Day: this.state.today,
+            situps: {
+                        Date: this.state.today,
+                        Day: 1,
                         Day1Set1: this.state.day1Set1,
                         Day1Set2: this.state.day1Set2,
                         Day1Set3: this.state.day1Set3,
                         Attempted: attempted,
                         Completed: completed
-                        }
-                     }
+                        
+                    }
         };
 
         console.log(`This userID is ${id}`);
@@ -228,15 +222,16 @@ class Situp extends Component {
         };
         const workoutData = {
             userID: user.id,
-            situps: {Day2: {
-                        Day: this.state.today,
+            situps: {
+                        Date: this.state.today,
+                        Day: 2,
                         Day2Set1: this.state.day2Set1,
                         Day2Set2: this.state.day2Set2,
                         Day2Set3: this.state.day2Set3,
                         Attempted: attempted,
                         Completed: completed
-                        }
-                     }
+                        
+                    }
         };
 
         console.log(`This userID is ${id}`);
@@ -272,15 +267,16 @@ class Situp extends Component {
         };
         const workoutData = {
             userID: user.id,
-            situps: {Day3: {
-                        Day: this.state.today,
+            situps: {
+                        Date: this.state.today,
+                        Day: 3,
                         Day3Set1: this.state.day3Set1,
                         Day3Set2: this.state.day3Set2,
                         Day3Set3: this.state.day3Set3,
                         Attempted: attempted,
                         Completed: completed
-                        }
-                     }
+                        
+                    }
         };
 
         console.log(`This userID is ${id}`);
