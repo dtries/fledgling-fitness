@@ -2,12 +2,14 @@ import React from "react";
 
 function TableBody(props) {
 
+    console.log(JSON.stringify(props.day));
+
     //This is a function (not a class) so it does not require a render
     return (
         <tbody>
             <tr>
                 <td>
-                    HEY DUDE
+                   {props.day}
                 </td>
                 <td>
                     Eclair
@@ -15,27 +17,8 @@ function TableBody(props) {
                 <td>
                     $0.87
                 </td>
-            </tr>
-            <tr>
                 <td>
-                    Alan
-                </td>
-                <td>
-                    Jellybean
-                </td>
-                <td>
-                    $3.76
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Jonathan
-                </td>
-                <td>
-                    Lollipop
-                </td>
-                <td>
-                    $7.00
+                    Full Belly
                 </td>
             </tr>
         </tbody>

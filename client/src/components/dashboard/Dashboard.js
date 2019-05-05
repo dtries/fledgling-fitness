@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import API from "../../utils/API";
 import { logoutUser } from "../../actions/authActions";
+
+const isEmpty = require("is-empty");
+
 // import { baseLineSubmit } from "../../actions/dataUpdates";
 // import { Link } from "react-router-dom";
 // import classnames from "classnames";
@@ -30,6 +33,20 @@ class Dashboard extends Component {
             userID: user.id
         };
         console.log(`This userID is ${JSON.stringify(baselineID)}`);
+
+        API.getProgress(baselineID)
+            .then(res => {
+                console.log(`PROGRESS DATA: ${res}`)
+
+                if (res.data == null) {
+                API.updateWalking(baselineID)
+                .then(res => {
+                console.log(`walking established: ${res}`)
+                })
+                .catch(err => console.log(err));
+                }
+            }
+            ).catch(err => console.log(err));
 
         API.getBaseline(baselineID)
             .then( res => {

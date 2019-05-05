@@ -25,15 +25,23 @@ class Workouts extends Component {
         API.getProgress(baselineID)
             .then( res => {
                 console.log(`Progress data are: ${JSON.stringify(res.data)}`)
-                res.data.walking.length >5 ? 
+                if (res.data.walking !== null){
+                    res.data.walking.length >5 ? 
                     this.setState({doPushups: false}) : 
                     this.setState({doPushups: true})
-                res.data.pushups.length >5 ? 
+                } 
+
+                if (res.data.pushups !== null) {
+                res.data.pushups.length !==null && res.data.pushups.length >5 ? 
                     this.setState({doSitups: false}) : 
                     this.setState({doSitups: true})
+                }
+
+                if (res.data.situps !== null) {
                 res.data.situps.length >5 ? 
                     this.setState({doSquats: false}) : 
                     this.setState({doSquats: true})
+                }
             })
 
     };

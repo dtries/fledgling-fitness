@@ -22,7 +22,15 @@ module.exports = {
           .then(dbModel => res.json(dbModel))
           .catch(err => res.status(422).json(err));
     },
-
+    removeNullWalking: function(req, res) {
+        var params = req.params;
+        console.log(`USER ID DELETE IS ${JSON.stringify(params[0])}`);
+        db.Progress
+            .findOneAndDelete({"userID": req.query.userID})
+            .then(dbModel => dbModel.remove())
+            .then(dbModel => res.json(dbModel))
+            .catch(err => console.log(err));
+    },
     updatePushups: function(req, res) {
         console.log(`The update req body is ${JSON.stringify(req.body)}`);
       db.Progress.findOneAndUpdate(
@@ -49,7 +57,7 @@ module.exports = {
     },
 
     updateSquats: function(req, res) {
-        console.log(`The update req body is ${JSON.stringify(req.body)}`);
+        console.log(`The update req body is ${req}`);
     db.Progress.findOneAndUpdate(
         {userID: req.body.userID}, //filter to get specific user object from collection
         {$push: 

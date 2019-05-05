@@ -7,23 +7,26 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
 class Progress extends Component {
-
-    state = {
-        progressMessage: "Let's Get Started!",
-        walkingData: [],
-        pushupData: [],
-        situpData: [],
-        squatData: []
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            progressMessage: "Let's Get Started!",
+            walkingData: [],
+            pushupData: [],
+            situpData: [],
+            squatData: []
+        }
     }
 
     componentWillMount() {
         this.checkDbCollections();
     };
 
-    componentWillUnmount() {
-        this.checkDbCollections();
+    // componentWillUnmount() {
+    //     this.checkDbCollections();
 
-    }
+    // }
 
     checkDbCollections = () => {
         const { user } = this.props.auth;
@@ -33,12 +36,24 @@ class Progress extends Component {
         API.getProgress(baselineID)
             .then( res => {
                 // console.log(`Situp progress data are: ${JSON.stringify(res.data)}`)
-                res.data.walking.length >0 ? 
+                const firstWalkingItem = res.data.walking[0];
+
+                console.log(`First walk item is ${firstWalkingItem}`);
+                if (firstWalkingItem === null) {
+                    var firstElement = res.data.walking.shift();
+                    console.log(`Now first walk item is ${JSON.stringify(res.data.walking[0])}`);
+                    console.log(`Removed item is ${firstElement}`);
+                }
+
+                res.data.walking.length > 0 ? 
                     this.setState({progressMessage: "You've Made Progress, Well Done!"}) 
                     : this.setState({progressMessage: "Let's Get Started!"})
-                console.log(`Data are: ${JSON.stringify(res.data.pushups)}`)
-                const walkDisplay = JSON.stringify(res.data.walking)
-                this.setState({walkingData: walkDisplay})
+                // console.log(`Data are: ${JSON.stringify(res.data.pushups)}`)
+                const walkDisplay = (res.data.walking);
+                // const walkDisplayArray = Object.entries(walkDisplay);
+                this.setState({walkingData: walkDisplay});
+                // let arrayDisplayTrial = walkDisplayArray[1].DailyData.Date;
+                console.log(`Walk display  is ${JSON.stringify(walkDisplay)}`);
 
                 const pushupDisplay = JSON.stringify(res.data.pushups)
                 this.setState({pushupData: pushupDisplay})
@@ -48,8 +63,6 @@ class Progress extends Component {
 
                 const squatDisplay = JSON.stringify(res.data.squats)
                 this.setState({squatData: squatDisplay})
-
-                this.walkingTable(res);
             })
             .catch( err => console.log(err))
 
@@ -64,13 +77,11 @@ class Progress extends Component {
 
     render () {
         const { user } = this.props.auth;
-        // this.walkTableRow = this.state.walkingData.map(day => 
-        //     <tr>
-        //         <td>
-        //             {day.Day1.Day}
-        //         </td>
-        //     </tr>
-        // );
+        // {this.state.walkingData.map((walkInfo, index) => (
+        //     key={index}
+        //     day={walkInfo}
+        // ))}
+
 
         return (
             <div className="container">
@@ -105,16 +116,12 @@ class Progress extends Component {
                                     </th>
                                 </tr>
                             </thead>
-                                {/* {this.state.walkingData.map(walkInfo => (
-                                <TableBody>
-                                    key={walkInfo.Day1.Day}
-                                    day={walkInfo.Day1.Day}
-                                    
-                                </TableBody>
-                                ))} */}
+                                <TableBody
+                                //    day = {[this.state.walkingData]}
+ 
+                                />
 
                             </Table>
-                            {this.state.walkingData}
                             </div>
                     </Tab>
                     <Tab title="Pushups">

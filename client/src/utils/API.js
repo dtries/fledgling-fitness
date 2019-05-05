@@ -40,13 +40,23 @@ export default {
 
   getProgress: function(userID) {
     console.log(`API check collections baselineID is ${JSON.stringify(userID.userID)}`);
-  return axios.get("/api/progress/", 
-  {
-      params: {
-          userID: userID.userID
+    return axios.get("/api/progress/", 
+        {
+            params: {
+                userID: userID.userID
+            }
+        }
+    )
+  },
+
+  removeNullWalking: function(userID) {
+      return axios.delete("/api/progress/walking/", 
+      {
+          params: {
+              userID: userID.userID
+          }
       }
-  }
-  )
+    )
   }
   
 

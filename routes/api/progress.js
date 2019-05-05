@@ -8,6 +8,9 @@ router.route("/")
 router.route("/walking")
     .post(progressController.updateWalking);
 
+router.route("/walking")
+    .delete(progressController.removeNullWalking);
+
 router.route("/pushups")
     .post(progressController.updatePushups);
 

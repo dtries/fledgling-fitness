@@ -36,15 +36,27 @@ class Walking extends Component {
         API.getProgress(baselineID)
             .then( res => {
                 console.log(`Walking progress data are: ${JSON.stringify(res.data)}`);
+
+                console.log(`Data walking are ${JSON.stringify(res.data.walking)}`);
                 
+                const firstWalkingItem = res.data.walking[0];
+
+
+                if(firstWalkingItem === null) {
+                    var firstElement = res.data.walking.shift();
+                    console.log(`Now first walk item is ${JSON.stringify(res.data.walking[0])}`);
+                    console.log(`Removed item is ${firstElement}`);
+                };
+
+
                 if (res.data === null || res.data.walking.length <2) {
                     this.loadInitialBaseline()
                 }
                 else { 
                     this.loadOngoingBaseline(res);
-                } 
+                }; 
             })
-            .catch( err => console.log(err))
+            .catch( err => console.log(err));
     };
 
     getDate = () => {
@@ -53,10 +65,6 @@ class Walking extends Component {
         this.setState({today: now});
         
     };
-
-    // buttonActiveSetting = () => {
-
-    // };
 
     loadInitialBaseline = () => {
         const { user } = this.props.auth;
@@ -83,27 +91,27 @@ class Walking extends Component {
         let arrayStart = res.data.walking.length-1;
         for (let i=arrayStart; i > arrayStart-3; i--) { 
         const lastDay3Item = res.data.walking[i];
-        const lastDayValue = Object.keys(lastDay3Item)[0];
+        const lastDayValue = lastDay3Item.Day;
         console.log(`Last day 3 item: ${JSON.stringify(lastDay3Item)}`);
-        console.log(`Last day 3 1st key value is ${lastDayValue}`)
+        console.log(`Last day 3 key value is ${JSON.stringify(lastDayValue)}`)
 
-            if (lastDayValue === "Day3") {
+            if (lastDayValue === 3) {
                 console.log("Found last Day 3!!!!!!!");
                 
-                const lastDayCompleted = lastDay3Item.Day3.Completed;
+                const lastDayCompleted = lastDay3Item.Completed;
 
 
                 if (lastDayCompleted) {
                     console.log("get the value of day3 in last item");
-                    console.log(`Value for new baseline is ${lastDay3Item.Day3.Duration}`)
-                    let newBaseline = lastDay3Item.Day3.Duration;
+                    console.log(`Value for new baseline is ${lastDay3Item.Duration}`)
+                    let newBaseline = lastDay3Item.Duration;
                     this.setState({walkBase: newBaseline })
                     this.calculateWalking(this.state.walkBase, this.state.week);
 
                 } else {
                     console.log("repeat last weeks progression");
                     let calcBaseline1 = Math.ceil(
-                    parseFloat(([lastDay3Item.Day3.Duration]/1.1), 10));
+                    parseFloat(([lastDay3Item.Duration]/1.1), 10));
 
                     let calcBaseline2 = Math.ceil(calcBaseline1/1.1);
 
@@ -156,13 +164,13 @@ class Walking extends Component {
         };
         const workoutData = {
             userID: user.id,
-            walking: {Day1: {
-                        Day: this.state.today,
-                        Duration: this.state.Day1,
+            walking: { 
+                        Date: this.state.today,
+                        Day: 1,
+                        Duration: this.state.Day3,
                         Attempted: attempted,
                         Completed: completed
-                        }
-                     }
+             }
         };
 
         console.log(`This userID is ${id}`);
@@ -204,12 +212,12 @@ class Walking extends Component {
         };
         const workoutData = {
             userID: user.id,
-            walking: {Day2: {
-                        Day: this.state.today,
-                        Duration: this.state.Day2,
+            walking: { 
+                        Date: this.state.today,
+                        Day: 2,
+                        Duration: this.state.Day3,
                         Attempted: attempted,
                         Completed: completed}
-                     }
         };
 
         console.log(`This userID is ${id}`);
@@ -244,12 +252,13 @@ class Walking extends Component {
         };
         const workoutData = {
             userID: user.id,
-            walking: {Day3: {
-                        Day: this.state.today,
+            
+            walking: { 
+                        Date: this.state.today,
+                        Day: 3,
                         Duration: this.state.Day3,
                         Attempted: attempted,
                         Completed: completed}
-                     }
         };
 
         console.log(`This userID is ${id}`);
