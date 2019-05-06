@@ -19,7 +19,7 @@ class Progress extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.checkDbCollections();
     };
 
@@ -35,25 +35,25 @@ class Progress extends Component {
         };
         API.getProgress(baselineID)
             .then( res => {
-                // console.log(`Situp progress data are: ${JSON.stringify(res.data)}`)
+                // == Elimates null from first position in walking data ==
                 const firstWalkingItem = res.data.walking[0];
 
-                console.log(`First walk item is ${firstWalkingItem}`);
                 if (firstWalkingItem === null) {
                     var firstElement = res.data.walking.shift();
-                    console.log(`Now first walk item is ${JSON.stringify(res.data.walking[0])}`);
+                    // console.log(`Now first walk item is ${JSON.stringify(res.data.walking[0])}`);
                     console.log(`Removed item is ${firstElement}`);
                 }
+                // ===================================================
 
                 res.data.walking.length > 0 ? 
                     this.setState({progressMessage: "You've Made Progress, Well Done!"}) 
                     : this.setState({progressMessage: "Let's Get Started!"})
                 // console.log(`Data are: ${JSON.stringify(res.data.pushups)}`)
-                const walkDisplay = (res.data.walking);
-                // const walkDisplayArray = Object.entries(walkDisplay);
+
+                
+                const walkDisplay = Object.values(res.data.walking);
                 this.setState({walkingData: walkDisplay});
-                // let arrayDisplayTrial = walkDisplayArray[1].DailyData.Date;
-                console.log(`Walk display  is ${JSON.stringify(walkDisplay)}`);
+                console.log(`Walk display is ${JSON.stringify(this.state.walkingData)}`);
 
                 const pushupDisplay = JSON.stringify(res.data.pushups)
                 this.setState({pushupData: pushupDisplay})
@@ -64,10 +64,7 @@ class Progress extends Component {
                 const squatDisplay = JSON.stringify(res.data.squats)
                 this.setState({squatData: squatDisplay})
             })
-            .catch( err => console.log(err))
-
-
-        
+            .catch( err => console.log(err))      
     };
 
     onLogoutClick = e => {
@@ -77,11 +74,8 @@ class Progress extends Component {
 
     render () {
         const { user } = this.props.auth;
-        // {this.state.walkingData.map((walkInfo, index) => (
-        //     key={index}
-        //     day={walkInfo}
-        // ))}
 
+        console.log(`Walking data here is ${JSON.stringify(this.state.walkingData)}`);
 
         return (
             <div className="container">
@@ -116,11 +110,19 @@ class Progress extends Component {
                                     </th>
                                 </tr>
                             </thead>
-                                <TableBody
-                                //    day = {[this.state.walkingData]}
- 
-                                />
-
+                               {/* {this.state.walkingData.length ? (  */}
+                                { this.state.walkingData.map(walkInfo =>
+                                    <TableBody
+                                    day = {walkInfo.Date}
+                                    duration = {walkInfo.Duration}
+                                    attempted = {walkInfo.Attempted}
+                                    completed = {walkInfo.Completed}
+    
+                                    />
+                                )}
+                                {/* ) : (
+                                    <h3> </h3>
+                                )} */}
                             </Table>
                             </div>
                     </Tab>

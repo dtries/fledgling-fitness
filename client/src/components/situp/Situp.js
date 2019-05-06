@@ -57,9 +57,10 @@ class Situp extends Component {
 
     getDate = () => {
         const now = new Date();
+        const nowStr = now.toDateString();
         console.log(`${now}`);
-        this.setState({today: now});
-        
+        console.log(`${nowStr}`);
+        this.setState({today: nowStr});        
     };
 
     loadInitialBaseline = () => {

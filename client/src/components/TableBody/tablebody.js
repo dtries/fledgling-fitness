@@ -1,8 +1,9 @@
 import React from "react";
 
 function TableBody(props) {
-
-    console.log(JSON.stringify(props.day));
+    // var date = 
+    var attempted = props.attempted ? "Yes" : "No"
+    var completed = props.completed ? "Yes" : "No"
 
     //This is a function (not a class) so it does not require a render
     return (
@@ -12,13 +13,13 @@ function TableBody(props) {
                    {props.day}
                 </td>
                 <td>
-                    Eclair
+                    {props.duration}
                 </td>
                 <td>
-                    $0.87
+                    {attempted}
                 </td>
                 <td>
-                    Full Belly
+                    {completed}
                 </td>
             </tr>
         </tbody>

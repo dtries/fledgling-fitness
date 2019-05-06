@@ -57,9 +57,10 @@ class Pushup extends Component {
 
     getDate = () => {
         const now = new Date();
-        // console.log(`${now}`);
-        this.setState({today: now});
-        
+        const nowStr = now.toDateString();
+        console.log(`${now}`);
+        console.log(`${nowStr}`);
+        this.setState({today: nowStr});        
     };
 
     loadInitialBaseline = () => {
