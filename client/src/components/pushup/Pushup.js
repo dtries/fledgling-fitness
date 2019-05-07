@@ -57,7 +57,7 @@ class Pushup extends Component {
 
     getDate = () => {
         const now = new Date();
-        const nowStr = now.toDateString();
+        const nowStr = now.toLocaleString();
         console.log(`${now}`);
         console.log(`${nowStr}`);
         this.setState({today: nowStr});        
@@ -151,6 +151,7 @@ class Pushup extends Component {
 
     attemptedDay1Click = (e, completed) => {
         e.preventDefault();
+        this.getDate();
         this.setState({attemptDay1: true});
         this.setState({completeDay1: true});
         this.setState({attemptDay2: false});
@@ -181,8 +182,6 @@ class Pushup extends Component {
                     }
         };
 
-        console.log(`This userID is ${id}`);
-        console.log(`This workout data is ${JSON.stringify(workoutData)}`);
         API.updatePushups(workoutData)
             .then( res => {
                 console.log(res.status, res.statusText);
@@ -200,6 +199,7 @@ class Pushup extends Component {
 
     attemptedDay2Click = (e, completed) => {
         e.preventDefault();
+        this.getDate();
         this.setState({attemptDay2: true});
         this.setState({completeDay2: true});
         this.setState({attemptDay3: false});
@@ -249,8 +249,8 @@ class Pushup extends Component {
 
     attemptedDay3Click = (e, completed) => {
         e.preventDefault();
+        this.getDate();
         console.log(`The date is ${this.state.today}`);
-
         console.log(`Completed value is  ${completed}`);
         console.log(`Attempted button clicked`);
         console.log(`Week is now ${this.state.week}`);

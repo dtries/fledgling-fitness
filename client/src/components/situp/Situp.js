@@ -154,6 +154,7 @@ class Situp extends Component {
 
     attemptedDay1Click = (e, completed) => {
         e.preventDefault();
+        this.getDate();
         this.setState({attemptDay1: true});
         this.setState({completeDay1: true});
         this.setState({attemptDay2: false});
@@ -205,15 +206,11 @@ class Situp extends Component {
 
     attemptedDay2Click = (e, completed) => {
         e.preventDefault();
+        this.getDate();
         this.setState({attemptDay2: true});
         this.setState({completeDay2: true});
         this.setState({attemptDay3: false});
         this.setState({completeDay3: false});
-        console.log(`The date is ${this.state.today}`);
-
-        console.log(`Completed value is  ${completed}`);
-        console.log(`Attempted button clicked`);
-        console.log(`Week is now ${this.state.week}`);
         const attempted = true;
         const { user } = this.props.auth;
         const id = user.id;
@@ -254,11 +251,7 @@ class Situp extends Component {
 
     attemptedDay3Click = (e, completed) => {
         e.preventDefault();
-        console.log(`The date is ${this.state.today}`);
-
-        console.log(`Completed value is  ${completed}`);
-        console.log(`Attempted button clicked`);
-        console.log(`Week is now ${this.state.week}`);
+        this.getDate();        
         const attempted = true;
         const { user } = this.props.auth;
         const id = user.id;

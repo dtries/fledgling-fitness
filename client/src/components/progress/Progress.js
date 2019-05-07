@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {Tab,Tabs, Table} from 'react-materialize';
 import TableBody from "../TableBody/tablebody";
+import TableBodyPSS from "../TableBodyPSS/tablebody-pss";
 import API from "../../utils/API";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
@@ -55,14 +56,19 @@ class Progress extends Component {
                 this.setState({walkingData: walkDisplay});
                 console.log(`Walk display is ${JSON.stringify(this.state.walkingData)}`);
 
-                const pushupDisplay = JSON.stringify(res.data.pushups)
-                this.setState({pushupData: pushupDisplay})
+                const pushupDisplay =  Object.values(res.data.pushups);
+                this.setState({pushupData: pushupDisplay});
+                console.log(`Pushup display is ${JSON.stringify(this.state.pushupData)}`);
 
-                const situpDisplay = JSON.stringify(res.data.situps)
-                this.setState({situpData: situpDisplay})
+                const situpDisplay = Object.values(res.data.situps);
+                this.setState({situpData: situpDisplay});
+                console.log(`Situp display is ${JSON.stringify(this.state.situpData)}`);
 
-                const squatDisplay = JSON.stringify(res.data.squats)
-                this.setState({squatData: squatDisplay})
+
+                const squatDisplay = Object.values(res.data.squats);
+                this.setState({squatData: squatDisplay});
+                console.log(`Squat display is ${JSON.stringify(this.state.squatData)}`);
+
             })
             .catch( err => console.log(err))      
     };
@@ -110,9 +116,9 @@ class Progress extends Component {
                                     </th>
                                 </tr>
                             </thead>
-                               {/* {this.state.walkingData.length ? (  */}
-                                { this.state.walkingData.map(walkInfo =>
+                                { this.state.walkingData.map((walkInfo, index) =>
                                     <TableBody
+                                    key = {index}
                                     day = {walkInfo.Date}
                                     duration = {walkInfo.Duration}
                                     attempted = {walkInfo.Attempted}
@@ -120,20 +126,159 @@ class Progress extends Component {
     
                                     />
                                 )}
-                                {/* ) : (
-                                    <h3> </h3>
-                                )} */}
                             </Table>
                             </div>
                     </Tab>
                     <Tab title="Pushups">
-                        <div id="display-pushups">{this.state.pushupData}</div>
+                        <div id="display-pushups">
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th data-field="date">
+                                        Date
+                                    </th>
+                                    <th data-field="day">
+                                        Day
+                                    </th>
+                                    <th data-field="set1">
+                                        Set 1
+                                    </th>
+                                    <th data-field="set2">
+                                        Set 2
+                                    </th>
+                                    <th data-field="set3">
+                                        Set 3
+                                    </th>
+                                    <th data-field="attempted">
+                                        Attempted
+                                    </th>
+                                    <th data-field="completed">
+                                        Completed
+                                    </th>
+                                </tr>
+                            </thead>
+                                { this.state.pushupData.map((exerciseInfo, index) =>
+                                    <TableBodyPSS
+                                    key = {index}
+                                    day = {exerciseInfo.Date}
+                                    dayNum = {exerciseInfo.Day}
+                                    day1set1 = {exerciseInfo.Day1Set1}
+                                    day1set2 = {exerciseInfo.Day1Set2}
+                                    day1set3 = {exerciseInfo.Day1Set3}
+                                    day2set1 = {exerciseInfo.Day2Set1}
+                                    day2set2 = {exerciseInfo.Day2Set2}
+                                    day2set3 = {exerciseInfo.Day2Set3}
+                                    day3set1 = {exerciseInfo.Day3Set1}
+                                    day3set2 = {exerciseInfo.Day3Set2}
+                                    day3set3 = {exerciseInfo.Day3Set3}
+                                    attempted = {exerciseInfo.Attempted}
+                                    completed = {exerciseInfo.Completed}
+    
+                                    />
+                                )}
+                            </Table>
+                        </div>                       
                     </Tab>
                     <Tab title="Situps">
-                        <div id="display-situps">{this.state.situpData}</div>
+                        <div id="display-situps">                        
+                            <Table>
+                                <thead>
+                                    <tr>
+                                        <th data-field="date">
+                                            Date
+                                        </th>
+                                        <th data-field="day">
+                                            Day
+                                        </th>
+                                        <th data-field="set1">
+                                            Set 1
+                                        </th>
+                                        <th data-field="set2">
+                                            Set 2
+                                        </th>
+                                        <th data-field="set3">
+                                            Set 3
+                                        </th>
+                                        <th data-field="attempted">
+                                            Attempted
+                                        </th>
+                                        <th data-field="completed">
+                                            Completed
+                                        </th>
+                                    </tr>
+                                </thead>
+                                { this.state.situpData.map((exerciseInfo, index) =>
+                                    <TableBodyPSS
+                                    key = {index}
+                                    day = {exerciseInfo.Date}
+                                    dayNum = {exerciseInfo.Day}
+                                    day1set1 = {exerciseInfo.Day1Set1}
+                                    day1set2 = {exerciseInfo.Day1Set2}
+                                    day1set3 = {exerciseInfo.Day1Set3}
+                                    day2set1 = {exerciseInfo.Day2Set1}
+                                    day2set2 = {exerciseInfo.Day2Set2}
+                                    day2set3 = {exerciseInfo.Day2Set3}
+                                    day3set1 = {exerciseInfo.Day3Set1}
+                                    day3set2 = {exerciseInfo.Day3Set2}
+                                    day3set3 = {exerciseInfo.Day3Set3}
+                                    attempted = {exerciseInfo.Attempted}
+                                    completed = {exerciseInfo.Completed}
+    
+                                    />
+                                )}
+                            </Table>
+                        </div>
+                        
                     </Tab>
                     <Tab title="Squats">
-                        <div id="display-squats">{this.state.squatData}</div>
+                        <div id="display-squats">
+                        <Table>
+                                <thead>
+                                    <tr>
+                                        <th data-field="date">
+                                            Date
+                                        </th>
+                                        <th data-field="day">
+                                            Day
+                                        </th>
+                                        <th data-field="set1">
+                                            Set 1
+                                        </th>
+                                        <th data-field="set2">
+                                            Set 2
+                                        </th>
+                                        <th data-field="set3">
+                                            Set 3
+                                        </th>
+                                        <th data-field="attempted">
+                                            Attempted
+                                        </th>
+                                        <th data-field="completed">
+                                            Completed
+                                        </th>
+                                    </tr>
+                                </thead>
+                                { this.state.squatData.map((exerciseInfo, index) =>
+                                    <TableBodyPSS
+                                    key = {index}
+                                    day = {exerciseInfo.Date}
+                                    dayNum = {exerciseInfo.Day}
+                                    day1set1 = {exerciseInfo.Day1Set1}
+                                    day1set2 = {exerciseInfo.Day1Set2}
+                                    day1set3 = {exerciseInfo.Day1Set3}
+                                    day2set1 = {exerciseInfo.Day2Set1}
+                                    day2set2 = {exerciseInfo.Day2Set2}
+                                    day2set3 = {exerciseInfo.Day2Set3}
+                                    day3set1 = {exerciseInfo.Day3Set1}
+                                    day3set2 = {exerciseInfo.Day3Set2}
+                                    day3set3 = {exerciseInfo.Day3Set3}
+                                    attempted = {exerciseInfo.Attempted}
+                                    completed = {exerciseInfo.Completed}
+    
+                                    />
+                                )}
+                            </Table>
+                        </div>
                     </Tab>
                 </Tabs>
 

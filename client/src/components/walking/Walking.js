@@ -24,7 +24,7 @@ class Walking extends Component {
 
     componentWillMount(){
         this.checkDbCollections()
-        this.getDate()
+        this.getDate();
     };
 
     checkDbCollections = () => {
@@ -57,13 +57,13 @@ class Walking extends Component {
             })
             .catch( err => console.log(err));
     };
-
+    
     getDate = () => {
         const now = new Date();
-        const nowStr = now.toDateString();
+        const nowStr = now.toLocaleString();
         console.log(`${now}`);
         console.log(`${nowStr}`);
-        this.setState({today: nowStr});        
+        this.setState({today: nowStr}); 
     };
 
     loadInitialBaseline = () => {
@@ -144,30 +144,14 @@ class Walking extends Component {
         console.log(`Week = ${week}, Day 1 = ${this.state.Day1}, Day 2 = ${this.state.Day2}, Day 3 = ${this.state.Day3}`);
     };
 
-    attemptedDay1Click = (e, completed) => {
-        e.preventDefault();
-        this.setState({attemptDay1: true});
-        this.setState({completeDay1: true});
-        this.setState({attemptDay2: false});
-        this.setState({completeDay2: false});
-        console.log(`The date is ${this.state.today}`);
+    workoutUpdater = (id, dayNum, duration, attempted, completed) => {
 
-        console.log(`Completed value is  ${completed}`);
-        console.log(`Attempted button clicked`);
-        console.log(`Week is now ${this.state.week}`);
-        const attempted = true;
-        const { user } = this.props.auth;
-        const id = user.id;
-
-        if (completed === undefined) {
-            completed = false;
-        };
         const workoutData = {
-            userID: user.id,
+            userID: id,
             walking: { 
                         Date: this.state.today,
-                        Day: 1,
-                        Duration: this.state.Day3,
+                        Day: dayNum,
+                        Duration: duration,
                         Attempted: attempted,
                         Completed: completed
              }
@@ -181,7 +165,34 @@ class Walking extends Component {
 
             }) 
             .catch(err => console.log(err));
-    }
+
+        if (dayNum === 3) {
+            this.props.history.push("/workouts");
+        };
+    };
+
+    
+
+    attemptedDay1Click = (e, completed) => {
+        e.preventDefault();
+        this.getDate();
+        this.setState({attemptDay1: true});
+        this.setState({completeDay1: true});
+        this.setState({attemptDay2: false});
+        this.setState({completeDay2: false});
+  
+        const attempted = true;
+        const { user } = this.props.auth;
+        const id = user.id;
+        const dayNum = 1;
+        const duration = this.state.Day1;
+
+        if (completed === undefined) {
+            completed = false;
+        };
+
+        this.workoutUpdater(id, dayNum, duration, attempted, completed);
+    };
 
     completedDay1Click = e => {
         e.preventDefault();
@@ -191,93 +202,57 @@ class Walking extends Component {
         this.setState({completeDay2: false});
         const completed = true;
         this.attemptedDay1Click(e, completed);
-        console.log(`Completed button clicked`);
-    }
+    };
 
     attemptedDay2Click = (e, completed) => {
         e.preventDefault();
+        this.getDate()
         this.setState({attemptDay2: true});
         this.setState({completeDay2: true});
         this.setState({attemptDay3: false});
         this.setState({completeDay3: false});
-        console.log(`Completed value is  ${completed}`);
-        console.log(`Attempted button clicked`);
-        console.log(`Week is now ${this.state.week}`);
         const attempted = true;
         const { user } = this.props.auth;
         const id = user.id;
+        const dayNum = 2;
+        const duration = this.state.Day2;
+
 
         if (completed === undefined) {
             completed = false;
         };
-        const workoutData = {
-            userID: user.id,
-            walking: { 
-                        Date: this.state.today,
-                        Day: 2,
-                        Duration: this.state.Day3,
-                        Attempted: attempted,
-                        Completed: completed}
-        };
 
-        console.log(`This userID is ${id}`);
-        console.log(`This workout data is ${JSON.stringify(workoutData)}`);
-        API.updateWalking(workoutData)
-            .then( res => {
-                console.log(res.status, res.statusText);
-
-            }) 
-            .catch(err => console.log(err));
-    }
+        this.workoutUpdater(id, dayNum, duration, attempted, completed);
+    };
 
     completedDay2Click = e => {
         e.preventDefault();
         const completed = true;
         this.attemptedDay2Click(e, completed);
-        console.log(`Completed button clicked`);
     }
 
     attemptedDay3Click = (e, completed) => {
         e.preventDefault();
-        console.log(`Completed value is  ${completed}`);
-        console.log(`Attempted button clicked`);
+        this.getDate()
         const week = this.state.week+1;
-        console.log(`Week is now ${this.state.week}`);
         const attempted = true;
         const { user } = this.props.auth;
         const id = user.id;
+        const dayNum = 3;
+        const duration = this.state.Day3;
+
 
         if (completed === undefined) {
             completed = false;
         };
-        const workoutData = {
-            userID: user.id,
-            
-            walking: { 
-                        Date: this.state.today,
-                        Day: 3,
-                        Duration: this.state.Day3,
-                        Attempted: attempted,
-                        Completed: completed}
-        };
 
-        console.log(`This userID is ${id}`);
-        console.log(`This workout data is ${JSON.stringify(workoutData)}`);
-        API.updateWalking(workoutData)
-            .then( res => {
-                console.log(res.status, res.statusText);
-
-            }) 
-            .catch(err => console.log(err));
-
-        this.props.history.push("/workouts");
-    }
+        this.workoutUpdater(id, dayNum, duration, attempted, completed);
+    };
 
     completedDay3Click = e => {
         e.preventDefault();
         const completed = true;
         this.attemptedDay3Click(e, completed);
-        console.log(`Completed button clicked`)
     }
 
     onLogoutClick = e => {
