@@ -44,6 +44,26 @@ class Situp extends Component {
         API.getProgress(baselineID)
             .then( res => {
                 console.log(`Situp progress data are: ${JSON.stringify(res.data)}`);
+
+                const lastDayComplete = res.data.situps[res.data.situps.length-1];
+                console.log(`Last day complete: ${JSON.stringify(lastDayComplete)}`);
+                console.log(`Last day complete Day: ${JSON.stringify(lastDayComplete.Day)}`);
+                
+                if (lastDayComplete.Day === 1 && lastDayComplete.Attempted === true) {
+                console.log("conditions day 1 met");
+                this.setState({attemptDay1: true});
+                this.setState({completeDay1: true});
+                this.setState({attemptDay2: false});
+                this.setState({completeDay2: false});
+                    } else if (lastDayComplete.Day === 2 && lastDayComplete.Attempted === true) {
+                    console.log("conditions day 1 met");
+                    this.setState({attemptDay1: true});
+                    this.setState({completeDay1: true});
+                    this.setState({attemptDay2: true});
+                    this.setState({completeDay2: true});
+                    this.setState({attemptDay3: false});
+                    this.setState({completeDay3: false});
+                };
                 
                 if (res.data === null || res.data.situps.length <2) {
                     this.loadInitialBaseline()

@@ -4,13 +4,6 @@ import { connect } from "react-redux";
 import API from "../../utils/API";
 import { logoutUser } from "../../actions/authActions";
 
-const isEmpty = require("is-empty");
-
-// import { baseLineSubmit } from "../../actions/dataUpdates";
-// import { Link } from "react-router-dom";
-// import classnames from "classnames";
-
-
 class Dashboard extends Component {
     constructor () {
         super();

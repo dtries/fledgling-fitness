@@ -47,6 +47,25 @@ class Walking extends Component {
                     console.log(`Removed item is ${firstElement}`);
                 };
 
+                const lastDayComplete = res.data.walking[res.data.walking.length-1];
+                console.log(`Last day complete: ${JSON.stringify(lastDayComplete)}`);
+                console.log(`Last day complete Day: ${JSON.stringify(lastDayComplete.Day)}`);
+                
+                if (lastDayComplete.Day === 1 && lastDayComplete.Attempted === true) {
+                console.log("conditions day 1 met");
+                this.setState({attemptDay1: true});
+                this.setState({completeDay1: true});
+                this.setState({attemptDay2: false});
+                this.setState({completeDay2: false});
+                    } else if (lastDayComplete.Day === 2 && lastDayComplete.Attempted === true) {
+                    console.log("conditions day 1 met");
+                    this.setState({attemptDay1: true});
+                    this.setState({completeDay1: true});
+                    this.setState({attemptDay2: true});
+                    this.setState({completeDay2: true});
+                    this.setState({attemptDay3: false});
+                    this.setState({completeDay3: false});
+                };
 
                 if (res.data === null || res.data.walking.length <2) {
                     this.loadInitialBaseline()
@@ -127,9 +146,8 @@ class Walking extends Component {
         }
     };
 
-    calculateWalking = (walkBase, week) => {
+    calculateWalking = (walkBase => {
         console.log(`walkBase is ${walkBase}`);
-        console.log(`week at begin of calcWalk is ${week}`);
         this.setState({Day1: walkBase});
         if (walkBase < 10) {
             this.setState({Day2: Math.ceil(walkBase*1.1)});
@@ -141,8 +159,8 @@ class Walking extends Component {
         };
 
 
-        console.log(`Week = ${week}, Day 1 = ${this.state.Day1}, Day 2 = ${this.state.Day2}, Day 3 = ${this.state.Day3}`);
-    };
+        console.log(`Day 1 = ${this.state.Day1}, Day 2 = ${this.state.Day2}, Day 3 = ${this.state.Day3}`);
+    });
 
     workoutUpdater = (id, dayNum, duration, attempted, completed) => {
 
@@ -234,7 +252,6 @@ class Walking extends Component {
     attemptedDay3Click = (e, completed) => {
         e.preventDefault();
         this.getDate()
-        const week = this.state.week+1;
         const attempted = true;
         const { user } = this.props.auth;
         const id = user.id;
