@@ -4,22 +4,29 @@ import PropTypes from "prop-types";
 // import ReactDom from "react-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import WalkingModal from "../walking/walkInstructions";
 
 class Walking extends Component {
-    state = {
-        week1ArrayComplete: false,
-        walkBase: null,
-        Day1: null,
-        Day2: null,
-        Day3: null,
-        today: "",
-        attempted: false,
-        attemptDay1: false,
-        completeDay1: false,
-        attemptDay2: true,
-        completeDay2: true,
-        attemptDay3: true,
-        completeDay3: true
+
+    constructor(props) {
+        super(props);
+
+            this.state = {
+                week1ArrayComplete: false,
+                walkBase: null,
+                Day1: null,
+                Day2: null,
+                Day3: null,
+                today: "",
+                attempted: false,
+                attemptDay1: false,
+                completeDay1: false,
+                attemptDay2: true,
+                completeDay2: true,
+                attemptDay3: true,
+                completeDay3: true,
+                walkVal: 0
+            }
     }
 
     componentWillMount(){
@@ -47,30 +54,30 @@ class Walking extends Component {
                     console.log(`Removed item is ${firstElement}`);
                 };
 
-                const lastDayComplete = res.data.walking[res.data.walking.length-1];
-                console.log(`Last day complete: ${JSON.stringify(lastDayComplete)}`);
-                console.log(`Last day complete Day: ${JSON.stringify(lastDayComplete.Day)}`);
-                
-                if (lastDayComplete.Day === 1 && lastDayComplete.Attempted === true) {
-                console.log("conditions day 1 met");
-                this.setState({attemptDay1: true});
-                this.setState({completeDay1: true});
-                this.setState({attemptDay2: false});
-                this.setState({completeDay2: false});
-                    } else if (lastDayComplete.Day === 2 && lastDayComplete.Attempted === true) {
+                if (res.data === null || res.data.walking.length <2) {
+                    this.loadInitialBaseline()
+                } else {
+
+                    const lastDayComplete = res.data.walking[res.data.walking.length-1];
+                    console.log(`Last day complete: ${JSON.stringify(lastDayComplete)}`);
+                    console.log(`Last day complete Day: ${JSON.stringify(lastDayComplete.Day)}`);
+                    
+                    if (lastDayComplete.Day === 1 && lastDayComplete.Attempted === true) {
                     console.log("conditions day 1 met");
                     this.setState({attemptDay1: true});
                     this.setState({completeDay1: true});
-                    this.setState({attemptDay2: true});
-                    this.setState({completeDay2: true});
-                    this.setState({attemptDay3: false});
-                    this.setState({completeDay3: false});
-                };
+                    this.setState({attemptDay2: false});
+                    this.setState({completeDay2: false});
+                        } else if (lastDayComplete.Day === 2 && lastDayComplete.Attempted === true) {
+                        console.log("conditions day 1 met");
+                        this.setState({attemptDay1: true});
+                        this.setState({completeDay1: true});
+                        this.setState({attemptDay2: true});
+                        this.setState({completeDay2: true});
+                        this.setState({attemptDay3: false});
+                        this.setState({completeDay3: false});
+                    };
 
-                if (res.data === null || res.data.walking.length <2) {
-                    this.loadInitialBaseline()
-                }
-                else { 
                     this.loadOngoingBaseline(res);
                 }; 
             })
@@ -279,8 +286,10 @@ class Walking extends Component {
 
     render () {
         const { user } = this.props.auth;
+        const walkModalLink = "WALKING";
+            
 
-        return (
+        return (    
             <div className="container">
                 <div className="row">
                     <div className="col s12 center-align">
@@ -292,8 +301,10 @@ class Walking extends Component {
                 <div className="row">
                     <div className="walking-list col s12 center-align">
                         <ul className=" work-out-list">
-                            <li className="workout-header"><h4>WEEKLY WALKING WORKOUTS</h4>
+                            <li className="workout-header"><h4>Weekly <WalkingModal walkVal={this.state.walkVal} trigger = {walkModalLink}>{walkModalLink}</WalkingModal> workout</h4>
+                            
                             </li>
+
                             <li className="workout-item">
                                 <div className="card workout-card">
                                     <div className="card-content">

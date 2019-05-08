@@ -3,6 +3,8 @@ import API from "../../utils/API";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import PushupModal from "../pushup/pushupInstructions";
+
 
 var week = 0;
 
@@ -321,6 +323,8 @@ class Pushup extends Component {
 
     render () {
         const { user } = this.props.auth;
+        const pushupModalLink = "PUSHUP";
+
 
         return (
             <div className="container">
@@ -334,7 +338,7 @@ class Pushup extends Component {
                 <div className="row">
                     <div className="walking-list col s12 center-align">
                         <ul className=" work-out-list">
-                            <li className="workout-header"><h4>WEEKLY PUSHUP WORKOUTS</h4>
+                            <li className="workout-header"><h4>Weekly <PushupModal trigger = {pushupModalLink}>{pushupModalLink}</PushupModal> workouts</h4>
                             </li>
                             <li className="workout-item">
                                 <div className="card workout-card">

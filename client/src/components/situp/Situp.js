@@ -3,6 +3,8 @@ import API from "../../utils/API";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import SitupModal from "../situp/situpInstructions";
+
 
 var week = 0;
 
@@ -319,6 +321,8 @@ class Situp extends Component {
 
     render () {
         const { user } = this.props.auth;
+        const situpModalLink = "situps";
+
 
         return (
             <div className="container">
@@ -332,7 +336,7 @@ class Situp extends Component {
                 <div className="row">
                     <div className="walking-list col s12 center-align">
                         <ul className=" work-out-list">
-                            <li className="workout-header"><h4>WEEKLY SITUP WORKOUTS</h4>
+                            <li className="workout-header"><h4>Weekly <SitupModal trigger = {situpModalLink}>{situpModalLink}</SitupModal> workouts</h4>
                             </li>
                             <li className="workout-item">
                                 <div className="card workout-card">

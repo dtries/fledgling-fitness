@@ -3,6 +3,8 @@ import API from "../../utils/API";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import SquatModal from "../squat/squatInstructions";
+
 
 var week = 0;
 
@@ -321,6 +323,7 @@ class Squat extends Component {
 
     render () {
         const { user } = this.props.auth;
+        const squatModalLink = "SQUAT";
 
         return (
             <div className="container">
@@ -334,7 +337,7 @@ class Squat extends Component {
                 <div className="row">
                     <div className="walking-list col s12 center-align">
                         <ul className=" work-out-list">
-                            <li className="workout-header"><h4>WEEKLY SQUAT WORKOUTS</h4>
+                            <li className="workout-header"><h4>Weekly <SquatModal trigger = {squatModalLink}>{squatModalLink}</SquatModal> workouts</h4>
                             </li>
                             <li className="workout-item">
                                 <div className="card workout-card">

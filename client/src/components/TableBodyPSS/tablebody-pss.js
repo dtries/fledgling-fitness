@@ -32,36 +32,6 @@ function TableBodyPSS(props) {
         completed = props.completed ? "Yes" : "No";
     }
 
-
-    // console.log(`Value is ${props.dayNum}`);
-
-    // if (props.dayNum === 1 && props.day1set1 !== "undefined") {
-    //             attempted = props.attempted ? "Yes" : "No";
-    //             completed = props.completed ? "Yes" : "No";
-    //             day = props.day;   
-    //             setNum = 1
-    //             dayNum = props.dayNum;
-    //             reps = props.day1set1;
-    // } else if (props.dayNum === 1 && props.day1set2 !== "undefined") {
-    //             attempted = props.attempted ? "Yes" : "No";
-    //             completed = props.completed ? "Yes" : "No";
-    //             day = props.day;   
-    //             setNum = 2
-    //             dayNum = props.dayNum;
-    //             reps = props.day1set2;
-    // } else if (props.dayNum === 1 && props.day1set3 !== "undefined") {
-    //     attempted = props.attempted ? "Yes" : "No";
-    //     completed = props.completed ? "Yes" : "No";
-    //     day = props.day;   
-    //     setNum = 3
-    //     dayNum = props.dayNum;
-    //     reps = props.day1set3;
-    // } 
-
-    
-   
-
-
     //This is a function (not a class) so it does not require a render
     return (
         <tbody>

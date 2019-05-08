@@ -254,3 +254,48 @@ li.collection-item {
 }
 
 /* End of Progress Page Styling */
+
+/* Modals Styling */
+#walking-modal-btn,
+#pushup-modal-btn,
+#situp-modal-btn,
+#squat-modal-btn {
+    color: #FFE400;
+    font-size: 100%;
+    background-color: #272727;
+    padding-bottom: 3.5%;
+    padding-left: 1%;
+    padding-right: 1%;
+    border: 1px solid #13A76C;
+    vertical-align: 0%;
+    text-transform: none;
+}
+
+.exercise-modal {
+    background-color: #13A76C;
+    color: #FFE400;
+    font-size: 200%;
+}
+
+.modal-close {
+    color: #FF652F;
+    font-size: 75%;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* End of Modals Styling */

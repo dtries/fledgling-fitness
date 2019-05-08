@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import API from "../../utils/API";
 import { logoutUser } from "../../actions/authActions";
+import WalkingModal from "../walking/walkInstructions";
+import PushupModal from "../pushup/pushupInstructions";
+import SitupModal from "../situp/situpInstructions";
+import SquatModal from "../squat/squatInstructions";
+
 
 class Dashboard extends Component {
     constructor () {
@@ -92,6 +97,11 @@ class Dashboard extends Component {
     render () {
         console.log(`State is ${JSON.stringify(this.state)}`);
         const { user } = this.props.auth;
+        const walkModalLink = "walk";
+        const pushupModalLink = "pushups";
+        const situpModalLink = "situps";
+        const squatModalLink = "squats";
+
 
         return (
             <div className="container">
@@ -130,7 +140,7 @@ class Dashboard extends Component {
                     <div className="row form-begin">
                         <div className="col s12 base-assessment-question center">
                         <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
-                        Minutes you can walk comfortably at a brisk pace &nbsp;&nbsp;
+                        Minutes you can <WalkingModal trigger = {walkModalLink}>{walkModalLink}</WalkingModal> comfortably at a brisk pace &nbsp;&nbsp;
                             <div className="input-field inline">
                                 <input
                                     onChange={this.onChange}
@@ -151,7 +161,7 @@ class Dashboard extends Component {
                     <div className="row">
                         <div className="col s12 base-assessment-question center">
                         <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
-                        Number of good-form pushups you can complete &nbsp;
+                        Number of good-form <PushupModal trigger = {pushupModalLink}>{pushupModalLink}</PushupModal> you can complete &nbsp;
                             <div className="input-field inline">
                                 <input
                                     onChange={this.onChange}
@@ -172,7 +182,7 @@ class Dashboard extends Component {
                     <div className="row">
                         <div className="col s12 base-assessment-question center">
                         <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
-                        Number of good form situps you can complete &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Number of good form <SitupModal trigger = {situpModalLink}>{situpModalLink}</SitupModal> you can complete &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div className="input-field inline">
                                 <input
                                     onChange={this.onChange}
@@ -193,7 +203,7 @@ class Dashboard extends Component {
                     <div className="row">
                         <div className="col s12 base-assessment-question center">
                             <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
-                            Number of good form squats you can complete &nbsp;&nbsp;&nbsp;&nbsp;
+                            Number of good form <SquatModal trigger = {squatModalLink}>{squatModalLink}</SquatModal> you can complete &nbsp;&nbsp;&nbsp;&nbsp;
                             <div className="input-field inline">
                                 <input
                                     onChange={this.onChange}
