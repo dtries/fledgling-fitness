@@ -105,7 +105,7 @@ input {
     background-color: #13A76C;
     color: #FFE400;
     font-weight: bolder;
-    margin-bottom: 9%;
+    margin-bottom: 2%;
 
 }
 
@@ -124,6 +124,14 @@ input {
     color: #FF652F;
     text-align: center;
     font-weight: bold;
+}
+
+#startDate {
+    width: 111px;
+}
+
+.datepicker-table-wrapper {
+    color: #FF652F;
 }
 
 /* End Dashboard Styling */
@@ -263,7 +271,7 @@ li.collection-item {
     color: #FFE400;
     font-size: 100%;
     background-color: #272727;
-    padding-bottom: 3.5%;
+    padding-bottom: 3%;
     padding-left: 1%;
     padding-right: 1%;
     border: 1px solid #13A76C;

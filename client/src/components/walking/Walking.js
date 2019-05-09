@@ -6,6 +6,9 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import WalkingModal from "../walking/walkInstructions";
 
+var moment = require('moment');
+// moment().format();
+
 class Walking extends Component {
 
     constructor(props) {
@@ -25,7 +28,10 @@ class Walking extends Component {
                 completeDay2: true,
                 attemptDay3: true,
                 completeDay3: true,
-                walkVal: 0
+                walkVal: 0,
+                cardDate: "",
+                cardDate2: "",
+                cardDate3: ""
             }
     }
 
@@ -85,13 +91,28 @@ class Walking extends Component {
     };
     
     getDate = () => {
-        const now = new Date();
-        const nowStr = now.toLocaleString();
+        const now = moment().format("ddd, MMM Do YYYY, h:mm:ss a");
+        // const nowStr = now.toLocaleString();
         console.log(`${now}`);
-        console.log(`${nowStr}`);
-        this.setState({today: nowStr}); 
+        // console.log(`${nowStr}`);
+        this.setState({today: now}); 
     };
 
+    setCardDates = () => {
+        const day2Adder = 2;
+        const day3Adder = 4;
+        const oldDate = moment(this.state.cardDate, "MMM-Do-YYYY");
+        console.log(`Old date is ${oldDate}`);
+        const day2Date = moment(oldDate).add(day2Adder, 'days').format("MMM Do YYYY");
+        const day3Date = moment(oldDate).add(day3Adder, 'days').format("MMM Do YYYY");
+        // this.setState({cardDate: res.data.startDate})
+        this.setState({cardDate2: day2Date});
+        this.setState({cardDate3: day3Date});
+        console.log(`New date is ${this.state.cardDate2}`);
+        console.log(`New date is ${this.state.cardDate3}`);
+
+    }
+    
     loadInitialBaseline = () => {
         const { user } = this.props.auth;
         const baselineID = {
@@ -106,9 +127,10 @@ class Walking extends Component {
                 console.log(`The baseline response object is ${JSON.stringify(res.data)}`);
                 this.setState({walkBase: res.data.walking})
                 this.setState({week: res.data.week})
+                this.setState({cardDate: res.data.startDate})
                 this.calculateWalking(this.state.walkBase, this.state.week)
                 console.log(`Week here is ${JSON.stringify(res.data.week)}`)
-
+                this.setCardDates()
             }) 
             .catch(err => console.log(err)); 
     };
@@ -195,8 +217,6 @@ class Walking extends Component {
             this.props.history.push("/workouts");
         };
     };
-
-    
 
     attemptedDay1Click = (e, completed) => {
         e.preventDefault();
@@ -287,8 +307,10 @@ class Walking extends Component {
     render () {
         const { user } = this.props.auth;
         const walkModalLink = "WALKING";
-            
+        const day2Day = this.state.cardDay2;
 
+        console.log(`day 2 date in render is ${day2Day}`);
+         
         return (    
             <div className="container">
                 <div className="row">
@@ -308,7 +330,7 @@ class Walking extends Component {
                             <li className="workout-item">
                                 <div className="card workout-card">
                                     <div className="card-content">
-                                        <p className="card-title" id="workout-card-title">Day 1</p>
+                                        <p className="card-title" id="workout-card-title">Day 1: {this.state.cardDate}</p>
                                             <ul className="collection set-card">
                                                 <li className="collection-item"><span className="set-marker">Warm Up:</span> &nbsp;  Easy pace for 5 minutes</li>
                                                 <li className="collection-item"><span className="set-marker">Workout: </span> &nbsp;  Brisk pace for {this.state.Day1} minutes.</li>
@@ -340,7 +362,7 @@ class Walking extends Component {
                             <li className="workout-item">
                                 <div className="card workout-card">
                                     <div className="card-content">
-                                        <p className="card-title" id="workout-card-title">Day 2</p>
+                                        <p className="card-title" id="workout-card-title">Day 2: {Object.values(this.state.cardDate2)}</p>
                                             <ul className="collection set-card">
                                                 <li className="collection-item"><span className="set-marker">Warm Up:</span> &nbsp;  Easy pace for 5 minutes</li>
                                                 <li className="collection-item"><span className="set-marker">Workout: </span> &nbsp;  Brisk pace for {this.state.Day2} minutes.</li>
@@ -370,7 +392,7 @@ class Walking extends Component {
                             <li className="workout-item">
                                 <div className="card workout-card">
                                     <div className="card-content">
-                                        <p className="card-title" id="workout-card-title">Day 3</p>
+                                        <p className="card-title" id="workout-card-title">Day 3: {this.state.cardDate3}</p>
                                         <ul className="collection set-card">
                                                 <li className="collection-item"><span className="set-marker">Warm Up:</span> &nbsp;  Easy pace for 5 minutes</li>
                                                 <li className="collection-item"><span className="set-marker">Workout: </span> &nbsp;  Brisk pace for {this.state.Day3} minutes.</li>

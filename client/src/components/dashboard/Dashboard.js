@@ -7,13 +7,15 @@ import WalkingModal from "../walking/walkInstructions";
 import PushupModal from "../pushup/pushupInstructions";
 import SitupModal from "../situp/situpInstructions";
 import SquatModal from "../squat/squatInstructions";
-
+import { DatePicker, TextInput} from 'react-materialize';
+var moment = require('moment');
+moment().format();
 
 class Dashboard extends Component {
     constructor () {
         super();
         this.state = {
-            
+            startDate: "",
             walking: "",
             pushups: "",
             situps: "",
@@ -62,12 +64,19 @@ class Dashboard extends Component {
         this.setState({ [e.target.id]: e.target.value });
     };
 
+    dateValue = e => {
+        console.log(e);
+        const formattedDate = moment(e).format("MMM Do YYYY");//e.toDateString();
+        this.setState({ startDate: formattedDate });
+    }
+
     onSubmit = e => {
         e.preventDefault();
         const { user } = this.props.auth;
         const baselineData = {
             userID: user.id,
             week: 0,
+            startDate: this.state.startDate,
             walking: this.state.walking,
             pushups: this.state.pushups,
             situps: this.state.situps,
@@ -134,10 +143,25 @@ class Dashboard extends Component {
                         </button>
                     </div>
                 </div>
-                <br />
-                <br />
+
                 <form onSubmit={this.onSubmit}>
-                    <div className="row form-begin">
+                    <div className = "row form-begin">
+                       &nbsp; <div className="col s12 base-assessment-question center">
+                        <i className="fas fa-kiwi-bird bird-bullet">
+                            </i> &nbsp; Enter the date you will start the fledgling fitness plan &nbsp;&nbsp;
+                                <div className="input-field inline">
+                                    <DatePicker 
+                                    onChange={this.dateValue}
+                                    value={this.state.startDate}
+                                    id="startDate"
+                                    label="Click to Pick Date"
+                                    type=""
+                                    className="validate baseline-input-line"
+                                    />
+                                </div>
+                        </div>
+                    </div>
+                    <div className="row">
                         <div className="col s12 base-assessment-question center">
                         <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
                         Minutes you can <WalkingModal trigger = {walkModalLink}>{walkModalLink}</WalkingModal> comfortably at a brisk pace &nbsp;&nbsp;

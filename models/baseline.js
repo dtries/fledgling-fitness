@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const baselineSchema = new Schema({
   userID: { type: String, required: true },
   week: { type: Number, required: true},
+  startDate: {type: String, required: true},
   walking: { type: Number , required: true },
   pushups: { type: Number, required: true },
   situps: { type: Number, required: true },
