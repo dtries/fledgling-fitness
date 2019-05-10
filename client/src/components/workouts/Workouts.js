@@ -29,7 +29,9 @@ class Workouts extends Component {
                     res.data.walking.length >5 ? 
                     this.setState({doPushups: false}) : 
                     this.setState({doPushups: true})
-                } 
+                } else {
+                    this.setState({doPushups: true})
+                }
 
                 if (res.data.pushups !== null) {
                 res.data.pushups.length !==null && res.data.pushups.length >5 ? 

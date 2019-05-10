@@ -22,6 +22,7 @@ class Walking extends Component {
                 Day3: null,
                 today: "",
                 attempted: false,
+                completed: false,        
                 attemptDay1: false,
                 completeDay1: false,
                 attemptDay2: true,
@@ -47,6 +48,8 @@ class Walking extends Component {
         };
         API.getProgress(baselineID)
             .then( res => {
+
+                var progressCheckResponse = res;
                 console.log(`Walking progress data are: ${JSON.stringify(res.data)}`);
 
                 console.log(`Data walking are ${JSON.stringify(res.data.walking)}`);
@@ -60,8 +63,8 @@ class Walking extends Component {
                     console.log(`Removed item is ${firstElement}`);
                 };
 
-                if (res.data === null || res.data.walking.length <2) {
-                    this.loadInitialBaseline()
+                if (res.data === null || res.data.walking.length <3) {
+                    this.loadInitialBaseline(progressCheckResponse)
                 } else {
 
                     const lastDayComplete = res.data.walking[res.data.walking.length-1];
@@ -75,7 +78,7 @@ class Walking extends Component {
                     this.setState({attemptDay2: false});
                     this.setState({completeDay2: false});
                         } else if (lastDayComplete.Day === 2 && lastDayComplete.Attempted === true) {
-                        console.log("conditions day 1 met");
+                        console.log("conditions day 2 met");
                         this.setState({attemptDay1: true});
                         this.setState({completeDay1: true});
                         this.setState({attemptDay2: true});
@@ -113,12 +116,37 @@ class Walking extends Component {
 
     }
     
-    loadInitialBaseline = () => {
+    loadInitialBaseline = (progressCheckResponse) => {
         const { user } = this.props.auth;
         const baselineID = {
             userID: user.id
         };
+
+        console.log(`progress check data are ${JSON.stringify(progressCheckResponse)}`);
+        const lastDayComplete = progressCheckResponse.data.walking[progressCheckResponse.data.walking.length-1];
+        console.log(`Last day complete: ${JSON.stringify(lastDayComplete)}`);
+        // console.log(`Last day complete Day: ${JSON.stringify(lastDayComplete.Day)}`);
         
+        if (lastDayComplete === undefined) {
+            console.log("Skip this part");
+        }
+        else if (lastDayComplete.Day === 1 && lastDayComplete.Attempted === true) {
+        console.log("conditions day 1 met");
+        this.setState({attemptDay1: true});
+        this.setState({completeDay1: true});
+        this.setState({attemptDay2: false});
+        this.setState({completeDay2: false});
+            } else if (lastDayComplete.Day === 2 && lastDayComplete.Attempted === true) {
+            console.log("conditions day 2 met");
+            this.setState({attemptDay1: true});
+            this.setState({completeDay1: true});
+            this.setState({attemptDay2: true});
+            this.setState({completeDay2: true});
+            this.setState({attemptDay3: false});
+            this.setState({completeDay3: false});
+        };
+
+
         console.log(`Week 1 walking array complete: ${this.state.week1ArrayComplete}`);
         console.log(`This userID is ${JSON.stringify(baselineID)}`);
         
@@ -241,7 +269,7 @@ class Walking extends Component {
 
     completedDay1Click = e => {
         e.preventDefault();
-        this.setState({attemptDay2: true});
+        this.setState({attemptDay1: true});
         this.setState({completeDay1: true});
         this.setState({attemptDay2: false});
         this.setState({completeDay2: false});
@@ -307,9 +335,9 @@ class Walking extends Component {
     render () {
         const { user } = this.props.auth;
         const walkModalLink = "WALKING";
-        const day2Day = this.state.cardDay2;
+        // const day2Day = this.state.cardDay2;
 
-        console.log(`day 2 date in render is ${day2Day}`);
+        // console.log(`day 2 date in render is ${day2Day}`);
          
         return (    
             <div className="container">
