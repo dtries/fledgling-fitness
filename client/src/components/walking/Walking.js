@@ -135,7 +135,7 @@ class Walking extends Component {
         console.log(`Last day complete: ${JSON.stringify(lastDayComplete)}`);
         // console.log(`Last day complete Day: ${JSON.stringify(lastDayComplete.Day)}`);
         
-        console.log(`LAST DAY COMPLETE MISSED: ${lastDayComplete.Missed}`);
+        // console.log(`LAST DAY COMPLETE MISSED: ${lastDayComplete.Missed}`);
 
         if (lastDayComplete === undefined) {
             console.log("Skip this part");

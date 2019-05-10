@@ -231,6 +231,8 @@ li.collection-item {
 #situps,
 #squats {
     color: #FFE400;
+    font-size: 200%;
+    text-align: center;
 }
 
 #display-walking,
@@ -250,6 +252,12 @@ li.collection-item {
 
 .tabs .tab a {
     color: #272727;
+}
+
+th,
+td {
+    text-align: center;
+    font-size: 120%;
 }
 
 .tabs .tab a:hover {
@@ -306,7 +314,5 @@ li.collection-item {
     width: 100%;
     height: 100%;
 }
-
-
 
 /* End of Modals Styling */

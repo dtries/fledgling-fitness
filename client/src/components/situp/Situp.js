@@ -414,9 +414,9 @@ class Situp extends Component {
             situps: {
                         Date: this.state.today,
                         Day: 1,
-                        Day2Set1: this.state.day2Set1,
-                        Day2Set2: this.state.day2Set2,
-                        Day2Set3: this.state.day2Set3,
+                        Day1Set1: this.state.day1Set1,
+                        Day1Set2: this.state.day1Set2,
+                        Day1Set3: this.state.day1Set3,
                         Attempted: false,
                         Completed: false,
                         Missed: true                    
