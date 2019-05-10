@@ -200,11 +200,14 @@ li.collection-item {
     color: #13A76C;
     text-align: left;
 }
-.attempted-btn {
+
+.attempted-btn,
+.missed-btn {
     margin-right: 15%;
 }
 
 .attempted-btn,
+.missed-btn,
 .completed-btn {
     background-color: #13A76C;
     color: #FFE400;

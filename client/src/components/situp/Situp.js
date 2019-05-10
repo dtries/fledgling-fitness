@@ -34,7 +34,10 @@ class Situp extends Component {
         completeDay3: true,
         cardDate: "",
         cardDate2: "",
-        cardDate3: ""
+        cardDate3: "",
+        missedDay1: false,
+        missedDay2: true,
+        missedDay3: true
     }
 
      componentWillMount() {
@@ -62,20 +65,30 @@ class Situp extends Component {
                     console.log(`Last day complete: ${JSON.stringify(lastDayComplete)}`);
                     console.log(`Last day complete Day: ${JSON.stringify(lastDayComplete.Day)}`);
                     
-                    if (lastDayComplete.Day === 1 && lastDayComplete.Attempted === true) {
+                    if (lastDayComplete.Day === 1 && (lastDayComplete.Attempted === true || lastDayComplete.Missed === true)) {
                     console.log("conditions day 1 met");
                     this.setState({attemptDay1: true});
                     this.setState({completeDay1: true});
+                    this.setState({missedDay1: true});
+
                     this.setState({attemptDay2: false});
                     this.setState({completeDay2: false});
-                        } else if (lastDayComplete.Day === 2 && lastDayComplete.Attempted === true) {
+                    this.setState({missedDay2: false});
+
+                        } else if (lastDayComplete.Day === 2 && (lastDayComplete.Attempted === true || lastDayComplete.Missed === true)) {
                         console.log("conditions day 1 met");
                         this.setState({attemptDay1: true});
                         this.setState({completeDay1: true});
+                        this.setState({missedDay1: true});
+
                         this.setState({attemptDay2: true});
                         this.setState({completeDay2: true});
+                        this.setState({missedDay2: true});
+
                         this.setState({attemptDay3: false});
                         this.setState({completeDay3: false});
+                        this.setState({missedDay3: false});
+
                     };
 
                     this.loadOngoingBaseline(res);
@@ -118,20 +131,30 @@ class Situp extends Component {
         if (lastDayComplete === undefined) {
             console.log("Skip this part");
         }
-        else if (lastDayComplete.Day === 1 && lastDayComplete.Attempted === true) {
+        else if (lastDayComplete.Day === 1 && (lastDayComplete.Attempted === true || lastDayComplete.Missed === true)) {
         console.log("conditions day 1 met");
         this.setState({attemptDay1: true});
         this.setState({completeDay1: true});
+        this.setState({missedDay1: true});
+
         this.setState({attemptDay2: false});
         this.setState({completeDay2: false});
-            } else if (lastDayComplete.Day === 2 && lastDayComplete.Attempted === true) {
+        this.setState({missedDay2: false});
+
+            } else if (lastDayComplete.Day === 2 && (lastDayComplete.Attempted === true || lastDayComplete.Missed === true)) {
             console.log("conditions day 2 met");
             this.setState({attemptDay1: true});
             this.setState({completeDay1: true});
+            this.setState({missedDay1: true});
+
             this.setState({attemptDay2: true});
             this.setState({completeDay2: true});
+            this.setState({missedDay2: true});
+
             this.setState({attemptDay3: false});
             this.setState({completeDay3: false});
+            this.setState({missedDay3: false});
+
         };
 
         API.getBaseline(baselineID)
@@ -159,7 +182,7 @@ class Situp extends Component {
         console.log(`First date: ${firstDay}`);
         this.setState({cardDate: firstDay});
         this.setCardDates();
-        
+
             if (lastDayValue === 3) {
                 console.log("Found last Day 3!!!!!!!");
                 
@@ -232,10 +255,12 @@ class Situp extends Component {
         this.getDate();
         this.setState({attemptDay1: true});
         this.setState({completeDay1: true});
+        this.setState({missedDay1: true});
+
         this.setState({attemptDay2: false});
         this.setState({completeDay2: false});
-        this.setState({attemptDay3: true});
-        this.setState({completeDay3: true});
+        this.setState({missedDay2: false});
+
         console.log(`The date is ${this.state.today}`);
 
         console.log(`Completed value is  ${completed}`);
@@ -257,8 +282,8 @@ class Situp extends Component {
                         Day1Set2: this.state.day1Set2,
                         Day1Set3: this.state.day1Set3,
                         Attempted: attempted,
-                        Completed: completed
-                        
+                        Completed: completed,
+                        Missed: false                                            
                     }
         };
 
@@ -284,8 +309,12 @@ class Situp extends Component {
         this.getDate();
         this.setState({attemptDay2: true});
         this.setState({completeDay2: true});
+        this.setState({missedDay2: true});
+
         this.setState({attemptDay3: false});
         this.setState({completeDay3: false});
+        this.setState({missedDay3: false});
+
         const attempted = true;
         const { user } = this.props.auth;
         const id = user.id;
@@ -302,8 +331,8 @@ class Situp extends Component {
                         Day2Set2: this.state.day2Set2,
                         Day2Set3: this.state.day2Set3,
                         Attempted: attempted,
-                        Completed: completed
-                        
+                        Completed: completed,
+                        Missed: false                                            
                     }
         };
 
@@ -343,8 +372,8 @@ class Situp extends Component {
                         Day3Set2: this.state.day3Set2,
                         Day3Set3: this.state.day3Set3,
                         Attempted: attempted,
-                        Completed: completed
-                        
+                        Completed: completed,
+                        Missed: false                                            
                     }
         };
 
@@ -365,6 +394,118 @@ class Situp extends Component {
         const completed = true;
         this.attemptedDay3Click(e, completed);
         console.log(`Completed button clicked`);
+    };
+
+    missedDay1Click = e => {
+        e.preventDefault();
+        this.getDate();
+        this.setState({attemptDay1: true});
+        this.setState({completeDay1: true});
+        this.setState({missedDay1: true});
+        this.setState({attemptDay2: false});
+        this.setState({completeDay2: false});
+        this.setState({missedDay2: false});
+  
+        const { user } = this.props.auth;
+        const id = user.id;
+
+        const workoutData = {
+            userID: user.id,
+            situps: {
+                        Date: this.state.today,
+                        Day: 1,
+                        Day2Set1: this.state.day2Set1,
+                        Day2Set2: this.state.day2Set2,
+                        Day2Set3: this.state.day2Set3,
+                        Attempted: false,
+                        Completed: false,
+                        Missed: true                    
+                    }
+        };
+
+        console.log(`This userID is ${id}`);
+        console.log(`This workout data is ${JSON.stringify(workoutData)}`);
+        API.updateSitups(workoutData)
+            .then( res => {
+                console.log(res.status, res.statusText);
+
+            }) 
+            .catch(err => console.log(err));
+    };
+
+    missedDay2Click = e => {
+        e.preventDefault();
+        this.getDate();
+        this.setState({attemptDay1: true});
+        this.setState({completeDay1: true});
+        this.setState({missedDay1: true});
+
+        this.setState({attemptDay2: true});
+        this.setState({completeDay2: true});
+        this.setState({missedDay2: true});
+
+        this.setState({attemptDay3: false});
+        this.setState({completeDay3: false});
+        this.setState({missedDay3: false});
+  
+        const { user } = this.props.auth;
+        const id = user.id;
+
+        const workoutData = {
+            userID: user.id,
+            situps: {
+                        Date: this.state.today,
+                        Day: 2,
+                        Day2Set1: this.state.day2Set1,
+                        Day2Set2: this.state.day2Set2,
+                        Day2Set3: this.state.day2Set3,
+                        Attempted: false,
+                        Completed: false,
+                        Missed: true                                            
+                    }
+        };
+
+        console.log(`This userID is ${id}`);
+        console.log(`This workout data is ${JSON.stringify(workoutData)}`);
+        API.updateSitups(workoutData)
+            .then( res => {
+                console.log(res.status, res.statusText);
+
+            }) 
+            .catch(err => console.log(err));
+    };
+
+    missedDay3Click = e => {
+        e.preventDefault();
+        this.getDate();
+
+        const { user } = this.props.auth;
+        const id = user.id;
+
+        const workoutData = {
+            userID: user.id,
+            situps: {
+                        Date: this.state.today,
+                        Day: 3,
+                        Day3Set1: this.state.day3Set1,
+                        Day3Set2: this.state.day3Set2,
+                        Day3Set3: this.state.day3Set3,
+                        Attempted: false,
+                        Completed: false,
+                        Missed: true                                            
+                    }
+        };
+
+        console.log(`This userID is ${id}`);
+        console.log(`This workout data is ${JSON.stringify(workoutData)}`);
+        API.updateSitups(workoutData)
+            .then( res => {
+                console.log(res.status, res.statusText);
+
+            }) 
+            .catch(err => console.log(err));
+            
+            this.props.history.push("/workouts");
     };
 
     onLogoutClick = e => {
@@ -413,6 +554,14 @@ class Situp extends Component {
                                                 >
                                                 Attempted
                                         </button>
+                                        <button className="missed-btn
+                                            btn btn-small waves-effect
+                                            waves-light hoverable"
+                                            disabled={this.state.missedDay1}
+                                            onClick={this.missedDay1Click}
+                                            >
+                                            Missed
+                                        </button>
                                         <button className="completed-btn
                                                 btn btn-small waves-effect
                                                 waves-light hoverable"
@@ -446,6 +595,14 @@ class Situp extends Component {
                                                 >
                                                 Attempted
                                         </button>
+                                        <button className="missed-btn
+                                            btn btn-small waves-effect
+                                            waves-light hoverable"
+                                            disabled={this.state.missedDay2}
+                                            onClick={this.missedDay2Click}
+                                            >
+                                            Missed
+                                        </button>
                                         <button className="completed-btn
                                                 btn btn-small waves-effect
                                                 waves-light hoverable"
@@ -478,6 +635,14 @@ class Situp extends Component {
                                                 onClick={this.attemptedDay3Click}
                                                 >
                                                 Attempted
+                                        </button>
+                                        <button className="missed-btn
+                                            btn btn-small waves-effect
+                                            waves-light hoverable"
+                                            disabled={this.state.missedDay3}
+                                            onClick={this.missedDay3Click}
+                                            >
+                                            Missed
                                         </button>
                                         <button className="completed-btn
                                                 btn btn-small waves-effect

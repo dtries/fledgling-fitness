@@ -31,7 +31,10 @@ class Walking extends Component {
                 walkVal: 0,
                 cardDate: "",
                 cardDate2: "",
-                cardDate3: ""
+                cardDate3: "",
+                missedDay1: false,
+                missedDay2: true,
+                missedDay3: true
             }
     }
 
@@ -70,20 +73,29 @@ class Walking extends Component {
                     console.log(`Last day complete: ${JSON.stringify(lastDayComplete)}`);
                     console.log(`Last day complete Day: ${JSON.stringify(lastDayComplete.Day)}`);
                     
-                    if (lastDayComplete.Day === 1 && lastDayComplete.Attempted === true) {
+                    if (lastDayComplete.Day === 1 && (lastDayComplete.Attempted === true || lastDayComplete.Missed === true)) {
                     console.log("conditions day 1 met");
                     this.setState({attemptDay1: true});
                     this.setState({completeDay1: true});
+                    this.setState({missedDay1: true});
+
                     this.setState({attemptDay2: false});
                     this.setState({completeDay2: false});
-                        } else if (lastDayComplete.Day === 2 && lastDayComplete.Attempted === true) {
+                    this.setState({missedDay2: false});
+
+                        } else if (lastDayComplete.Day === 2 && (lastDayComplete.Attempted === true || lastDayComplete.Missed === true)) {
                         console.log("conditions day 2 met");
                         this.setState({attemptDay1: true});
                         this.setState({completeDay1: true});
+                        this.setState({missedDay1: true});
+
                         this.setState({attemptDay2: true});
                         this.setState({completeDay2: true});
+                        this.setState({missedDay2: true});
+
                         this.setState({attemptDay3: false});
                         this.setState({completeDay3: false});
+                        this.setState({missedDay3: false});
                     };
 
                     this.loadOngoingBaseline(res);
@@ -123,23 +135,34 @@ class Walking extends Component {
         console.log(`Last day complete: ${JSON.stringify(lastDayComplete)}`);
         // console.log(`Last day complete Day: ${JSON.stringify(lastDayComplete.Day)}`);
         
+        console.log(`LAST DAY COMPLETE MISSED: ${lastDayComplete.Missed}`);
+
         if (lastDayComplete === undefined) {
             console.log("Skip this part");
         }
-        else if (lastDayComplete.Day === 1 && lastDayComplete.Attempted === true) {
+        else if (lastDayComplete.Day === 1 && (lastDayComplete.Attempted === true || lastDayComplete.Missed === true)) {
         console.log("conditions day 1 met");
         this.setState({attemptDay1: true});
         this.setState({completeDay1: true});
+        this.setState({missedDay1: true});
+
         this.setState({attemptDay2: false});
         this.setState({completeDay2: false});
-            } else if (lastDayComplete.Day === 2 && lastDayComplete.Attempted === true) {
+        this.setState({missedDay2: false});
+
+            } else if (lastDayComplete.Day === 2 && (lastDayComplete.Attempted === true || lastDayComplete.Missed === true)) {
             console.log("conditions day 2 met");
             this.setState({attemptDay1: true});
             this.setState({completeDay1: true});
+            this.setState({missedDay1: true});
+
             this.setState({attemptDay2: true});
             this.setState({completeDay2: true});
+            this.setState({missedDay2: true});
+
             this.setState({attemptDay3: false});
             this.setState({completeDay3: false});
+            this.setState({missedDay3: false});
         };
 
 
@@ -222,7 +245,7 @@ class Walking extends Component {
         console.log(`Day 1 = ${this.state.Day1}, Day 2 = ${this.state.Day2}, Day 3 = ${this.state.Day3}`);
     });
 
-    workoutUpdater = (id, dayNum, duration, attempted, completed) => {
+    workoutUpdater = (id, dayNum, duration, attempted, completed, missed) => {
 
         const workoutData = {
             userID: id,
@@ -231,7 +254,8 @@ class Walking extends Component {
                         Day: dayNum,
                         Duration: duration,
                         Attempted: attempted,
-                        Completed: completed
+                        Completed: completed,
+                        Missed: missed
              }
         };
 
@@ -254,28 +278,37 @@ class Walking extends Component {
         this.getDate();
         this.setState({attemptDay1: true});
         this.setState({completeDay1: true});
+        this.setState({missedDay1: true});
+
         this.setState({attemptDay2: false});
         this.setState({completeDay2: false});
+        this.setState({missedDay2: false});
+
   
         const attempted = true;
         const { user } = this.props.auth;
         const id = user.id;
         const dayNum = 1;
         const duration = this.state.Day1;
+        const missed = false;
 
         if (completed === undefined) {
             completed = false;
         };
 
-        this.workoutUpdater(id, dayNum, duration, attempted, completed);
+        this.workoutUpdater(id, dayNum, duration, attempted, completed, missed);
     };
 
     completedDay1Click = e => {
         e.preventDefault();
         this.setState({attemptDay1: true});
         this.setState({completeDay1: true});
+        this.setState({missedDay1: true});
+
         this.setState({attemptDay2: false});
         this.setState({completeDay2: false});
+        this.setState({missedDay2: false});
+
         const completed = true;
         this.attemptedDay1Click(e, completed);
     };
@@ -285,20 +318,24 @@ class Walking extends Component {
         this.getDate()
         this.setState({attemptDay2: true});
         this.setState({completeDay2: true});
+        this.setState({missedDay2: true});
+
         this.setState({attemptDay3: false});
         this.setState({completeDay3: false});
+        this.setState({missedDay3: false});
+
         const attempted = true;
         const { user } = this.props.auth;
         const id = user.id;
         const dayNum = 2;
         const duration = this.state.Day2;
-
+        const missed = false;
 
         if (completed === undefined) {
             completed = false;
         };
 
-        this.workoutUpdater(id, dayNum, duration, attempted, completed);
+        this.workoutUpdater(id, dayNum, duration, attempted, completed, missed);
     };
 
     completedDay2Click = e => {
@@ -315,13 +352,15 @@ class Walking extends Component {
         const id = user.id;
         const dayNum = 3;
         const duration = this.state.Day3;
+        const missed = false;
+
 
 
         if (completed === undefined) {
             completed = false;
         };
 
-        this.workoutUpdater(id, dayNum, duration, attempted, completed);
+        this.workoutUpdater(id, dayNum, duration, attempted, completed, missed);
     };
 
     completedDay3Click = e => {
@@ -329,6 +368,71 @@ class Walking extends Component {
         const completed = true;
         this.attemptedDay3Click(e, completed);
     }
+
+    missedDay1Click = e => {
+        e.preventDefault();
+        this.getDate();
+        this.setState({attemptDay1: true});
+        this.setState({completeDay1: true});
+        this.setState({missedDay1: true});
+        this.setState({attemptDay2: false});
+        this.setState({completeDay2: false});
+        this.setState({missedDay2: false});
+  
+        const attempted = false;
+        const completed = false
+        const { user } = this.props.auth;
+        const id = user.id;
+        const dayNum = 1;
+        const duration = this.state.Day1;
+        const missed = true;
+
+
+        this.workoutUpdater(id, dayNum, duration, attempted, completed, missed);
+    };
+
+    missedDay2Click = e => {
+        e.preventDefault();
+        this.getDate();
+        this.setState({attemptDay1: true});
+        this.setState({completeDay1: true});
+        this.setState({missedDay1: true});
+        this.setState({attemptDay2: true});
+        this.setState({completeDay2: true});
+        this.setState({missedDay2: true});
+        this.setState({attemptDay3: false});
+        this.setState({completeDay3: false});
+        this.setState({missedDay3: false});
+  
+        const attempted = false;
+        const completed = false
+        const { user } = this.props.auth;
+        const id = user.id;
+        const dayNum = 2;
+        const duration = this.state.Day2;
+        const missed = true;
+
+
+        this.workoutUpdater(id, dayNum, duration, attempted, completed, missed);
+    };
+
+    missedDay3Click = e => {
+        e.preventDefault();
+        this.getDate();
+
+  
+        const attempted = false;
+        const completed = false
+        const { user } = this.props.auth;
+        const id = user.id;
+        const dayNum = 3;
+        const duration = this.state.Day3;
+        const missed = true;
+
+
+        this.workoutUpdater(id, dayNum, duration, attempted, completed, missed);
+    };
+
 
     onLogoutClick = e => {
         e.preventDefault();
@@ -376,6 +480,14 @@ class Walking extends Component {
                                             >
                                             Attempted
                                         </button>
+                                        <button className="missed-btn
+                                            btn btn-small waves-effect
+                                            waves-light hoverable"
+                                            disabled={this.state.missedDay1}
+                                            onClick={this.missedDay1Click}
+                                            >
+                                            Missed
+                                        </button>
                                         <button className="completed-btn
                                             btn btn-small waves-effect
                                             waves-light hoverable"
@@ -405,6 +517,14 @@ class Walking extends Component {
                                             onClick={this.attemptedDay2Click}
                                             >
                                             Attempted
+                                        </button>
+                                        <button className="missed-btn
+                                            btn btn-small waves-effect
+                                            waves-light hoverable"
+                                            disabled={this.state.missedDay2}
+                                            onClick={this.missedDay2Click}
+                                            >
+                                            Missed
                                         </button>
                                         <button className="completed-btn
                                             btn btn-small waves-effect
@@ -436,6 +556,14 @@ class Walking extends Component {
                                             onClick={this.attemptedDay3Click}
                                             >
                                             Attempted
+                                        </button>
+                                        <button className="missed-btn
+                                            btn btn-small waves-effect
+                                            waves-light hoverable"
+                                            disabled={this.state.missedDay3}
+                                            onClick={this.missedDay3Click}
+                                            >
+                                            Missed
                                         </button>
                                         <button className="completed-btn
                                             btn btn-small waves-effect
