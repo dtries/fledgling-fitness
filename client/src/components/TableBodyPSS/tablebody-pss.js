@@ -35,26 +35,26 @@ function TableBodyPSS(props) {
     //This is a function (not a class) so it does not require a render
     return (
         <tbody>
-            <tr>
-                <td>
+            <tr className="progress-data">
+                <td className="progress-data">
                    {props.day}
                 </td>
-                <td>
+                <td className="progress-data">
                     {props.dayNum}
                 </td>
-                <td>
+                <td className="progress-data">
                     {set1}
                 </td>
-                <td>
+                <td className="progress-data">
                     {set2}
                 </td>
-                <td>
+                <td className="progress-data">
                     {set3}
                 </td>
-                <td>
+                <td className="progress-data">
                     {attempted}
                 </td>
-                <td>
+                <td className="progress-data">
                     {completed}
                 </td>
             </tr>

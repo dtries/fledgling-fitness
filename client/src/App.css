@@ -226,14 +226,14 @@ li.collection-item {
     color: #FF652F;
 }
 
-#walking,
+/* #walking,
 #pushups,
 #situps,
 #squats {
     color: #FFE400;
     font-size: 200%;
     text-align: center;
-}
+} */
 
 #display-walking,
 #display-pushups,

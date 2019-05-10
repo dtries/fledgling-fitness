@@ -66,7 +66,7 @@ class Dashboard extends Component {
 
     dateValue = e => {
         console.log(e);
-        const formattedDate = moment(e).format("MMM Do YYYY");//e.toDateString();
+        const formattedDate = moment(e).format("MMM Do YYYY");
         this.setState({ startDate: formattedDate });
     }
 
