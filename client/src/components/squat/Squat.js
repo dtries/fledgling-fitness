@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import SquatModal from "../squat/squatInstructions";
 
+var moment = require('moment');
 
 var week = 0;
 
@@ -30,7 +31,10 @@ class Squat extends Component {
         attemptDay2: true,
         completeDay2: true,
         attemptDay3: true,
-        completeDay3: true
+        completeDay3: true,
+        cardDate: "",
+        cardDate2: "",
+        cardDate3: ""
     }
 
     
@@ -83,11 +87,23 @@ class Squat extends Component {
     };
 
     getDate = () => {
-        const now = new Date();
-        const nowStr = now.toDateString();
+        const now = moment().format("ddd, MMM Do YYYY, h:mm:ss a");
         console.log(`${now}`);
-        console.log(`${nowStr}`);
-        this.setState({today: nowStr});        
+        this.setState({today: now}); 
+    };
+
+    setCardDates = () => {
+        const day2Adder = 2;
+        const day3Adder = 4;
+        const oldDate = moment(this.state.cardDate, "MMM-Do-YYYY");
+        console.log(`Old date is ${oldDate}`);
+        const day2Date = moment(oldDate).add(day2Adder, 'days').format("MMM Do YYYY");
+        const day3Date = moment(oldDate).add(day3Adder, 'days').format("MMM Do YYYY");
+        this.setState({cardDate2: day2Date});
+        this.setState({cardDate3: day3Date});
+        console.log(`New date is ${this.state.cardDate2}`);
+        console.log(`New date is ${this.state.cardDate3}`);
+
     };
 
     loadInitialBaseline = (progressCheckResponse) => {
@@ -124,7 +140,14 @@ class Squat extends Component {
             .then( res => {
                 console.log(`SQUAT BASE is ${JSON.stringify(res.data)}`)
                 this.setState({squatBase: res.data.squats})
+                const baseBeginDate = moment(res.data.startDate, "MMM-Do-YYYY")
+                console.log(`base start date is ${baseBeginDate}`);
+                const squatFirstDay = moment(baseBeginDate).add(1, 'days').format("MMM Do YYYY")
+                console.log(`Squat first date: ${squatFirstDay}`);
+                this.setState({cardDate: squatFirstDay})
                 this.calculateSquats(this.state.squatBase)
+                this.setCardDates()
+
             }) 
             .catch(err => console.log(err)); 
     };
@@ -371,7 +394,7 @@ class Squat extends Component {
                             <li className="workout-item">
                                 <div className="card workout-card">
                                     <div className="card-content">
-                                        <p className="card-title" id="workout-card-title">Day 1</p>
+                                        <p className="card-title" id="workout-card-title">Day 1: {this.state.cardDate}</p>
                                         <p>Complete 3 Sets of Squats:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
@@ -404,7 +427,7 @@ class Squat extends Component {
                             <li className="workout-item">
                                 <div className="card workout-card">
                                     <div className="card-content">
-                                        <p className="card-title" id="workout-card-title">Day 2</p>
+                                        <p className="card-title" id="workout-card-title">Day 2: {Object.values(this.state.cardDate2)}</p>
                                         <p>Complete 3 Sets of Squats:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">
@@ -437,7 +460,7 @@ class Squat extends Component {
                             <li className="workout-item">
                                 <div className="card workout-card">
                                     <div className="card-content">
-                                        <p className="card-title" id="workout-card-title">Day 3</p>
+                                        <p className="card-title" id="workout-card-title">Day 3: {this.state.cardDate3}</p>
                                         <p>Complete 3 Sets of Squats:</p>
                                         <p>60 seconds rest between sets</p>
                                             <ul className="collection set-card">

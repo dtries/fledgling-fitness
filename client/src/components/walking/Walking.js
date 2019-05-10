@@ -7,7 +7,6 @@ import { logoutUser } from "../../actions/authActions";
 import WalkingModal from "../walking/walkInstructions";
 
 var moment = require('moment');
-// moment().format();
 
 class Walking extends Component {
 
@@ -95,9 +94,7 @@ class Walking extends Component {
     
     getDate = () => {
         const now = moment().format("ddd, MMM Do YYYY, h:mm:ss a");
-        // const nowStr = now.toLocaleString();
         console.log(`${now}`);
-        // console.log(`${nowStr}`);
         this.setState({today: now}); 
     };
 
@@ -108,7 +105,6 @@ class Walking extends Component {
         console.log(`Old date is ${oldDate}`);
         const day2Date = moment(oldDate).add(day2Adder, 'days').format("MMM Do YYYY");
         const day3Date = moment(oldDate).add(day3Adder, 'days').format("MMM Do YYYY");
-        // this.setState({cardDate: res.data.startDate})
         this.setState({cardDate2: day2Date});
         this.setState({cardDate3: day3Date});
         console.log(`New date is ${this.state.cardDate2}`);
@@ -335,9 +331,6 @@ class Walking extends Component {
     render () {
         const { user } = this.props.auth;
         const walkModalLink = "WALKING";
-        // const day2Day = this.state.cardDay2;
-
-        // console.log(`day 2 date in render is ${day2Day}`);
          
         return (    
             <div className="container">
