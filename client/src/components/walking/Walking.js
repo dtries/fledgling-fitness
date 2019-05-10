@@ -166,6 +166,13 @@ class Walking extends Component {
         const lastDayValue = lastDay3Item.Day;
         console.log(`Last day 3 item: ${JSON.stringify(lastDay3Item)}`);
         console.log(`Last day 3 key value is ${JSON.stringify(lastDayValue)}`)
+        const baseBeginDate = moment(res.Date);
+        console.log(`base start date is ${baseBeginDate}`);
+        const firstDay = moment(baseBeginDate).add(2, 'days').format("MMM Do YYYY");
+        console.log(`First date: ${firstDay}`);
+        this.setState({cardDate: firstDay});
+        this.setCardDates();
+
 
             if (lastDayValue === 3) {
                 console.log("Found last Day 3!!!!!!!");
