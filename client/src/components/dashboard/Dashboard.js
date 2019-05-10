@@ -7,7 +7,7 @@ import WalkingModal from "../walking/walkInstructions";
 import PushupModal from "../pushup/pushupInstructions";
 import SitupModal from "../situp/situpInstructions";
 import SquatModal from "../squat/squatInstructions";
-import { DatePicker, TextInput} from 'react-materialize';
+import { DatePicker } from 'react-materialize';
 var moment = require('moment');
 moment().format();
 

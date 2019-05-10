@@ -26,7 +26,7 @@ class Workouts extends Component {
             .then( res => {
                 console.log(`Progress data are: ${JSON.stringify(res.data)}`)
                 if (res.data.walking !== null){
-                    res.data.walking.length >5 ? 
+                    res.data.walking.length >6 ? 
                     this.setState({doPushups: false}) : 
                     this.setState({doPushups: true})
                 } else {

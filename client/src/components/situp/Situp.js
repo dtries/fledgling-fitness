@@ -45,32 +45,35 @@ class Situp extends Component {
         };
         API.getProgress(baselineID)
             .then( res => {
-                console.log(`Situp progress data are: ${JSON.stringify(res.data)}`);
 
-                const lastDayComplete = res.data.situps[res.data.situps.length-1];
-                console.log(`Last day complete: ${JSON.stringify(lastDayComplete)}`);
-                console.log(`Last day complete Day: ${JSON.stringify(lastDayComplete.Day)}`);
+                var progressCheckResponse = res;
                 
-                if (lastDayComplete.Day === 1 && lastDayComplete.Attempted === true) {
-                console.log("conditions day 1 met");
-                this.setState({attemptDay1: true});
-                this.setState({completeDay1: true});
-                this.setState({attemptDay2: false});
-                this.setState({completeDay2: false});
-                    } else if (lastDayComplete.Day === 2 && lastDayComplete.Attempted === true) {
+                if (res.data === null || res.data.situps.length <3) {
+                    this.loadInitialBaseline(progressCheckResponse)
+                }
+                else { 
+                    console.log(`Situp progress data are: ${JSON.stringify(res.data)}`);
+
+                    const lastDayComplete = res.data.situps[res.data.situps.length-1];
+                    console.log(`Last day complete: ${JSON.stringify(lastDayComplete)}`);
+                    console.log(`Last day complete Day: ${JSON.stringify(lastDayComplete.Day)}`);
+                    
+                    if (lastDayComplete.Day === 1 && lastDayComplete.Attempted === true) {
                     console.log("conditions day 1 met");
                     this.setState({attemptDay1: true});
                     this.setState({completeDay1: true});
-                    this.setState({attemptDay2: true});
-                    this.setState({completeDay2: true});
-                    this.setState({attemptDay3: false});
-                    this.setState({completeDay3: false});
-                };
-                
-                if (res.data === null || res.data.situps.length <2) {
-                    this.loadInitialBaseline()
-                }
-                else { 
+                    this.setState({attemptDay2: false});
+                    this.setState({completeDay2: false});
+                        } else if (lastDayComplete.Day === 2 && lastDayComplete.Attempted === true) {
+                        console.log("conditions day 1 met");
+                        this.setState({attemptDay1: true});
+                        this.setState({completeDay1: true});
+                        this.setState({attemptDay2: true});
+                        this.setState({completeDay2: true});
+                        this.setState({attemptDay3: false});
+                        this.setState({completeDay3: false});
+                    };
+
                     this.loadOngoingBaseline(res);
                 } 
             })
@@ -85,11 +88,36 @@ class Situp extends Component {
         this.setState({today: nowStr});        
     };
 
-    loadInitialBaseline = () => {
+    loadInitialBaseline = (progressCheckResponse) => {
         const { user } = this.props.auth;
         const baselineID = {
             userID: user.id
         };
+
+        console.log(`progress check data are ${JSON.stringify(progressCheckResponse)}`);
+        const lastDayComplete = progressCheckResponse.data.situps[progressCheckResponse.data.situps.length-1];
+        console.log(`Last day complete: ${JSON.stringify(lastDayComplete)}`);
+        // console.log(`Last day complete Day: ${JSON.stringify(lastDayComplete.Day)}`);
+        
+        if (lastDayComplete === undefined) {
+            console.log("Skip this part");
+        }
+        else if (lastDayComplete.Day === 1 && lastDayComplete.Attempted === true) {
+        console.log("conditions day 1 met");
+        this.setState({attemptDay1: true});
+        this.setState({completeDay1: true});
+        this.setState({attemptDay2: false});
+        this.setState({completeDay2: false});
+            } else if (lastDayComplete.Day === 2 && lastDayComplete.Attempted === true) {
+            console.log("conditions day 2 met");
+            this.setState({attemptDay1: true});
+            this.setState({completeDay1: true});
+            this.setState({attemptDay2: true});
+            this.setState({completeDay2: true});
+            this.setState({attemptDay3: false});
+            this.setState({completeDay3: false});
+        };
+
         API.getBaseline(baselineID)
             .then( res => {
                 console.log(`SITUP BASE is ${JSON.stringify(res.data)}`)
