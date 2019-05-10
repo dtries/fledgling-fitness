@@ -57,7 +57,7 @@ class Workouts extends Component {
         const { user } = this.props.auth;
 
         return (
-            <div className="container">
+            <div className="container workout-container">
                 <div className="row">
                     <div className="col s12 center-align">
                         <h4 className="user-workout">
@@ -66,7 +66,7 @@ class Workouts extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="workout-list col s4 center-align push-s4">
+                    <div className="workout-list col s8 push-s2 m4 push-m4 center-align">
                         <ul className="workout-list">
                             <li className="collection-header"><h4>YOUR WORKOUTS</h4></li>
                             <Link to="/walking" id="walking-workout-page" 

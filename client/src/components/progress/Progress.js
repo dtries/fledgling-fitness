@@ -96,7 +96,7 @@ class Progress extends Component {
                     </div>
                 </div>
 
-                <Tabs className="tab-progress z-depth-1 tabs-fixed-width">
+                <Tabs className="tab-progress z-depth-1 ">
                     <Tab title="Walking" className="tab-exercise">
                         <div id="display-walking">
                         <Table>
@@ -129,7 +129,7 @@ class Progress extends Component {
                             </Table>
                             </div>
                     </Tab>
-                    <Tab title="Pushups">
+                    <Tab title="Pushups" className="tab-exercise">
                         <div id="display-pushups">
                         <Table>
                             <thead>
@@ -179,7 +179,7 @@ class Progress extends Component {
                             </Table>
                         </div>                       
                     </Tab>
-                    <Tab title="Situps">
+                    <Tab title="Situps" className="tab-exercise">
                         <div id="display-situps">                        
                             <Table>
                                 <thead>
@@ -230,7 +230,7 @@ class Progress extends Component {
                         </div>
                         
                     </Tab>
-                    <Tab title="Squats">
+                    <Tab title="Squats" className="tab-exercise">
                         <div id="display-squats">
                         <Table>
                                 <thead>

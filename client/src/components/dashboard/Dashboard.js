@@ -117,7 +117,7 @@ class Dashboard extends Component {
                 <div className="row">
                     <div className="col s12 center-align">
                         <h4 className="title">
-                        <b>{user.name.split(" ")[0]}, Let's Get Started</b>
+                        <b className="dashboard-name">{user.name.split(" ")[0]}, Let's Get Started</b>
                         </h4>
                         <p className="sub-title">
                             Enter Your Values For the Assessment Activities, Click Create My Plan When Done.

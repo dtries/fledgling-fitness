@@ -12,12 +12,11 @@ nav {
 }
 .brand-logo {
     margin-left: 19%;
-    color: #FFE400;
-    
+    color: #FFE400;  
 }
 
-.fa-kiwi-bird { 
-    margin-top: 4%;
+.nav-bird { 
+    margin-top: -5%;
     color: #FFE400;
 }
 
@@ -31,8 +30,9 @@ nav {
     color: #FFE400;
 }
 
-.progress-nav {
-    margin-right: 19%;
+.sidenav {
+    background-color: #13A76C;
+    width: 60%;
 }
 
 /* End Navbar styling */
@@ -226,15 +226,6 @@ li.collection-item {
     color: #FF652F;
 }
 
-/* #walking,
-#pushups,
-#situps,
-#squats {
-    color: #FFE400;
-    font-size: 200%;
-    text-align: center;
-} */
-
 #display-walking,
 #display-pushups,
 #display-situps,
@@ -244,15 +235,15 @@ li.collection-item {
 
 .tab-progress {
     background-color:#13A76C;
-}
-
-.tabs .indicator {
-    color: purple;
+    /* width: 100%; */
 }
 
 .tabs .tab a {
     color: #272727;
+    font-size: 90%;
 }
+
+
 
 th,
 td {
@@ -316,3 +307,95 @@ td {
 }
 
 /* End of Modals Styling */
+
+/* Media Queries */
+
+@media only screen and (max-width: 824px) {
+
+    .brand-logo {
+        margin-left: 0%;
+    }
+
+    .material-icons {
+        color: #13A76C;
+    }
+}
+
+@media only screen and (max-width: 568px) {
+    .brand {
+      font-size: 63%;
+      text-emphasis: bold;
+      text-align: right;
+    }
+
+    .brand-logo {
+        margin-left: 0%;
+    }
+
+    .nav-bird {
+        text-align: left;
+        margin-top: 5%;
+        font-size: 70%;
+        margin-left: -10%;
+    }
+
+    .material-icons {
+        color: #13A76C;
+    }
+
+    .tab-exercise {
+        font-size: 70%;
+    }
+
+    .workout-item {
+        width: 100%;
+    }
+
+    #workout-card-title {
+        font-size: 100%;
+    }
+
+    .collection-item {
+        font-size: 90%;
+    }
+
+    .attempted-btn,
+    .missed-btn {
+        width: 80%;
+        margin: auto;
+        margin-bottom: 3%;
+    }
+
+    .completed-btn {
+        width: 80%;
+        margin: auto;
+    }
+
+    h4 {
+        font-size: 170%;
+        margin-bottom: 0%;
+    }
+
+    .walking-list {
+        margin-top: -10%;
+    }
+
+    .input-field.inline {
+        margin-left: 10%;
+    }
+
+    .title,
+    .sub-title {
+        font-size: 150%;
+    }
+
+    .tag-line {
+        text-align: center;
+        font-size: 130%;
+    }
+
+    .get-started-btn {
+        margin-top: -10%;
+    }
+
+  }
