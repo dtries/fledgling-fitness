@@ -5,13 +5,13 @@ A fitness app for the recent ex-couch potato or those aspiring to be a recent ex
 The task was to develop a multi-page web application using the MERN (MongodB, Express, React, Node) stack and which requires user authentication. A listing of the web technologies employed is provided in the **Tech Employed** section below.
 
 ## Site Overview 
+The Fledgling Fitness landing page of this mult-page site presents the user an with a simple and intuitive user experience. Upon arriving, the client is welcomed to the site, provided a quick overview of the intent of the site via short sub-title and three bullet points. A large, green button label "GET STARTED" encourages the client to enter the site and begin their fitness journey. 
+<br>
 <div align="center">
     <img src="/client/public/images/SearchTop.png" width="400px" /></img> 
     <img src="/client/public/images/BookCard.png" width="400px" /></img>
     <img src="/client/public/images/SavedPage.png" width="400px" /></img> 
 </div>
-<br>
-The Fledgling Fitness landing page of this mult-page site presents the user an with a simple and intuitive user experience. Upon arriving, the client is welcomed to the site, provided a quick overview of the intent of the site via short sub-title and three bullet points. A large, green button label "GET STARTED" encourages the client to enter the site and begin their fitness journey. 
 <br>
 
 Upon clicking the "GET STARTED" button, the client is brought to the login page, with the option to register if they are not currently enrolled with Fledgling Fitness. Once registered, if need be, the user is brought back to the login page to enter their email and password to enter the site. If the client is new to the site, they are brought to the "Let's Get Started" page to enter some baseline fitness assessment information. This page also contains links on key words, easily identified by the green outlines around the term of interest. Each link opens a modal that displays some key points about each exercise as well as a brief video demonstrating proper form as well as other salient points regarding that specific exercise. Once the client enters their baseline information, clicking the large green "CREATE MY PLAN" button starts their fitness journey.
