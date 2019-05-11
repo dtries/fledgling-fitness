@@ -664,8 +664,8 @@ class Squat extends Component {
                         </ul>
                     </div>
                 </div>
-                <br />
-                <div className="row">
+                {/* <br /> */}
+                {/* <div className="row">
                     <div className="col s12 workout-card-logout">
                         <button 
                             style={{ 
@@ -680,7 +680,7 @@ class Squat extends Component {
                             Logout
                         </button>
                     </div>
-                </div>
+                </div> */}
             </div>
 
         );

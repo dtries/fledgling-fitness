@@ -101,7 +101,7 @@ class Workouts extends Component {
                     </div>
                 </div>
                 <br />
-                <div className="row">
+                {/* <div className="row">
                     <div className="col s12 workout-logout">
                         <button 
                             style={{ 
@@ -116,7 +116,7 @@ class Workouts extends Component {
                             Logout
                         </button>
                     </div>
-                </div>
+                </div> */}
             </div>
 
         );

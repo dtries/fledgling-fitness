@@ -283,7 +283,7 @@ class Progress extends Component {
                 </Tabs>
 
                 
-                <div className="row">
+                {/* <div className="row">
                     <div className="col s12 workout-card-logout">
                         <button 
                             style={{ 
@@ -298,7 +298,7 @@ class Progress extends Component {
                             Logout
                         </button>
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }

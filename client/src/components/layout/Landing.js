@@ -51,7 +51,7 @@ class Landing extends Component {
                 <br />
                 <div className="row">
                         <div className="col s12">
-                            <h5 className="right tag-line"><i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;&nbsp;Focus on Fitness, not Weight</h5>
+                            <h5 className="tag-line tag-line-weight"><i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;&nbsp;Focus on Fitness, not Weight</h5>
                         </div>
                 </div>
             </div>

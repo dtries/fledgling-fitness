@@ -658,7 +658,7 @@ class Situp extends Component {
                         </ul>
                     </div>
                 </div>
-                <br />
+                {/* <br />
                 <div className="row">
                     <div className="col s12 workout-card-logout">
                         <button 
@@ -674,7 +674,7 @@ class Situp extends Component {
                             Logout
                         </button>
                     </div>
-                </div>
+                </div> */}
             </div>
 
         );

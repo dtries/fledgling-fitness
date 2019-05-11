@@ -7,12 +7,15 @@
 */
 
 /* Navbar Styling */
+
+
 nav {
     background-color: #272727;
 }
 .brand-logo {
-    margin-left: 19%;
+    margin-left: 1%;
     color: #FFE400;  
+    /* margin-right: -100%; */
 }
 
 .nav-bird { 
@@ -28,11 +31,19 @@ nav {
 .progress-nav {
     text-align: center;
     color: #FFE400;
+    font-weight: bold;
 }
+
+.logout-btn {
+    background-color: #272727;
+    color: #FF652F;
+    font-weight: bolder;
+}
+
 
 .sidenav {
     background-color: #13A76C;
-    width: 60%;
+    width: 40%;
 }
 
 /* End Navbar styling */
@@ -60,6 +71,10 @@ nav {
 .tag-line {
     color: #FFE400;
 } 
+
+.tag-line-weight {
+    text-align: right;
+}
 
 /* End of Landing Page Styling */
 
@@ -107,12 +122,6 @@ input {
     font-weight: bolder;
     margin-bottom: 2%;
 
-}
-
-.logout-btn {
-    background-color: #747474;
-    color: #FF652F;
-    font-weight: bolder;
 }
 
 .base-assessment-question {
@@ -310,6 +319,34 @@ td {
 
 /* Media Queries */
 
+@media only screen and (max-width: 1367px) {
+    .workout-card {
+        /* width: 150%; */
+    }
+
+    .workout-list {
+        text-align: center;
+    }
+
+    .attempted-btn,
+    .missed-btn {
+        width: 70%;
+        margin: auto;
+        margin-bottom: 4%;
+    }
+
+    .completed-btn {
+        width: 70%;
+        margin: auto;
+    }
+
+    .logout-btn {
+        background-color: #272727;
+        color: #FF652F;
+        font-weight: bolder;
+    }
+}
+
 @media only screen and (max-width: 824px) {
 
     .brand-logo {
@@ -319,11 +356,28 @@ td {
     .material-icons {
         color: #13A76C;
     }
+
+    .attempted-btn,
+    .missed-btn {
+        width: 100%;
+        margin: auto;
+        margin-bottom: 4%;
+    }
+
+    .completed-btn {
+        width: 100%;
+        margin: auto;
+    }
+    .logout-btn {
+        background-color: #13A76C;
+        color: #FF652F;
+        font-weight: bolder;
+    }
 }
 
-@media only screen and (max-width: 568px) {
+@media only screen and (max-width: 570px) {
     .brand {
-      font-size: 63%;
+      font-size: 60%;
       text-emphasis: bold;
       text-align: right;
     }
@@ -335,12 +389,27 @@ td {
     .nav-bird {
         text-align: left;
         margin-top: 5%;
-        font-size: 70%;
+        font-size: 63%;
         margin-left: -10%;
+    }
+
+    .nav-container {
+        width: 100%;
+    }
+
+    .logout-btn {
+        background-color: #13A76C;
+        color: #FF652F;
+        font-weight: bolder;
     }
 
     .material-icons {
         color: #13A76C;
+    }
+
+    .account-already {
+        font-size: 120%;
+        text-align: left;
     }
 
     .tab-exercise {
@@ -373,7 +442,7 @@ td {
 
     h4 {
         font-size: 170%;
-        margin-bottom: 0%;
+        margin-bottom: 5%;
     }
 
     .walking-list {
@@ -394,8 +463,20 @@ td {
         font-size: 130%;
     }
 
+    .tag-line-weight {
+        margin: auto;
+    }
+
     .get-started-btn {
         margin-top: -10%;
+    }
+
+    .base-assessment-question {
+        text-align: left;
+    }
+
+    .material-icons {
+        margin-left: 55%;
     }
 
   }

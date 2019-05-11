@@ -247,7 +247,7 @@ class Dashboard extends Component {
                     </div>
                 </form>
 
-                <div className="row">
+                {/* <div className="row">
                     <div className="col s12">
                         <button 
                             style={{ 
@@ -262,7 +262,7 @@ class Dashboard extends Component {
                             Logout
                         </button>
                     </div>
-                </div>
+                </div> */}
             </div>              
         );
     }

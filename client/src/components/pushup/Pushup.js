@@ -664,7 +664,7 @@ class Pushup extends Component {
                         </ul>
                     </div>
                 </div>
-                <br />
+                {/* <br />
                 <div className="row">
                     <div className="col s12 workout-card-logout">
                         <button 
@@ -680,7 +680,7 @@ class Pushup extends Component {
                             Logout
                         </button>
                     </div>
-                </div>
+                </div> */}
             </div>
 
         );
