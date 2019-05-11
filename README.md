@@ -8,7 +8,7 @@ The task was to develop a multi-page web application using the MERN (MongodB, Ex
 The Fledgling Fitness landing page of this mult-page site presents the user an with a simple and intuitive user experience. Upon arriving, the client is welcomed to the site, provided a quick overview of the intent of the site via short sub-title and three bullet points. A large, green button label "GET STARTED" encourages the client to enter the site and begin their fitness journey. 
 <br>
 <div align="center">
-    <img src="/client/public/images/SearchTop.png" width="400px" /></img> 
+    <img src="/client/public/images/FF_Landing.png" width="400px" /></img> 
     <img src="/client/public/images/BookCard.png" width="400px" /></img>
     <img src="/client/public/images/SavedPage.png" width="400px" /></img> 
 </div>
