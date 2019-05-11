@@ -9,8 +9,9 @@ The Fledgling Fitness landing page of this mult-page site presents the user an w
 <br>
 <div align="center">
     <img src="/client/public/images/FF_Landing.png" width="400px" /></img> 
-    <img src="/client/public/images/BookCard.png" width="400px" /></img>
-    <img src="/client/public/images/SavedPage.png" width="400px" /></img> 
+    <img src="/client/public/images/FF_Workouts.png" width="400px" /></img>
+    <img src="/client/public/images/FF_ExerciseCards.png" width="400px" /></img> 
+    <img src="/client/public/images/FF_Progress.png" width="400px" /></img> 
 </div>
 <br>
 
