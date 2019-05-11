@@ -133,6 +133,12 @@ input {
     color: #FFE400;
     font-weight: bolder;
     margin-bottom: 2%;
+    text-shadow:
+    1px 1px 0 #000,
+  -1px -1px 0 #000,  
+   1px -1px 0 #000,
+   -1px 1px 0 #000,
+    1px 1px 0 #000;
 
 }
 
@@ -313,7 +319,7 @@ td {
     color: #FFE400;
     font-size: 100%;
     background-color: #272727;
-    padding-bottom: 3%;
+    padding-bottom: 6%;
     padding-left: 1%;
     padding-right: 1%;
     border: 1px solid #13A76C;
