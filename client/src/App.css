@@ -27,23 +27,27 @@ nav {
     color: #FFE400;
 }
 
-.workouts-nav,
-.progress-nav {
+#workouts-nav-item,
+#progress-nav-item {
     text-align: center;
     color: #FFE400;
     font-weight: bold;
 }
 
-.logout-btn {
+#logout-nav-item {
     background-color: #272727;
     color: #FF652F;
     font-weight: bolder;
+    text-align: center;
 }
 
 
 .sidenav {
     background-color: #13A76C;
-    width: 40%;
+    width: 35%;
+    padding-top: 3%;
+    margin-top: 15%;
+    height: 75%;
 }
 
 /* End Navbar styling */
@@ -377,7 +381,7 @@ td {
         margin: auto;
     }
 
-    .logout-btn {
+    #logout-nav-item {
         background-color: #272727;
         color: #FF652F;
         font-weight: bolder;
@@ -405,7 +409,20 @@ td {
         width: 100%;
         margin: auto;
     }
-    .logout-btn {
+
+    #workouts-nav-item,
+    #progress-nav-item,
+    #logout-nav-item {
+        font-size: 125%;
+        text-shadow:
+         1px 1px 0 #000,
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    }
+
+    #logout-nav-item {
         background-color: #13A76C;
         color: #FF652F;
         font-weight: bolder;
@@ -434,7 +451,19 @@ td {
         width: 100%;
     }
 
-    .logout-btn {
+    #workouts-nav-item,
+    #progress-nav-item,
+    #logout-nav-item {
+        font-size: 125%;
+        text-shadow:
+        1px 1px 0 #000,
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    }
+
+    #logout-nav-item {
         background-color: #13A76C;
         color: #FF652F;
         font-weight: bolder;

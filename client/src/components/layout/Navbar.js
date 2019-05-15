@@ -15,46 +15,41 @@ class NavBar extends Component {
     render(){
         return (
            <div className="container nav-container">
-            <Navbar brand={                
+            <Navbar
+                alignLinks="right"
+                brand={                
                 <Link 
                     to="/"
                     className="brand-logo"
                 >
                     <i className="fas fa-kiwi-bird nav-bird"></i> 
                     <span className="brand">Fledgling Fitness</span>  
-                </Link>} alignLinks="right">
+                </Link>} 
+            >
 
-                <NavItem href="" className="workout-navItem">
-                            <Link
-                                to="/workouts" 
-                            //     style={{
-                            //     width: "140px",
-                            //     borderRadius: "3px",
-                            //     letterSpacing: "1.5px"
-                            // }}
-                            className="workouts-nav waves-effect waves-light hoverable right"
-                            >
-                                Workouts
-                        </Link>
+                <NavItem 
+                    href="/workouts" 
+                    className="workouts-nav
+                    waves-effect waves-light hoverable"
+                    id="workouts-nav-item"
+                >
+                    Workouts
                 </NavItem>
        
-                <NavItem href="">
-                    <Link 
-                        to="/progress"
-                        // style={{
-                        //     width: "140px",
-                        //     borderRadius: "3px",
-                        //     letterSpacing: "1.5px"
-                        // }}
-                        className="progress-nav waves-effect waves-light hoverable right"
-                        >
-                        Progress                
-                    </Link>
+                <NavItem 
+                    href="/progress"
+                    className="progress-nav 
+                    waves-effect waves-light hoverable"
+                    id="progress-nav-item"
+                >
+
+                    Progress                
                 </NavItem>
 
                 <NavItem href=""
                             onClick={this.onLogoutClick}
-                            className="logout-btn waves-effect waves-light hoverable right"
+                            className="logout-btn waves-effect waves-light hoverable"
+                            id="logout-nav-item"
                         >
                             Logout
                 </NavItem>
