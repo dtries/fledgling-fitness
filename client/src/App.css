@@ -358,78 +358,10 @@ td {
 
 /* End of Modals Styling */
 
-/* Media Queries */
+/* ******* Media Queries ******* */
 
-@media only screen and (max-width: 1367px) {
-    .workout-card {
-        /* width: 150%; */
-    }
-
-    .workout-list {
-        text-align: center;
-    }
-
-    .attempted-btn,
-    .missed-btn {
-        width: 70%;
-        margin: auto;
-        margin-bottom: 4%;
-    }
-
-    .completed-btn {
-        width: 70%;
-        margin: auto;
-    }
-
-    #logout-nav-item {
-        background-color: #272727;
-        color: #FF652F;
-        font-weight: bolder;
-    }
-}
-
-@media only screen and (max-width: 824px) {
-
-    .brand-logo {
-        margin-left: 0%;
-    }
-
-    .material-icons {
-        color: #13A76C;
-    }
-
-    .attempted-btn,
-    .missed-btn {
-        width: 100%;
-        margin: auto;
-        margin-bottom: 4%;
-    }
-
-    .completed-btn {
-        width: 100%;
-        margin: auto;
-    }
-
-    #workouts-nav-item,
-    #progress-nav-item,
-    #logout-nav-item {
-        font-size: 125%;
-        text-shadow:
-         1px 1px 0 #000,
-        -1px -1px 0 #000,  
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
-    }
-
-    #logout-nav-item {
-        background-color: #13A76C;
-        color: #FF652F;
-        font-weight: bolder;
-    }
-}
-
-@media only screen and (max-width: 570px) {
+ /* ==== Extra-Small devices ==== */
+@media only screen and (max-width: 600px) {
     .brand {
       font-size: 60%;
       text-emphasis: bold;
@@ -449,6 +381,13 @@ td {
 
     .nav-container {
         width: 100%;
+    }
+
+    .sidenav {
+        padding-top: 3%;
+        margin-top: 15%;
+        height: 35%;
+        width: 40%;
     }
 
     #workouts-nav-item,
@@ -546,3 +485,102 @@ td {
     }
 
   }
+
+  /* ======= Small devices ======= */
+  @media only screen and (min-width: 601px) {
+
+    .brand-logo {
+        margin-left: 0%;
+    }
+
+    .material-icons {
+        color: #13A76C;
+    }
+
+    .attempted-btn,
+    .missed-btn {
+        width: 100%;
+        margin: auto;
+        margin-bottom: 4%;
+    }
+
+    .completed-btn {
+        width: 100%;
+        margin: auto;
+    }
+
+    .sidenav {
+        width: 30%;
+        padding-top: 3%;
+        margin-top: 10%;
+        height: 70%;
+    }
+
+    #workouts-nav-item,
+    #progress-nav-item,
+    #logout-nav-item {
+        font-size: 125%;
+        text-shadow:
+         1px 1px 0 #000,
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    }
+
+    #logout-nav-item {
+        background-color: #13A76C;
+        color: #FF652F;
+        font-weight: bolder;
+    }
+}
+
+  /* ======= Medium devices ======= */
+
+  @media only screen and (min-width: 768px) {
+
+
+    .sidenav {
+        width: 30%;
+        padding-top: 3%;
+        margin-top: 10%;
+        height: 70%;
+    }
+}
+
+  /* ======= Large devices ======= */
+  @media only screen and (min-width: 992px) {
+    #logout-nav-item {
+        background-color: #272727;
+        color: #FF652F;
+        font-weight: bolder;
+    }
+}
+
+
+  /* ======= Extra Large Devices ======= */
+
+@media only screen and (min-width: 1200px) {
+
+    .workout-list {
+        text-align: center;
+    }
+
+    .attempted-btn,
+    .missed-btn {
+        width: 70%;
+        margin: auto;
+        margin-bottom: 4%;
+    }
+
+    .completed-btn {
+        width: 70%;
+        margin: auto;
+    }
+
+    #logout-nav-item {
+        background-color: #272727;
+        color: #FF652F;
+        font-weight: bolder;
+    }
+}
