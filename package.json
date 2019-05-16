@@ -1,7 +1,7 @@
 {
-  "name": "mern-auth",
+  "name": "fledgling-fitness",
   "version": "1.0.0",
-  "description": "Mern Auth Example",
+  "description": "exercise planning and tracking application",
   "main": "server.js",
   "scripts": {
     "client install": "npm install --prefix client",

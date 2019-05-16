@@ -335,6 +335,7 @@ td {
     background-color: #13A76C;
     color: #FFE400;
     font-size: 200%;
+    
 }
 
 .modal-close {
@@ -484,7 +485,25 @@ td {
         margin-left: 55%;
     }
 
+    .exercise-modal {
+        font-size: 120%;
+    }
+
   }
+
+  /* ====== Landscape ======== */
+    @media only screen 
+    and (min-device-width: 320px) 
+    and (max-device-width: 568px)
+    and (orientation: landscape) {
+
+        .sidenav {
+            padding-top: 3%;
+            margin-top: 10%;
+            height: 75%;
+            width: 40%;
+        }
+}
 
   /* ======= Small devices ======= */
   @media only screen and (min-width: 601px) {
@@ -533,6 +552,11 @@ td {
         color: #FF652F;
         font-weight: bolder;
     }
+
+    .exercise-modal {
+        font-size: 120%;
+    }
+
 }
 
   /* ======= Medium devices ======= */
@@ -555,6 +579,20 @@ td {
         color: #FF652F;
         font-weight: bolder;
     }
+}
+
+  /* ====== Landscape ======== */
+  @media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px)
+  and (orientation: portrait) {
+
+      .sidenav {
+          padding-top: 3%;
+          margin-top: 10%;
+          height: 30%;
+          width: 35%;
+      }
 }
 
 
