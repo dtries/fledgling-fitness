@@ -15,14 +15,21 @@ function WalkingModal(props) {
 
     $(".modal-close").click(function (e) {
             $("#walking-modal iframe").attr("src", "https://www.youtube.com/embed/2u8DXWRzkUE");
-    });       
+    }); 
+    
+    
  
     return (
     <Modal className="exercise-modal" id="walking-modal" header="Walking"
         footer="Walking-Footer"
+        options={{
+            inDuration: 700, 
+            onCloseEnd: function () {$("#walking-modal iframe").attr("src", "https://www.youtube.com/embed/2u8DXWRzkUE")}
+        }}
         trigger={<Button flat id="walking-modal-btn" 
         tooltip="Click for Information on Walking"
         tooltipoptions={{position: 'top'}}
+        
         >
             {walkTerm}
         </Button>}>

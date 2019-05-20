@@ -11,6 +11,10 @@ function SitupModal() {
 
 return (
 <Modal className="exercise-modal" id="situp-modal" header="Situps"  
+    options={{
+        inDuration: 700, 
+        onCloseEnd: function () {$("#situp-modal iframe").attr("src", "https://www.youtube.com/embed/2u8DXWRzkUE")}
+    }}
     trigger={<Button id="situp-modal-btn" 
     tooltip="Click for Information on Situps"
     tooltipoptions={{position: 'top'}}

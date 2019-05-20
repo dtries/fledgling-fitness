@@ -11,6 +11,10 @@ $(".modal-close").click(function (e) {
 
 return (
 <Modal className="exercise-modal" id="pushup-modal" header="Pushups"  
+    options={{
+        inDuration: 700, 
+        onCloseEnd: function () {$("#pushup-modal iframe").attr("src", "https://www.youtube.com/embed/2u8DXWRzkUE")}
+    }}
     trigger={<Button id="pushup-modal-btn" 
     tooltip="Click for Information on Pushups"
     tooltipoptions={{position: 'top'}}

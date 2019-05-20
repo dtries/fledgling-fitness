@@ -11,6 +11,10 @@ $(".modal-close").click(function (e) {
 
 return (
 <Modal className="exercise-modal" id="squat-modal" header="Squats"  
+    options={{
+        inDuration: 700, 
+        onCloseEnd: function () {$("#squat-modal iframe").attr("src", "https://www.youtube.com/embed/2u8DXWRzkUE")}
+    }}
     trigger={<Button id="squat-modal-btn" 
     tooltip="Click for Information on Squats"
     tooltipoptions={{position: 'top'}}
