@@ -5,15 +5,11 @@ import $ from "jquery";
 
 function PushupModal() {
 
-$(".modal-close").click(function (e) {
-    $("#pushup-modal iframe").attr("src", "https://www.youtube.com/embed/tGRND-McdCg");
-}); 
-
 return (
 <Modal className="exercise-modal" id="pushup-modal" header="Pushups"  
     options={{
         inDuration: 700, 
-        onCloseEnd: function () {$("#pushup-modal iframe").attr("src", "https://www.youtube.com/embed/2u8DXWRzkUE")}
+        onCloseEnd: function () {$("#pushup-modal iframe").attr("src", "https://www.youtube.com/embed/tGRND-McdCg")}
     }}
     trigger={<Button id="pushup-modal-btn" 
     tooltip="Click for Information on Pushups"

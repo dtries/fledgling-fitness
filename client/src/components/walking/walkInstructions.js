@@ -12,12 +12,7 @@ function WalkingModal(props) {
     } else {
         walkTerm="walk";
     }
-
-    $(".modal-close").click(function (e) {
-            $("#walking-modal iframe").attr("src", "https://www.youtube.com/embed/2u8DXWRzkUE");
-    }); 
-    
-    
+ 
  
     return (
     <Modal className="exercise-modal" id="walking-modal" header="Walking"

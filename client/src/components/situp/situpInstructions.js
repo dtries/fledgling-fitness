@@ -5,15 +5,11 @@ import $ from "jquery";
 
 function SitupModal() {
 
-    $(".modal-close").click(function (e) {
-        $("#situp-modal iframe").attr("src", "https://www.youtube.com/embed/1fbU_MkV7NE");
-    }); 
-
 return (
 <Modal className="exercise-modal" id="situp-modal" header="Situps"  
     options={{
         inDuration: 700, 
-        onCloseEnd: function () {$("#situp-modal iframe").attr("src", "https://www.youtube.com/embed/2u8DXWRzkUE")}
+        onCloseEnd: function () {$("#situp-modal iframe").attr("src", "https://www.youtube.com/embed/1fbU_MkV7NE")}
     }}
     trigger={<Button id="situp-modal-btn" 
     tooltip="Click for Information on Situps"

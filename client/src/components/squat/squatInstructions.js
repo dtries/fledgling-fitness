@@ -5,15 +5,11 @@ import $ from "jquery";
 
 function SquatModal() {
 
-$(".modal-close").click(function (e) {
-    $("#squat-modal iframe").attr("src", "https://www.youtube.com/embed/as8uqmh2wKw");
-}); 
-
 return (
 <Modal className="exercise-modal" id="squat-modal" header="Squats"  
     options={{
         inDuration: 700, 
-        onCloseEnd: function () {$("#squat-modal iframe").attr("src", "https://www.youtube.com/embed/2u8DXWRzkUE")}
+        onCloseEnd: function () {$("#squat-modal iframe").attr("src", "https://www.youtube.com/embed/as8uqmh2wKw")}
     }}
     trigger={<Button id="squat-modal-btn" 
     tooltip="Click for Information on Squats"
