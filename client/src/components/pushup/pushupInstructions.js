@@ -1,14 +1,19 @@
 import React from "react";
 import {Modal, Button} from 'react-materialize';
+import $ from "jquery";
 
 
 function PushupModal() {
+
+$(".modal-close").click(function (e) {
+    $("#pushup-modal iframe").attr("src", "https://www.youtube.com/embed/tGRND-McdCg");
+}); 
 
 return (
 <Modal className="exercise-modal" id="pushup-modal" header="Pushups"  
     trigger={<Button id="pushup-modal-btn" 
     tooltip="Click for Information on Pushups"
-    tooltipOptions={{position: 'top'}}
+    tooltipoptions={{position: 'top'}}
     >
         pushups
     </Button>}>
@@ -21,7 +26,7 @@ return (
         as it places excess stress on the front shoulder area.</p>
 
     <div className="container video-container">
-    <iframe className="video" title="Pushup Tips" src="https://www.youtube.com/embed/tGRND-McdCg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>    </div>
+    <iframe className="video" title="Pushup Tips" src="https://www.youtube.com/embed/tGRND-McdCg" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>    </div>
 </Modal>
 )
 }

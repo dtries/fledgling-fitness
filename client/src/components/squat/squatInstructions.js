@@ -1,14 +1,19 @@
 import React from "react";
 import {Modal, Button} from 'react-materialize';
+import $ from "jquery";
 
 
 function SquatModal() {
+
+$(".modal-close").click(function (e) {
+    $("#squat-modal iframe").attr("src", "https://www.youtube.com/embed/as8uqmh2wKw");
+}); 
 
 return (
 <Modal className="exercise-modal" id="squat-modal" header="Squats"  
     trigger={<Button id="squat-modal-btn" 
     tooltip="Click for Information on Squats"
-    tooltipOptions={{position: 'top'}}
+    tooltipoptions={{position: 'top'}}
     >
         squats
     </Button>}>
@@ -25,7 +30,7 @@ return (
         tight and back up and straight.
     </p>
     <div className="container video-container">
-        <iframe className="video" title="Squat Tips" src="https://www.youtube.com/embed/as8uqmh2wKw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe className="video" title="Squat Tips" src="https://www.youtube.com/embed/as8uqmh2wKw" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
     </div>
     </Modal>
 )

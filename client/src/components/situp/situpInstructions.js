@@ -1,14 +1,19 @@
 import React from "react";
 import {Modal, Button} from 'react-materialize';
+import $ from "jquery";
 
 
 function SitupModal() {
+
+    $(".modal-close").click(function (e) {
+        $("#situp-modal iframe").attr("src", "https://www.youtube.com/embed/1fbU_MkV7NE");
+    }); 
 
 return (
 <Modal className="exercise-modal" id="situp-modal" header="Situps"  
     trigger={<Button id="situp-modal-btn" 
     tooltip="Click for Information on Situps"
-    tooltipOptions={{position: 'top'}}
+    tooltipoptions={{position: 'top'}}
     >
         situps
     </Button>}>
@@ -24,7 +29,7 @@ return (
         your back.
     </p>
     <div className="container video-container">
-    <iframe className="video" title="Situp Tips"  src="https://www.youtube.com/embed/1fbU_MkV7NE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>    </div>
+    <iframe className="video" title="Situp Tips"  src="https://www.youtube.com/embed/1fbU_MkV7NE" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>    </div>
 </Modal>
 )
 }

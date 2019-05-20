@@ -285,6 +285,8 @@ li.collection-item {
 
 .tab-progress {
     background-color:#13A76C;
+    text-align: center;
+
     /* width: 100%; */
 }
 
@@ -292,8 +294,6 @@ li.collection-item {
     color: #272727;
     font-size: 90%;
 }
-
-
 
 th,
 td {
@@ -489,6 +489,10 @@ td {
         font-size: 120%;
     }
 
+    .tabs .tab a {
+        font-size: 110%;
+    }
+
   }
 
   /* ====== Landscape ======== */
@@ -502,6 +506,10 @@ td {
             margin-top: 10%;
             height: 75%;
             width: 40%;
+        }
+
+        .tabs .tab a {
+            font-size: 150%;
         }
 }
 
@@ -557,6 +565,10 @@ td {
         font-size: 120%;
     }
 
+    .tabs .tab a {
+        font-size: 160%;
+    }
+
 }
 
   /* ======= Medium devices ======= */
@@ -570,6 +582,10 @@ td {
         margin-top: 10%;
         height: 70%;
     }
+
+    .tabs .tab a {
+        font-size: 140%;
+    }
 }
 
   /* ======= Large devices ======= */
@@ -578,6 +594,10 @@ td {
         background-color: #272727;
         color: #FF652F;
         font-weight: bolder;
+    }
+
+    .tabs .tab a {
+        font-size: 140%;
     }
 }
 
@@ -593,6 +613,10 @@ td {
           height: 30%;
           width: 35%;
       }
+
+      .tabs .tab a {
+        font-size: 180%;
+    }
 }
 
 
@@ -620,5 +644,9 @@ td {
         background-color: #272727;
         color: #FF652F;
         font-weight: bolder;
+    }
+
+    .tabs .tab a {
+        font-size: 200%;
     }
 }
