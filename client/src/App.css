@@ -128,6 +128,11 @@ input {
     1px 1px 0 #000;
 }
 
+input #email {
+    background-color: #272727;
+    color: #FF652F;
+}
+
 /* End Login and Register Styling */
 
 /* Dashboard Styling */

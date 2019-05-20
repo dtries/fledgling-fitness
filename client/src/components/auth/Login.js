@@ -70,7 +70,7 @@ class Login extends Component {
                             <Link to="/register" className="register-now"> &nbsp;Register Today</Link>
                             </p>
                         </div>
-                        <form noValidate onSubmit={this.onSubmit}>
+                        <form noValidate onSubmit={this.onSubmit} autoComplete="off">
                             <div className="input-field col s12">
                                 <input
                                     onChange={this.onChange}

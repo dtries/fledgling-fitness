@@ -7,7 +7,7 @@ import WalkingModal from "../walking/walkInstructions";
 import PushupModal from "../pushup/pushupInstructions";
 import SitupModal from "../situp/situpInstructions";
 import SquatModal from "../squat/squatInstructions";
-import { DatePicker } from 'react-materialize';
+import { DatePicker, TextInput } from 'react-materialize';
 var moment = require('moment');
 moment().format();
 
@@ -124,25 +124,6 @@ class Dashboard extends Component {
                         </p>
                     </div>
                 </div>
-                <br />
-                <br />
-                <div className="row">
-                    <div className="col s12 center-align">
-                        <button
-                            style={{
-                            width: "250px",
-                            borderRadius: "3px",
-                            letterSpacing: "1.5px"
-                        }}
-                        className="create-plan-btn btn btn-large waves-effect waves-dark hoverable"
-                        type="submit"
-                        name="action"
-                        onClick={this.onSubmit}
-                        >
-                            Create My Plan
-                        </button>
-                    </div>
-                </div>
 
                 <form onSubmit={this.onSubmit}>
                     <div className = "row form-begin">
@@ -166,8 +147,9 @@ class Dashboard extends Component {
                         <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
                         Minutes you can <WalkingModal trigger = {walkModalLink}>{walkModalLink}</WalkingModal> comfortably at a brisk pace &nbsp;&nbsp;
                             <div className="input-field inline">
-                                <input
+                                <TextInput
                                     onChange={this.onChange}
+                                    label="Enter Number"
                                     value={this.state.walking}
                                     id="walking"
                                     type="number"
@@ -175,7 +157,7 @@ class Dashboard extends Component {
                                     max="1000000"
                                     className="validate baseline-input-line"
                                 />
-                                <label htmlFor="name">Enter Number</label>
+                                {/* <label htmlFor="name">Enter Number</label> */}
                                 <span   className="helper-text" data-error="Enter a Valid Number" 
                                         data-success="Great!">
                                 </span>
@@ -187,8 +169,9 @@ class Dashboard extends Component {
                         <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
                         Number of good-form <PushupModal trigger = {pushupModalLink}>{pushupModalLink}</PushupModal> you can complete &nbsp;
                             <div className="input-field inline">
-                                <input
+                                <TextInput
                                     onChange={this.onChange}
+                                    label="Enter Number"
                                     value={this.state.pushups}
                                     id="pushups"
                                     type="number"
@@ -196,7 +179,6 @@ class Dashboard extends Component {
                                     max="1000000"                                        
                                     className="validate baseline-input-line"
                                 />
-                                <label htmlFor="name">Enter Number</label>
                                 <span   className="helper-text" data-error="Please Enter a Number" 
                                         data-success="Great!">
                                 </span>
@@ -208,8 +190,9 @@ class Dashboard extends Component {
                         <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
                         Number of good form <SitupModal trigger = {situpModalLink}>{situpModalLink}</SitupModal> you can complete &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <div className="input-field inline">
-                                <input
+                                <TextInput
                                     onChange={this.onChange}
+                                    label="Enter Number"
                                     value={this.state.situps}
                                     id="situps"
                                     type="number"
@@ -217,7 +200,6 @@ class Dashboard extends Component {
                                     max="1000000"                                        
                                     className="validate baseline-input-line"
                                 />
-                                <label htmlFor="name">Enter Number</label>
                                 <span   className="helper-text" data-error="Please Enter a Number" 
                                         data-success="Great!">
                                 </span>
@@ -229,8 +211,9 @@ class Dashboard extends Component {
                             <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;
                             Number of good form <SquatModal trigger = {squatModalLink}>{squatModalLink}</SquatModal> you can complete &nbsp;&nbsp;&nbsp;&nbsp;
                             <div className="input-field inline">
-                                <input
+                                <TextInput
                                     onChange={this.onChange}
+                                    label="Enter Number"
                                     value={this.state.squats}
                                     id="squats"
                                     type="number"
@@ -238,7 +221,6 @@ class Dashboard extends Component {
                                     max="1000000"                                        
                                     className="validate baseline-input-line"
                                 />
-                                <label htmlFor="name">Enter Number</label>
                                 <span   className="helper-text" data-error="Please Enter a Number" 
                                         data-success="Great!">
                                 </span>
@@ -247,22 +229,24 @@ class Dashboard extends Component {
                     </div>
                 </form>
 
-                {/* <div className="row">
-                    <div className="col s12">
-                        <button 
-                            style={{ 
-                                width: "140px",
-                                borderRadius: "3px",
-                                letterSpacing: "1.5px",
-                                marginTop: "10%"
-                            }}
-                            onClick={this.onLogoutClick}
-                            className="logout-btn btn btn-large waves-effect waves-dark hoverable"
+                <div className="row">
+                    <div className="col s12 center-align">
+                        <button
+                            style={{
+                            width: "250px",
+                            borderRadius: "3px",
+                            letterSpacing: "1.5px"
+                        }}
+                        className="create-plan-btn btn btn-large waves-effect waves-dark hoverable"
+                        type="submit"
+                        name="action"
+                        onClick={this.onSubmit}
                         >
-                            Logout
+                            Create My Plan
                         </button>
                     </div>
-                </div> */}
+                </div>
+
             </div>              
         );
     }

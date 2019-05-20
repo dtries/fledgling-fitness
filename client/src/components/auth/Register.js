@@ -72,7 +72,7 @@ class Register extends Component {
                                 Already have an account? <Link to="/login" className="login-now">&nbsp;Log In</Link>
                             </p>
                         </div>
-                        <form noValidate onSubmit={this.onSubmit}>
+                        <form noValidate onSubmit={this.onSubmit} autoComplete="off">
                             <div className="input-field col s12">
                                 <input
                                     onChange={this.onChange}
