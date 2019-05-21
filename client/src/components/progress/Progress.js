@@ -96,7 +96,7 @@ class Progress extends Component {
                     </div>
                 </div>
 
-                <Tabs className="tab-progress z-depth-1 ">
+                <Tabs className="tab-progress z-depth-1" options={{swipeable: true}}>
                     <Tab title="Walking" className="tab-exercise">
                         <div id="display-walking">
                         <Table>
@@ -281,24 +281,6 @@ class Progress extends Component {
                         </div>
                     </Tab>
                 </Tabs>
-
-                
-                {/* <div className="row">
-                    <div className="col s12 workout-card-logout">
-                        <button 
-                            style={{ 
-                                width: "200px",
-                                borderRadius: "3px",
-                                letterSpacing: "1.5px",
-                                marginTop: "1rem"
-                            }}
-                            onClick={this.onLogoutClick}
-                            className="workout-logout-btn btn btn-large waves-effect waves-light hoverable"
-                        >
-                            Logout
-                        </button>
-                    </div>
-                </div> */}
             </div>
         );
     }

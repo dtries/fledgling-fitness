@@ -96,6 +96,7 @@ nav {
 .login-below,
 .register-below {
     color: #FF652F;
+    /* text-align: center; */
 }
 
 input {
@@ -115,6 +116,12 @@ input {
 
 }
 
+ #email {
+    align-content: center;
+}
+
+
+
 .login-btn,
 .sign-up-btn {
     background-color: #13A76C;
@@ -126,11 +133,6 @@ input {
    1px -1px 0 #000,
    -1px 1px 0 #000,
     1px 1px 0 #000;
-}
-
-input #email {
-    background-color: #272727;
-    color: #FF652F;
 }
 
 /* End Login and Register Styling */
@@ -291,8 +293,6 @@ li.collection-item {
 .tab-progress {
     background-color:#13A76C;
     text-align: center;
-
-    /* width: 100%; */
 }
 
 .tabs .tab a {
@@ -380,7 +380,7 @@ td {
 
     .nav-bird {
         text-align: left;
-        margin-top: 5%;
+        margin-top: 10%;
         font-size: 63%;
         margin-left: -10%;
     }
@@ -420,7 +420,6 @@ td {
 
     .account-already {
         font-size: 120%;
-        text-align: left;
     }
 
     .tab-exercise {
@@ -486,16 +485,12 @@ td {
         text-align: left;
     }
 
-    .material-icons {
-        margin-left: 55%;
-    }
-
-    .exercise-modal {
+     .exercise-modal {
         font-size: 120%;
     }
 
     .tabs .tab a {
-        font-size: 110%;
+        font-size: 92%;
     }
 
   }
@@ -572,6 +567,10 @@ td {
 
     .tabs .tab a {
         font-size: 160%;
+    }
+
+    .account-already {
+        font-size: 150%;
     }
 
 }

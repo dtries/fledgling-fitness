@@ -47,9 +47,9 @@ class NavBar extends Component {
                 </NavItem>
 
                 <NavItem href=""
-                            onClick={this.onLogoutClick}
-                            className="logout-btn waves-effect waves-light hoverable"
+                            className="logout-btn sidenav-close waves-effect waves-light hoverable"
                             id="logout-nav-item"
+                            onClick={this.onLogoutClick}
                         >
                             Logout
                 </NavItem>

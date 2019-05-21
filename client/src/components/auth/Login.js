@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
+import { TextInput } from 'react-materialize';
+
 
 class Login extends Component {
     constructor () {
@@ -54,13 +56,9 @@ class Login extends Component {
         const {errors} = this.state;
 
         return (
-            <div className="container">
+            <div className="container center">
                 <div style={{ marginTop: "4rem"}} className="row">
-                    <div className="col s8 offset-s2">
-                        <Link to="/" className="back-btn btn-flat waves-effect">
-                            <i className="back-arrow material-icons left">keyboard_backspace</i>
-                            Back to Home
-                        </Link>
+                    <div className="col s12">
                         <div className="col s12" style={{ paddingLeft: "11.25px" }}>
                             <h4 className="login-below">
                                 <b>Login</b> below
@@ -71,9 +69,11 @@ class Login extends Component {
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit} autoComplete="off">
-                            <div className="input-field col s12">
-                                <input
+                            <div className="col s8 offset-s2">
+                                <TextInput
+                                    noLayout="false"
                                     onChange={this.onChange}
+                                    label="Email"
                                     value={this.state.email}
                                     error={errors.email}
                                     id="email"
@@ -82,29 +82,22 @@ class Login extends Component {
                                         invalid: errors.email || errors.emailnotfound
                                     })}
                                 />
-                                <label htmlFor="email">Email</label>
-                                <span className="red-text">
-                                    {errors.email}
-                                    {errors.emailnotfound}
-                                </span>
                             </div>
-                            <div className="input-field col s12">
-                                <input
+                            <div className="col s8 offset-s2">
+                                <TextInput
+                                    noLayout="false"
                                     onChange={this.onChange}
                                     value={this.state.password}
                                     error={errors.password}
+                                    label="Password"
                                     id="password"
                                     type="password"
                                     className={classnames("", {
                                         invalid: errors.password || errors.passwordincorrect
                                     })}
                                 />
-                                <label htmlFor="password">Password</label>
-                                <span className="red-text">
-                                    {errors.password}
-                                    {errors.passwordincorrect}
-                                </span>
                             </div>
+                            
                             <div className="col s12" style={{ paddingLeft:"11.25px"}}>
                                 <button
                                     style={{ 
