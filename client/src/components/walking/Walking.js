@@ -188,12 +188,14 @@ class Walking extends Component {
         const lastDay3Item = res.data.walking[i];
         const lastDayValue = lastDay3Item.Day;
         console.log(`Last day 3 item: ${JSON.stringify(lastDay3Item)}`);
+            
         console.log(`Last day 3 key value is ${JSON.stringify(lastDayValue)}`)
         const baseBeginDate = moment(res.Date);
         console.log(`base start date is ${baseBeginDate}`);
         const firstDay = moment(baseBeginDate).add(2, 'days').format("MMM Do YYYY");
         console.log(`First date: ${firstDay}`);
         this.setState({cardDate: firstDay});
+        this.setState({week: lastDay3Item.Week});
         this.setCardDates();
 
 
@@ -245,7 +247,7 @@ class Walking extends Component {
         console.log(`Day 1 = ${this.state.Day1}, Day 2 = ${this.state.Day2}, Day 3 = ${this.state.Day3}`);
     });
 
-    workoutUpdater = (id, dayNum, duration, attempted, completed, missed) => {
+    workoutUpdater = (id, dayNum, duration, attempted, completed, missed, weekPlus) => {
 
         const workoutData = {
             userID: id,
@@ -255,7 +257,8 @@ class Walking extends Component {
                         Duration: duration,
                         Attempted: attempted,
                         Completed: completed,
-                        Missed: missed
+                        Missed: missed,
+                        Week: weekPlus
              }
         };
 
@@ -291,12 +294,14 @@ class Walking extends Component {
         const dayNum = 1;
         const duration = this.state.Day1;
         const missed = false;
+        const weekPlus = this.state.week+1;
+
 
         if (completed === undefined) {
             completed = false;
         };
 
-        this.workoutUpdater(id, dayNum, duration, attempted, completed, missed);
+        this.workoutUpdater(id, dayNum, duration, attempted, completed, missed, weekPlus);
     };
 
     completedDay1Click = e => {
@@ -330,12 +335,13 @@ class Walking extends Component {
         const dayNum = 2;
         const duration = this.state.Day2;
         const missed = false;
+        const weekPlus = this.state.week+1;
 
         if (completed === undefined) {
             completed = false;
         };
 
-        this.workoutUpdater(id, dayNum, duration, attempted, completed, missed);
+        this.workoutUpdater(id, dayNum, duration, attempted, completed, missed, weekPlus);
     };
 
     completedDay2Click = e => {
@@ -353,6 +359,7 @@ class Walking extends Component {
         const dayNum = 3;
         const duration = this.state.Day3;
         const missed = false;
+        const weekPlus = this.state.week+1;
 
 
 
@@ -360,7 +367,7 @@ class Walking extends Component {
             completed = false;
         };
 
-        this.workoutUpdater(id, dayNum, duration, attempted, completed, missed);
+        this.workoutUpdater(id, dayNum, duration, attempted, completed, missed, weekPlus);
     };
 
     completedDay3Click = e => {

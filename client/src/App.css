@@ -300,6 +300,37 @@ li.collection-item {
     font-size: 90%;
 }
 
+.switch label {
+    color: #FF652F;
+    font-size: 150%;
+}
+
+span .lever {
+    background-color: pink;
+}
+
+.switch label .lever {
+    background-color: #FF652F;
+}
+
+.switch label .lever:after {
+    background-color: #FFE400;
+}
+
+.switch label .lever:before {
+    background-color: #13A76C;
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+    background-color:#13A76C;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #FFE400;
+}
+
+
+
 th,
 td {
     text-align: center;

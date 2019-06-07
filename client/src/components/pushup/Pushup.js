@@ -7,7 +7,7 @@ import PushupModal from "../pushup/pushupInstructions";
 
 var moment = require('moment');
 
-var week = 0;
+// var week= 0;
 
 class Pushup extends Component {
 
@@ -184,6 +184,7 @@ class Pushup extends Component {
         const firstDay = moment(baseBeginDate).add(3, 'days').format("MMM Do YYYY");
         console.log(`First date: ${firstDay}`);
         this.setState({cardDate: firstDay});
+        this.setState({week: lastDay3Item.Week});
         this.setCardDates();
 
             if (lastDayValue === 3) {
@@ -229,7 +230,7 @@ class Pushup extends Component {
         pushupBase = Math.trunc((this.state.pushupBase-2)/3);
 
         console.log(`Pushup Base is ${pushupBase}`);
-        week=week+1;
+        // this.state.week=this.state.week+1;
 
         // Day 1 Sets
         this.setState({day1Set1: pushupBase});
@@ -268,6 +269,8 @@ class Pushup extends Component {
         console.log(`Week is now ${this.state.week}`);
         const attempted = true;
         const { user } = this.props.auth;
+        const weekPlus = this.state.week+1;
+
 
         if (completed === undefined) {
             completed = false;
@@ -282,8 +285,8 @@ class Pushup extends Component {
                         Day1Set3: this.state.day1Set3,
                         Attempted: attempted,
                         Completed: completed,
-                        Missed: false
-                    
+                        Missed: false,
+                        Week: weekPlus
                     }
         };
 
@@ -321,6 +324,7 @@ class Pushup extends Component {
         const attempted = true;
         const { user } = this.props.auth;
         const id = user.id;
+        const weekPlus = this.state.week+1;
 
         if (completed === undefined) {
             completed = false;
@@ -335,8 +339,8 @@ class Pushup extends Component {
                         Day2Set3: this.state.day2Set3,
                         Attempted: attempted,
                         Completed: completed,
-                        Missed: false
-                    
+                        Missed: false,
+                        Week: weekPlus
                     }
         };
 
@@ -367,6 +371,7 @@ class Pushup extends Component {
         const attempted = true;
         const { user } = this.props.auth;
         const id = user.id;
+        const weekPlus = this.state.week+1;
 
         if (completed === undefined) {
             completed = false;
@@ -381,8 +386,8 @@ class Pushup extends Component {
                         Day3Set3: this.state.day3Set3,
                         Attempted: attempted,
                         Completed: completed,
-                        Missed: false
-                    
+                        Missed: false,
+                        Week: weekPlus
                     }
         };
 
