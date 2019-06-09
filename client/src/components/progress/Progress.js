@@ -7,34 +7,11 @@ import API from "../../utils/API";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import {
-  BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip,
-  ResponsiveContainer, Legend,
+  BarChart, Bar, Label, XAxis, YAxis, CartesianGrid, Tooltip,
+  ResponsiveContainer
 } from 'recharts';
 
-var squatGraphData = [];
-const data = [
-    {
-      name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
-    },
-    {
-      name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
-    },
-    {
-      name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
-    },
-    {
-      name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
-    },
-    {
-      name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
-    },
-    {
-      name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
-    },
-    {
-      name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
-    },
-  ];
+var squatGraphData=[];
 
 class Progress extends Component {
     constructor(props) {
@@ -47,11 +24,10 @@ class Progress extends Component {
             situpData: [],
             squatData: [],
             tableUp: true
-            // squatGraphData:[]
         }
     }
 
-
+    // squatGraphData = [];
 
     componentDidMount() {
         this.checkDbCollections();
@@ -101,24 +77,46 @@ class Progress extends Component {
                 const squatDisplay = Object.values(res.data.squats);
                 this.setState({squatData: squatDisplay});
 
-
+                var squatTotal = 0;
+                var squatWeek = 0;
+                var squatWeekString = "";
                 squatDisplay.forEach(function(element) {
-                    squatGraphData.push(element);
-                    console.log(element);
+
+                    switch (element.Day) {
+                        case 1: 
+                            squatTotal += element.Day1Set1 + element.Day1Set2 + element.Day1Set3;
+                            console.log("ADDED ANOTHER DAY1");
+                            break;
+                        case 2: 
+                            squatTotal += element.Day2Set1 + element.Day2Set2 + element.Day2Set3;
+                            console.log("ADDED ANOTHER DAY2");
+                            break;
+
+                        case 3: 
+                        squatTotal += element.Day3Set1 + element.Day3Set2 + element.Day3Set3;
+                        squatWeek++
+                        // squatWeekString = squatWeek.toString();
+                        console.log("ADDED ANOTHER DAY3");
+                        console.log(`Squat Week = ${squatWeek}`);
+                        squatGraphData.push({Week: squatWeek, Reps: squatTotal})
+                        squatTotal = 0;
+                        break;
+
+                        default: 
+                            console.log("Nothing else to add");
+                    }
+                    console.log(`squat total counter ${squatTotal}`);
+                    
+                    console.log(`The Week is ${element.Week}`);
+
+
+                    // console.log(`HEY IT'S THE SAME WEEK: ${element.Week-1}`);
+                    // squatGraphData.push(element);
+                    // console.log(element);
                 })
 
 
                 console.log(`Squat graph data is ${JSON.stringify(squatGraphData)}`);
-
-                // console.log(`MAPPING IS ${JSON.stringify(squatMap)}`);
-
-                
-                // mapIter = squatMap.values();
-                // console.log(`Squat map is ${JSON.stringify(mapIter.next().value)}`);
-                // console.log(`Squat map now is ${JSON.stringify(mapIter.next().value)}`);
-
-                // console.log(`Squat display is ${JSON.stringify(this.state.squatData)}`);
-
             })
             .catch( err => console.log(err))      
     };
@@ -350,37 +348,27 @@ class Progress extends Component {
                                     
                                 :
                                 
-                                <div style={{ width: "100%", height: 300}}>
-                                    <ResponsiveContainer>
+                                <ResponsiveContainer width="100%" height={400}>
                                     <BarChart
-                                    width={100}
-                                    height={100}
-                                    data={squatGraphData}
+                                    data={ squatGraphData }
                                     margin={{
-                                    top: 5, right: 30, left: 20, bottom: 5,
+                                    top: 50, left: -40, right: 0
                                     }}
+                                    // barGap={1}
+                                    // barCategoryGap={1}
                                     >
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey="Date" />
-                                        <YAxis />
-                                        <Tooltip />
-                                        <Legend />
+                                        <CartesianGrid strokeDasharray="5 3" />
+                                        <XAxis dataKey="Week" type="category" tick={{ fill: "#13A76C"}} height={60} stroke="#13A76C"> 
+                                            <Label value="Week" position="insideBottom" fill="#13A76C"/>
+                                        </XAxis>
+                                        <YAxis tick={{ fill: "#13A76C"}} width={130} stroke="#13A76C">
+                                            <Label value="Total Repetitions" angle={-90} position="center" offset={0} fill="#13A76C" />
+                                        </YAxis> 
+                                        <Tooltip  />
 
-                                        <Bar dataKey="Day1Set1" fill="#8884d8" />
-                                        <Bar dataKey="Day1Set2" fill="#82ca9d" />
-                                        <Bar dataKey="Day1Set3" fill="#FF652F" />
-
-
-                                        <Bar dataKey="Day2Set1" fill="#8884d8" />
-                                        <Bar dataKey="Day2Set2" fill="#82ca9d" />
-                                        <Bar dataKey="Day2Set3" fill="#FF652F" />
-
-                                        <Bar dataKey="Day3Set1" fill="#8884d8" />
-                                        <Bar dataKey="Day3Set2" fill="#82ca9d" />
-                                        <Bar dataKey="Day3Set3" fill="#FF652F" />
+                                        <Bar dataKey="Reps" fill="#FF652F" label={{ position: 'top', fill: "#FFE400" }}/>
                                     </BarChart>
-                                    </ResponsiveContainer>
-                                </div>
+                                </ResponsiveContainer>
 
                             }
                         </div>

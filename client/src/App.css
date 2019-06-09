@@ -6,6 +6,17 @@
 #13A76C - greenish
 */
 
+.recharts-surface {
+    font-size: 175%;
+    font-weight: bold;
+    color: #13A76C;
+}
+
+.ResponsiveContainer {
+    margin: 0 auto;
+}
+
+
 /* Navbar Styling */
 
 
