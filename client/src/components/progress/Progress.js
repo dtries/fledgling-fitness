@@ -11,6 +11,9 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
+var walkingGraphData=[];
+var pushupGraphData=[];
+var situpGraphData=[];
 var squatGraphData=[];
 
 class Progress extends Component {
@@ -27,16 +30,10 @@ class Progress extends Component {
         }
     }
 
-    // squatGraphData = [];
 
     componentDidMount() {
         this.checkDbCollections();
     };
-
-    // componentWillUnmount() {
-    //     this.checkDbCollections();
-
-    // }
 
     checkDbCollections = () => {
         const { user } = this.props.auth;
@@ -63,41 +60,106 @@ class Progress extends Component {
                 
                 const walkDisplay = Object.values(res.data.walking);
                 this.setState({walkingData: walkDisplay});
-                // console.log(`Walk display is ${JSON.stringify(this.state.walkingData)}`);
+                var walkingTotal = 0;
+                var walkingWeek = 0;
 
+                walkDisplay.forEach(function(element) {
+                    switch (element.Day) {
+                        case 1: 
+                            walkingTotal += element.Duration;
+                            break;
+                        case 2: 
+                            walkingTotal += element.Duration;
+                            break;
+
+                        case 3: 
+                        walkingTotal += element.Duration;
+                        walkingWeek++
+                        walkingGraphData.push({Week: walkingWeek, Time: walkingTotal})
+                        walkingTotal = 0;
+                        break;
+
+                        default: 
+                            console.log("Nothing else to add");
+                    }
+                    console.log(`Pushup total counter ${walkingTotal}`);
+                })// -------------------------------------------------------------------------------------------
                 const pushupDisplay =  Object.values(res.data.pushups);
                 this.setState({pushupData: pushupDisplay});
-                // console.log(`Pushup display is ${JSON.stringify(this.state.pushupData)}`);
 
+                var pushupTotal = 0;
+                var pushupWeek = 0;
+
+                pushupDisplay.forEach(function(element) {
+                    switch (element.Day) {
+                        case 1: 
+                            pushupTotal += element.Day1Set1 + element.Day1Set2 + element.Day1Set3;
+                            break;
+                        case 2: 
+                            pushupTotal += element.Day2Set1 + element.Day2Set2 + element.Day2Set3;
+                            break;
+
+                        case 3: 
+                        pushupTotal += element.Day3Set1 + element.Day3Set2 + element.Day3Set3;
+                        pushupWeek++
+                        pushupGraphData.push({Week: pushupWeek, Reps: pushupTotal})
+                        pushupTotal = 0;
+                        break;
+
+                        default: 
+                            console.log("Nothing else to add");
+                    }
+                    console.log(`Pushup total counter ${pushupTotal}`);
+                })
+// -------------------------------------------------------------------------------------------
                 const situpDisplay = Object.values(res.data.situps);
                 this.setState({situpData: situpDisplay});
-                // console.log(`Situp display is ${JSON.stringify(this.state.situpData)}`);
 
+                var situpTotal = 0;
+                var situpWeek = 0;
 
+                situpDisplay.forEach(function(element) {
+                    switch (element.Day) {
+                        case 1: 
+                            situpTotal += element.Day1Set1 + element.Day1Set2 + element.Day1Set3;
+                            break;
+                        case 2: 
+                            situpTotal += element.Day2Set1 + element.Day2Set2 + element.Day2Set3;
+                            break;
+
+                        case 3: 
+                        situpTotal += element.Day3Set1 + element.Day3Set2 + element.Day3Set3;
+                        situpWeek++
+                        console.log(`Situp Week = ${situpWeek}`);
+                        situpGraphData.push({Week: situpWeek, Reps: situpTotal})
+                        situpTotal = 0;
+                        break;
+
+                        default: 
+                            console.log("Nothing else to add");
+                    }
+                    console.log(`Situp total counter ${situpTotal}`);
+                })
+// -------------------------------------------------------------------------------------------
                 const squatDisplay = Object.values(res.data.squats);
                 this.setState({squatData: squatDisplay});
 
                 var squatTotal = 0;
                 var squatWeek = 0;
-                var squatWeekString = "";
+
                 squatDisplay.forEach(function(element) {
 
                     switch (element.Day) {
                         case 1: 
                             squatTotal += element.Day1Set1 + element.Day1Set2 + element.Day1Set3;
-                            console.log("ADDED ANOTHER DAY1");
                             break;
                         case 2: 
                             squatTotal += element.Day2Set1 + element.Day2Set2 + element.Day2Set3;
-                            console.log("ADDED ANOTHER DAY2");
                             break;
 
                         case 3: 
                         squatTotal += element.Day3Set1 + element.Day3Set2 + element.Day3Set3;
                         squatWeek++
-                        // squatWeekString = squatWeek.toString();
-                        console.log("ADDED ANOTHER DAY3");
-                        console.log(`Squat Week = ${squatWeek}`);
                         squatGraphData.push({Week: squatWeek, Reps: squatTotal})
                         squatTotal = 0;
                         break;
@@ -105,17 +167,12 @@ class Progress extends Component {
                         default: 
                             console.log("Nothing else to add");
                     }
-                    console.log(`squat total counter ${squatTotal}`);
-                    
-                    console.log(`The Week is ${element.Week}`);
-
-
-                    // console.log(`HEY IT'S THE SAME WEEK: ${element.Week-1}`);
-                    // squatGraphData.push(element);
-                    // console.log(element);
+                    console.log(`Squat total counter ${squatTotal}`);
                 })
 
-
+                console.log(`Walking graph data is ${JSON.stringify(walkingGraphData)}`);
+                console.log(`Pushup graph data is ${JSON.stringify(pushupGraphData)}`);
+                console.log(`Situp graph data is ${JSON.stringify(situpGraphData)}`);
                 console.log(`Squat graph data is ${JSON.stringify(squatGraphData)}`);
             })
             .catch( err => console.log(err))      
@@ -158,6 +215,14 @@ class Progress extends Component {
                 <Tabs className="tab-progress z-depth-1" options={{swipeable: false}}>
                     <Tab title="Walking" className="tab-exercise">
                         <div id="display-walking">
+                        <Switch 
+                                className="tableGraph" 
+                                offLabel="Table" 
+                                onLabel="Graph"
+                                onChange={this.changeTableGraph}
+                        />
+
+                            {this.state.tableUp ?                             
                         <Table>
                             <thead>
                                 <tr>
@@ -186,10 +251,45 @@ class Progress extends Component {
                                     />
                                 )}
                             </Table>
+
+                                    
+                            :
+                                
+                            <ResponsiveContainer width="100%" height={400}>
+                                <BarChart
+                                data={ walkingGraphData }
+                                margin={{
+                                top: 50, left: -40, right: 0
+                                }}
+                                // barGap={1}
+                                // barCategoryGap={1}
+                                >
+                                    <CartesianGrid strokeDasharray="5 3" />
+                                    <XAxis dataKey="Week" type="category" tick={{ fill: "#13A76C"}} height={60} stroke="#13A76C"> 
+                                        <Label value="Week" position="insideBottom" fill="#13A76C"/>
+                                    </XAxis>
+                                    <YAxis tick={{ fill: "#13A76C"}} width={130} stroke="#13A76C">
+                                        <Label value="Total Duration" angle={-90} position="center" offset={0} fill="#13A76C" />
+                                    </YAxis> 
+                                    <Tooltip  />
+
+                                    <Bar dataKey="Time" fill="#FF652F" label={{ position: 'top', fill: "#FFE400" }}/>
+                                </BarChart>
+                            </ResponsiveContainer>
+
+                            }
                             </div>
                     </Tab>
                     <Tab title="Pushups" className="tab-exercise">
                         <div id="display-pushups">
+                        <Switch 
+                                className="tableGraph" 
+                                offLabel="Table" 
+                                onLabel="Graph"
+                                onChange={this.changeTableGraph}
+                        />
+
+                            {this.state.tableUp ?                             
                         <Table>
                             <thead>
                                 <tr>
@@ -236,10 +336,45 @@ class Progress extends Component {
                                     />
                                 )}
                             </Table>
+
+        
+                            :
+                                
+                            <ResponsiveContainer width="100%" height={400}>
+                                <BarChart
+                                data={ pushupGraphData }
+                                margin={{
+                                top: 50, left: -40, right: 0
+                                }}
+                                // barGap={1}
+                                // barCategoryGap={1}
+                                >
+                                    <CartesianGrid strokeDasharray="5 3" />
+                                    <XAxis dataKey="Week" type="category" tick={{ fill: "#13A76C"}} height={60} stroke="#13A76C"> 
+                                        <Label value="Week" position="insideBottom" fill="#13A76C"/>
+                                    </XAxis>
+                                    <YAxis tick={{ fill: "#13A76C"}} width={130} stroke="#13A76C">
+                                        <Label value="Total Repetitions" angle={-90} position="center" offset={0} fill="#13A76C" />
+                                    </YAxis> 
+                                    <Tooltip  />
+
+                                    <Bar dataKey="Reps" fill="#FF652F" label={{ position: 'top', fill: "#FFE400" }}/>
+                                </BarChart>
+                            </ResponsiveContainer>
+
+                            }                            
                         </div>                       
                     </Tab>
                     <Tab title="Situps" className="tab-exercise">
-                        <div id="display-situps">                        
+                        <div id="display-situps">
+                            <Switch 
+                                    className="tableGraph" 
+                                    offLabel="Table" 
+                                    onLabel="Graph"
+                                    onChange={this.changeTableGraph}
+                            />
+
+                            {this.state.tableUp ?                                                     
                             <Table>
                                 <thead>
                                     <tr>
@@ -286,17 +421,43 @@ class Progress extends Component {
                                     />
                                 )}
                             </Table>
+                                    
+                            :
+                                
+                            <ResponsiveContainer width="100%" height={400}>
+                                <BarChart
+                                data={ situpGraphData }
+                                margin={{
+                                top: 50, left: -40, right: 0
+                                }}
+                                // barGap={1}
+                                // barCategoryGap={1}
+                                >
+                                    <CartesianGrid strokeDasharray="5 3" />
+                                    <XAxis dataKey="Week" type="category" tick={{ fill: "#13A76C"}} height={60} stroke="#13A76C"> 
+                                        <Label value="Week" position="insideBottom" fill="#13A76C"/>
+                                    </XAxis>
+                                    <YAxis tick={{ fill: "#13A76C"}} width={130} stroke="#13A76C">
+                                        <Label value="Total Repetitions" angle={-90} position="center" offset={0} fill="#13A76C" />
+                                    </YAxis> 
+                                    <Tooltip  />
+
+                                    <Bar dataKey="Reps" fill="#FF652F" label={{ position: 'top', fill: "#FFE400" }}/>
+                                </BarChart>
+                            </ResponsiveContainer>
+
+                            }
                         </div>
                         
                     </Tab>
                     <Tab title="Squats" className="tab-exercise">
                         <div id="display-squats">
-                        <Switch 
-                                className="tableGraph" 
-                                offLabel="Table" 
-                                onLabel="Graph"
-                                onChange={this.changeTableGraph}
-                        />
+                            <Switch 
+                                    className="tableGraph" 
+                                    offLabel="Table" 
+                                    onLabel="Graph"
+                                    onChange={this.changeTableGraph}
+                            />
 
                             {this.state.tableUp ? 
                                 <Table>

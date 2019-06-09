@@ -16,6 +16,7 @@ class NavBar extends Component {
         return (
            <div className="container nav-container">
             <Navbar
+                fixed="true"
                 alignLinks="right"
                 brand={                
                 <Link 
