@@ -26,7 +26,10 @@ class Progress extends Component {
             pushupData: [],
             situpData: [],
             squatData: [],
-            tableUp: true
+            tableUpWalking: true,
+            tableUpPushup: true,
+            tableUpSitup: true,
+            tableUpSquat: true
         }
     }
 
@@ -178,12 +181,45 @@ class Progress extends Component {
             .catch( err => console.log(err))      
     };
 
-    changeTableGraph = e => {
+    changeTableGraphWalking = e => {
 
-        this.state.tableUp ? 
-            this.setState({tableUp: false})
+        this.state.tableUpWalking ? 
+            this.setState({tableUpWalking: false})
         :
-            this.setState({tableUp: true});
+            this.setState({tableUpWalking: true});
+        
+
+        console.log(`Graph up is ${this.state.tableUpWalking}`);
+    };
+
+    changeTableGraphPushups = e => {
+
+        this.state.tableUpPushup ? 
+            this.setState({tableUpPushup: false})
+        :
+            this.setState({tableUpPushup: true});
+        
+
+        console.log(`Graph up is ${this.state.tableUpPushup}`);
+    };
+
+    changeTableGraphSitups = e => {
+
+        this.state.tableUpSitup ? 
+            this.setState({tableUpSitup: false})
+        :
+            this.setState({tableUpSitup: true});
+        
+
+        console.log(`Graph up is ${this.state.tableUpSitup}`);
+    };
+
+    changeTableGraphSquat = e => {
+
+        this.state.tableUpSquat ? 
+            this.setState({tableUpSquat: false})
+        :
+            this.setState({tableUpSquat: true});
         
 
         console.log(`Graph up is ${this.state.tableUp}`);
@@ -219,10 +255,10 @@ class Progress extends Component {
                                 className="tableGraph" 
                                 offLabel="Table" 
                                 onLabel="Graph"
-                                onChange={this.changeTableGraph}
+                                onChange={this.changeTableGraphWalking}
                         />
 
-                            {this.state.tableUp ?                             
+                            {this.state.tableUpWalking ?                             
                         <Table>
                             <thead>
                                 <tr>
@@ -286,10 +322,10 @@ class Progress extends Component {
                                 className="tableGraph" 
                                 offLabel="Table" 
                                 onLabel="Graph"
-                                onChange={this.changeTableGraph}
+                                onChange={this.changeTableGraphPushups}
                         />
 
-                            {this.state.tableUp ?                             
+                            {this.state.tableUpPushup ?                             
                         <Table>
                             <thead>
                                 <tr>
@@ -371,10 +407,10 @@ class Progress extends Component {
                                     className="tableGraph" 
                                     offLabel="Table" 
                                     onLabel="Graph"
-                                    onChange={this.changeTableGraph}
+                                    onChange={this.changeTableGraphSitups}
                             />
 
-                            {this.state.tableUp ?                                                     
+                            {this.state.tableUpSitup ?                                                     
                             <Table>
                                 <thead>
                                     <tr>
@@ -456,10 +492,10 @@ class Progress extends Component {
                                     className="tableGraph" 
                                     offLabel="Table" 
                                     onLabel="Graph"
-                                    onChange={this.changeTableGraph}
+                                    onChange={this.changeTableGraphSquat}
                             />
 
-                            {this.state.tableUp ? 
+                            {this.state.tableUpSquat ? 
                                 <Table>
                                     <thead>
                                         <tr>
