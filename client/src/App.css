@@ -6,6 +6,15 @@
 #13A76C - greenish
 */
 
+/* About Page Styling */
+
+.collapsible-header {
+    background-color: #FFE400;
+    font-weight: bold;
+}
+
+/* End of About Page Styling */
+
 /* Exercise Graph Styling */
 .recharts-surface {
     font-size: 175%;
