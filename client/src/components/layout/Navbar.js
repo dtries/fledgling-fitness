@@ -14,7 +14,7 @@ class NavBar extends Component {
     }
     render(){
         return (
-           <div className="container nav-container">
+        //    <div className="container nav-container">
             <Navbar
                 fixed="true"
                 alignLinks="right"
@@ -47,6 +47,16 @@ class NavBar extends Component {
                     Progress                
                 </NavItem>
 
+                <NavItem 
+                    href="/about"
+                    className="progress-nav 
+                    waves-effect waves-light hoverable"
+                    id="progress-nav-item"
+                >
+
+                    About                
+                </NavItem>
+
                 <NavItem href=""
                             className="logout-btn sidenav-close waves-effect waves-light hoverable"
                             id="logout-nav-item"
@@ -55,12 +65,10 @@ class NavBar extends Component {
                             Logout
                 </NavItem>
             </Navbar>
-            </div> 
+            // </div> 
         );
     }
 }
-
-// export default NavBar;
 
 NavBar.propTypes = {
     logoutUser: PropTypes.func.isRequired,

@@ -17,6 +17,8 @@
     margin: 0 auto;
 }
 
+/* End of Exercise Graph Styling */
+
 
 /* Navbar Styling */
 
@@ -26,11 +28,12 @@ nav {
 }
 .brand-logo {
     margin-left: 1%;
-    color: #FFE400;  
-    /* margin-right: -100%; */
+    color: #FFE400; 
+    width: 30%; 
 }
 
 .nav-bird { 
+    margin-left: 2%;
     margin-top: -5%;
     color: #FFE400;
 }
@@ -418,7 +421,8 @@ td {
     }
 
     .brand-logo {
-        margin-left: 0%;
+        margin-left: 9%;
+        width: 55%; 
     }
 
     .nav-bird {
@@ -435,7 +439,7 @@ td {
     .sidenav {
         padding-top: 3%;
         margin-top: 15%;
-        height: 35%;
+        height: 50%;
         width: 40%;
     }
 
@@ -544,10 +548,24 @@ td {
     and (max-device-width: 568px)
     and (orientation: landscape) {
 
+        .brand {
+            font-size: 80%;
+        }
+        .brand-logo {
+            margin-left: 14%;
+            width: 55%; 
+        }
+
+        .nav-bird {
+            text-align: left;
+            margin-top: 4%;
+            font-size: 63%;
+            margin-left: -10%;
+        }
         .sidenav {
             padding-top: 3%;
             margin-top: 10%;
-            height: 75%;
+            height: 90%;
             width: 40%;
         }
 
@@ -560,7 +578,15 @@ td {
   @media only screen and (min-width: 601px) {
 
     .brand-logo {
-        margin-left: 0%;
+        margin-left: 10%;
+        width: 50%;
+    }
+
+    .nav-bird {
+        text-align: left;
+        margin-top: -3%;
+        /* font-size: 63%; */
+        margin-left: -10%;
     }
 
     .material-icons {
@@ -583,7 +609,7 @@ td {
         width: 30%;
         padding-top: 3%;
         margin-top: 10%;
-        height: 70%;
+        height: 90%;
     }
 
     #workouts-nav-item,
@@ -622,12 +648,23 @@ td {
 
   @media only screen and (min-width: 768px) {
 
+    .brand-logo {
+        margin-left: 13%;
+        width: 55%; 
+    }
+
+    .nav-bird {
+        text-align: left;
+        margin-top: -2%;
+        font-size: 70%;
+        margin-left: -5%;
+    }
 
     .sidenav {
         width: 30%;
         padding-top: 3%;
         margin-top: 10%;
-        height: 70%;
+        height: 90%;
     }
 
     .tabs .tab a {
@@ -637,6 +674,13 @@ td {
 
   /* ======= Large devices ======= */
   @media only screen and (min-width: 992px) {
+
+    .brand-logo {
+        margin-left: 3%;
+        color: #FFE400; 
+        width: 30%; 
+    }
+
     #logout-nav-item {
         background-color: #272727;
         color: #FF652F;
@@ -648,7 +692,7 @@ td {
     }
 }
 
-  /* ====== Landscape ======== */
+  /* ====== Portrait ======== */
   @media only screen 
   and (min-device-width: 768px) 
   and (max-device-width: 1024px)
@@ -657,7 +701,7 @@ td {
       .sidenav {
           padding-top: 3%;
           margin-top: 10%;
-          height: 30%;
+          height: 40%;
           width: 35%;
       }
 

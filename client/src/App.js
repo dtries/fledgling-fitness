@@ -21,6 +21,7 @@ import Situp from "./components/situp/Situp";
 import Squat from "./components/squat/Squat";  
 import Walking from "./components/walking/Walking";
 import Progress from "./components/progress/Progress";
+import About from "./components/about/About";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -51,6 +52,7 @@ class App extends Component {
           <div className="App">
             <NavBar />
             <Route exact path="/" component={Landing} />
+            <Route exact path="/about" component={About} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
 
