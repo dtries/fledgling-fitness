@@ -17,17 +17,17 @@ class Landing extends Component {
                         <br />
                         <br />
                         <div className="col s12">
-                        <Link
-                            to="/login" 
-                            style={{
-                            width: "200px",
-                            borderRadius: "3px",
-                            letterSpacing: "1.5px"
-                        }}
-                        className="get-started-btn btn btn-large waves-effect waves-dark hoverable"
-                        >
-                            Get Started
-                        </Link>
+                            <Link
+                                to="/login" 
+                                style={{
+                                width: "200px",
+                                borderRadius: "3px",
+                                letterSpacing: "1.5px"
+                            }}
+                            className="get-started-btn btn btn-large waves-effect waves-dark hoverable"
+                            >
+                                Get Started
+                            </Link>
                         </div>
 
                     </div>
@@ -40,7 +40,6 @@ class Landing extends Component {
                             </h5>
                         </div>
                 </div>
-                <br />
                 <div className="row">
                         <div className="col s12">
                             <h5 className="center tag-line">
@@ -48,10 +47,10 @@ class Landing extends Component {
                             </h5>
                         </div>
                 </div>
-                <br />
                 <div className="row">
                         <div className="col s12">
-                            <h5 className="tag-line tag-line-weight"><i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;&nbsp;Focus on Fitness, not Weight</h5>
+                            <h5 className="tag-line tag-line-weight">
+                            <i className="fas fa-kiwi-bird bird-bullet"></i> &nbsp;&nbsp;Focus on Fitness, not Weight</h5>
                         </div>
                 </div>
             </div>

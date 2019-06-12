@@ -50,7 +50,7 @@ class Progress extends Component {
 
                 if (firstWalkingItem === null) {
                     var firstElement = res.data.walking.shift();
-                    // console.log(`Now first walk item is ${JSON.stringify(res.data.walking[0])}`);
+                    console.log(`Now walking items are ${JSON.stringify(res.data.walking)}`);
                     console.log(`Removed item is ${firstElement}`);
                 }
                 // ===================================================
@@ -69,15 +69,25 @@ class Progress extends Component {
                 walkDisplay.forEach(function(element) {
                     switch (element.Day) {
                         case 1: 
-                            walkingTotal += element.Duration;
+                            if (element.Completed === true) {
+                                walkingTotal += element.Duration;
+                            } else {
+                                walkingTotal += 0;
+                            }
                             break;
                         case 2: 
+                        if (element.Completed === true) {
                             walkingTotal += element.Duration;
-                            break;
+                        } else {
+                            walkingTotal += 0;
+                        }                            break;
 
                         case 3: 
-                        walkingTotal += element.Duration;
-                        walkingWeek++
+                        if (element.Completed === true) {
+                            walkingTotal += element.Duration;
+                        } else {
+                            walkingTotal += 0;
+                        }                        walkingWeek++
                         walkingGraphData.push({Week: walkingWeek, Time: walkingTotal})
                         walkingTotal = 0;
                         break;
@@ -85,7 +95,7 @@ class Progress extends Component {
                         default: 
                             console.log("Nothing else to add");
                     }
-                    console.log(`Pushup total counter ${walkingTotal}`);
+                    console.log(`Walking total counter ${walkingTotal}`);
                 })// -------------------------------------------------------------------------------------------
                 const pushupDisplay =  Object.values(res.data.pushups);
                 this.setState({pushupData: pushupDisplay});
@@ -96,14 +106,26 @@ class Progress extends Component {
                 pushupDisplay.forEach(function(element) {
                     switch (element.Day) {
                         case 1: 
-                            pushupTotal += element.Day1Set1 + element.Day1Set2 + element.Day1Set3;
+                            if (element.Completed === true) {
+                                pushupTotal += element.Day1Set1 + element.Day1Set2 + element.Day1Set3;
+                            } else {
+                                pushupTotal += 0;
+                            }
                             break;
                         case 2: 
-                            pushupTotal += element.Day2Set1 + element.Day2Set2 + element.Day2Set3;
+                            if (element.Completed === true) {
+                                pushupTotal += element.Day2Set1 + element.Day2Set2 + element.Day2Set3;
+                            } else {
+                                pushupTotal += 0;
+                            }
                             break;
 
                         case 3: 
-                        pushupTotal += element.Day3Set1 + element.Day3Set2 + element.Day3Set3;
+                        if (element.Completed === true) {
+                            pushupTotal += element.Day3Set1 + element.Day3Set2 + element.Day3Set3;
+                        } else {
+                            pushupTotal += 0;
+                        }                        
                         pushupWeek++
                         pushupGraphData.push({Week: pushupWeek, Reps: pushupTotal})
                         pushupTotal = 0;
@@ -124,19 +146,32 @@ class Progress extends Component {
                 situpDisplay.forEach(function(element) {
                     switch (element.Day) {
                         case 1: 
-                            situpTotal += element.Day1Set1 + element.Day1Set2 + element.Day1Set3;
-                            break;
-                        case 2: 
-                            situpTotal += element.Day2Set1 + element.Day2Set2 + element.Day2Set3;
+                            if (element.Completed === true) {
+                                situpTotal += element.Day1Set1 + element.Day1Set2 + element.Day1Set3;
+                            } else {
+                                situpTotal += 0;
+                            }
+                                break;
+                        case 2:
+                            if (element.Completed === true) { 
+                                situpTotal += element.Day2Set1 + element.Day2Set2 + element.Day2Set3;
+                            } else {
+                                situpTotal += 0;
+                            }                            
                             break;
 
                         case 3: 
-                        situpTotal += element.Day3Set1 + element.Day3Set2 + element.Day3Set3;
-                        situpWeek++
-                        console.log(`Situp Week = ${situpWeek}`);
-                        situpGraphData.push({Week: situpWeek, Reps: situpTotal})
-                        situpTotal = 0;
-                        break;
+                            if (element.Completed === true) {
+
+                                situpTotal += element.Day3Set1 + element.Day3Set2 + element.Day3Set3;
+                            } else {
+                                situpTotal += 0;
+                            }                            
+                            situpWeek++
+                            console.log(`Situp Week = ${situpWeek}`);
+                            situpGraphData.push({Week: situpWeek, Reps: situpTotal})
+                            situpTotal = 0;
+                            break;
 
                         default: 
                             console.log("Nothing else to add");
@@ -154,14 +189,26 @@ class Progress extends Component {
 
                     switch (element.Day) {
                         case 1: 
-                            squatTotal += element.Day1Set1 + element.Day1Set2 + element.Day1Set3;
-                            break;
+                            if (element.Completed === true) {
+                                squatTotal += element.Day1Set1 + element.Day1Set2 + element.Day1Set3;
+                            } else {
+                                squatTotal += 0;
+                            }
+                                break;
                         case 2: 
+                        if (element.Completed === true) {
                             squatTotal += element.Day2Set1 + element.Day2Set2 + element.Day2Set3;
+                        } else {
+                            squatTotal += 0;
+                        }                            
                             break;
 
                         case 3: 
-                        squatTotal += element.Day3Set1 + element.Day3Set2 + element.Day3Set3;
+                        if (element.Completed === true) {
+                            squatTotal += element.Day3Set1 + element.Day3Set2 + element.Day3Set3;
+                        } else {
+                            squatTotal += 0;
+                        }                        
                         squatWeek++
                         squatGraphData.push({Week: squatWeek, Reps: squatTotal})
                         squatTotal = 0;
@@ -305,7 +352,7 @@ class Progress extends Component {
                                         <Label value="Week" position="insideBottom" fill="#13A76C"/>
                                     </XAxis>
                                     <YAxis tick={{ fill: "#13A76C"}} width={130} stroke="#13A76C">
-                                        <Label value="Total Duration" angle={-90} position="center" offset={0} fill="#13A76C" />
+                                        <Label value="Duration Completed" angle={-90} position="center" offset={0} fill="#13A76C" />
                                     </YAxis> 
                                     <Tooltip  />
 
@@ -390,7 +437,7 @@ class Progress extends Component {
                                         <Label value="Week" position="insideBottom" fill="#13A76C"/>
                                     </XAxis>
                                     <YAxis tick={{ fill: "#13A76C"}} width={130} stroke="#13A76C">
-                                        <Label value="Total Repetitions" angle={-90} position="center" offset={0} fill="#13A76C" />
+                                        <Label value="Total Completed" angle={-90} position="center" offset={0} fill="#13A76C" />
                                     </YAxis> 
                                     <Tooltip  />
 
@@ -474,7 +521,7 @@ class Progress extends Component {
                                         <Label value="Week" position="insideBottom" fill="#13A76C"/>
                                     </XAxis>
                                     <YAxis tick={{ fill: "#13A76C"}} width={130} stroke="#13A76C">
-                                        <Label value="Total Repetitions" angle={-90} position="center" offset={0} fill="#13A76C" />
+                                        <Label value="Total Completed" angle={-90} position="center" offset={0} fill="#13A76C" />
                                     </YAxis> 
                                     <Tooltip  />
 
@@ -559,7 +606,7 @@ class Progress extends Component {
                                             <Label value="Week" position="insideBottom" fill="#13A76C"/>
                                         </XAxis>
                                         <YAxis tick={{ fill: "#13A76C"}} width={130} stroke="#13A76C">
-                                            <Label value="Total Repetitions" angle={-90} position="center" offset={0} fill="#13A76C" />
+                                            <Label value="Total Completed" angle={-90} position="center" offset={0} fill="#13A76C" />
                                         </YAxis> 
                                         <Tooltip  />
 
